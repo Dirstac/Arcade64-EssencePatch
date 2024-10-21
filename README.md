@@ -20,12 +20,12 @@ The cheat reference function, if the cloned game does not have a cheat file, it 
 Supports game list lst language files. The list language can be edited freely.
 
 Added 8 new UI folders by default.
+ * Neogeo
+ * Cps
+ * Pgm
+ * Namco
+ * Taito
+ * konami
+ * sega
+ * cave
 
-Neogeo
-Cps
-Pgm
-Namco
-Taito
-konami
-sega
-cave

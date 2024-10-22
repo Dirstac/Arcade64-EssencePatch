@@ -83,7 +83,7 @@ struct _play_options
 
 // 修改的 代码来源 (EKMAME)
 /****************************************/
-#define TSVNAME "Game List.txt"
+#define TSVNAME "Arcade_List.lst"
 #define LINEBUF_SIZE  1024
 #define NUM_COLUMNS   3
 

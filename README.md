@@ -1,7 +1,7 @@
 # Arcade64-EssencePatch
 What is Arcade64 Essence Patch?
 
-This is a version that implements some features that the PSARCADECLASSIC+ emulator had, to the most recent versions of Arcade64.
+This is a version that implements some features that the [PSARCADECLASSIC+](https://github.com/Gaston900/PSArcadeClassic) emulator had, to the most recent versions of Arcade64.
 
 What has been optimized in this version?
 ---------------------------------------

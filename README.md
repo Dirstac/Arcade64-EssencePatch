@@ -15,13 +15,15 @@ Removed the following annoying messages: “WRONG LENGTH”, “NO_DUMP”, “W
 
 Added movement optimization for all fighting games “GSC2007”.
 
-The Arcade64 “GUI” was modernized with new icons, a custom default configuration has been made.
+The Arcade64 “GUI” was modernized with new icons (KOF2112), a custom default configuration has been made.
 
 It is already pre-configured, enforce aspect ratio is disabled, full screen mode and tricks are already enabled by default.
 
 The cheat reference function, if the cloned game does not have a cheat file, it will reference the cheat file of the main ROM.
 
 Supports game list lst language files. The list language can be edited freely.
+
+NEOGEO, PGM, driver supports key combination settings.
 
 Added 8 new UI folders by default.
  * Neogeo

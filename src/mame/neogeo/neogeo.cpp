@@ -1433,20 +1433,14 @@ void neogeo_base_state::set_slot_idx(int slot)
 		case NEOGEO_FATFURY2:
 			space.install_read_handler(0x200000, 0x2fffff, read16m_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_r)));
 			space.install_write_handler(0x200000, 0x2fffff, write16s_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_w)));
-			space.install_read_port(0x300000, 0x300001, 0x01ff7e, "DSW"); // 修改的 (Remikare)
-			space.install_read_port(0x340000, 0x340001, 0x01ff7e, "P2"); // 修改的 (Remikare)
 			break;
 		case NEOGEO_KOF98:
 			space.install_read_handler(0x00100, 0x00103, read16m_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_r)));
 			space.install_write_handler(0x20aaaa, 0x20aaab, write16s_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_w)));
-			space.install_read_port(0x300000, 0x300001, 0x01ff7e, "DSW"); // 修改的 (Remikare)
-			space.install_read_port(0x340000, 0x340001, 0x01ff7e, "P2"); // 修改的 (Remikare)
 			break;
 		case NEOGEO_MSLUGX:
 			space.install_read_handler(0x2fffe0, 0x2fffef, read16m_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_r)));
 			space.install_write_handler(0x2fffe0, 0x2fffef, write16s_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_w)));
-			space.install_read_port(0x300000, 0x300001, 0x01ff7e, "DSW"); // 修改的 (Remikare)
-			space.install_read_port(0x340000, 0x340001, 0x01ff7e, "P2"); // 修改的 (Remikare)
 			break;
 		case NEOGEO_KOF99:
 			// addon_r here gives SMA random number
@@ -1454,8 +1448,6 @@ void neogeo_base_state::set_slot_idx(int slot)
 			space.install_read_handler(0x2fe446, 0x2fe447, read16m_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_r)));
 			space.install_read_handler(0x2ffff8, 0x2ffff9, read16sm_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::addon_r)));
 			space.install_read_handler(0x2ffffa, 0x2ffffb, read16sm_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::addon_r)));
-			space.install_read_port(0x300000, 0x300001, 0x01ff7e, "DSW"); // 修改的 (Remikare)
-			space.install_read_port(0x340000, 0x340001, 0x01ff7e, "P2"); // 修改的 (Remikare)
 			break;
 		case NEOGEO_GAROU:
 			// addon_r here gives SMA random number
@@ -1463,8 +1455,6 @@ void neogeo_base_state::set_slot_idx(int slot)
 			space.install_read_handler(0x2fe446, 0x2fe447, read16m_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_r)));
 			space.install_read_handler(0x2fffcc, 0x2fffcd, read16sm_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::addon_r)));
 			space.install_read_handler(0x2ffff0, 0x2ffff1, read16sm_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::addon_r)));
-			space.install_read_port(0x300000, 0x300001, 0x01ff7e, "DSW"); // 修改的 (Remikare)
-			space.install_read_port(0x340000, 0x340001, 0x01ff7e, "P2"); // 修改的 (Remikare)
 			break;
 		case NEOGEO_GAROUH:
 			// addon_r here gives SMA random number
@@ -1472,8 +1462,6 @@ void neogeo_base_state::set_slot_idx(int slot)
 			space.install_read_handler(0x2fe446, 0x2fe447, read16m_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_r)));
 			space.install_read_handler(0x2fffcc, 0x2fffcd, read16sm_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::addon_r)));
 			space.install_read_handler(0x2ffff0, 0x2ffff1, read16sm_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::addon_r)));
-			space.install_read_port(0x300000, 0x300001, 0x01ff7e, "DSW"); // 修改的 (Remikare)
-			space.install_read_port(0x340000, 0x340001, 0x01ff7e, "P2"); // 修改的 (Remikare)
 			break;
 		case NEOGEO_MSLUG3:
 		case NEOGEO_MSLUG3A:
@@ -1481,8 +1469,6 @@ void neogeo_base_state::set_slot_idx(int slot)
 			space.install_read_handler(0x2fe446, 0x2fe447, read16m_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_r)));
 			//space.install_read_handler(0x2ffff8, 0x2ffff9, read16sm_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::addon_r)));
 			//space.install_read_handler(0x2ffffa, 0x2ffffb, read16sm_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::addon_r)));
-			space.install_read_port(0x300000, 0x300001, 0x01ff7e, "DSW"); // 修改的 (Remikare)
-			space.install_read_port(0x340000, 0x340001, 0x01ff7e, "P2"); // 修改的 (Remikare)
 			break;
 		case NEOGEO_KOF2K:
 			// addon_r here gives SMA random number
@@ -1499,20 +1485,14 @@ void neogeo_base_state::set_slot_idx(int slot)
 		case NEOGEO_SVCSPLUS:
 			space.install_read_handler(0x2fe000, 0x2fffff, read16m_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_r)));
 			space.install_write_handler(0x2fe000, 0x2fffff, write16s_delegate(*this, FUNC(neogeo_base_state::write_bankprot_pvc)));
-			space.install_read_port(0x300000, 0x300001, 0x01ff7e, "DSW"); // 修改的 (Remikare)
-			space.install_read_port(0x340000, 0x340001, 0x01ff7e, "P2"); // 修改的 (Remikare)
 			break;
 		case NEOGEO_CTHD2K3:
 		case NEOGEO_CT2K3SP:
 			space.install_write_handler(0x2ffff0, 0x2ffff1, write16smo_delegate(*this, FUNC(neogeo_base_state::write_bankprot)));
-			space.install_read_port(0x300000, 0x300001, 0x01ff7e, "DSW"); // 修改的 (Remikare)
-			space.install_read_port(0x340000, 0x340001, 0x01ff7e, "P2"); // 修改的 (Remikare)
 			break;
 		case NEOGEO_MSLUG5P:
 			space.install_read_handler(0x2ffff0, 0x2fffff, read16m_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_r)));
 			space.install_write_handler(0x2ffff0, 0x2fffff, write16sm_delegate(*this, FUNC(neogeo_base_state::write_bankprot_ms5p)));
-			space.install_read_port(0x300000, 0x300001, 0x01ff7e, "DSW"); // 修改的 (Remikare)
-			space.install_read_port(0x340000, 0x340001, 0x01ff7e, "P2"); // 修改的 (Remikare)
 			break;
 		case NEOGEO_KOG:
 			space.install_read_handler(0x0ffffe, 0x0fffff, read16m_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_r)));
@@ -1523,14 +1503,10 @@ void neogeo_base_state::set_slot_idx(int slot)
 			space.install_read_handler(0x2fe000, 0x2fffff, read16m_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_r)));
 			space.install_write_handler(0x2fe000, 0x2fffff, write16s_delegate(*this, FUNC(neogeo_base_state::write_bankprot_kf2k3bl)));
 			space.install_read_handler(0x58196, 0x58197, read16sm_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::addon_r)));
-			space.install_read_port(0x300000, 0x300001, 0x01ff7e, "DSW"); // 修改的 (Remikare)
-			space.install_read_port(0x340000, 0x340001, 0x01ff7e, "P2"); // 修改的 (Remikare)
 			break;
 		case NEOGEO_KOF2K3P:
 			space.install_read_handler(0x2fe000, 0x2fffff, read16m_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_r)));
 			space.install_write_handler(0x2fe000, 0x2fffff, write16s_delegate(*this, FUNC(neogeo_base_state::write_bankprot_kf2k3bl)));
-			space.install_read_port(0x300000, 0x300001, 0x01ff7e, "DSW"); // 修改的 (Remikare)
-			space.install_read_port(0x340000, 0x340001, 0x01ff7e, "P2"); // 修改的 (Remikare)
 			break;
 		case NEOGEO_SBP:
 			// there seems to be a protection device living around here..
@@ -1613,6 +1589,9 @@ void ngarcade_base_state::machine_start()
 		main_program_space.install_read_handler(0x340000, 0x340001, 0, 0x01fffe, 0, read16smo_delegate(*this, FUNC(ngarcade_base_state::in1_edge_joy_r)));
 	else if (m_edge)
 		main_program_space.install_read_handler(0x340000, 0x340001, 0, 0x01fffe, 0, read16smo_delegate(*this, FUNC(ngarcade_base_state::in1_edge_r)));
+
+	    main_program_space.install_read_port(0x300000, 0x300001, 0x01ff7e, "DSW"); // 修改的 (Remikare)
+		main_program_space.install_read_port(0x340000, 0x340001, 0x01fffe, "P2"); // 修改的 (Remikare)
 
 	if (m_memcard)
 	{
@@ -1867,8 +1846,8 @@ INPUT_PORTS_START( neogeo )
 	PORT_DIPSETTING(    0x80, DEF_STR( Off ) )
 	PORT_DIPSETTING(    0x00, DEF_STR( On ) )
 
-// 修改的 (Remikare)
-/*****************************************************************************************************************/
+// 修改的 (Remikare) / (EKMAME) 
+/****************************************************************************************************************************************************************************************************************/
 	PORT_BIT( 0x0100, IP_ACTIVE_LOW, IPT_JOYSTICK_UP )
 	PORT_BIT( 0x0200, IP_ACTIVE_LOW, IPT_JOYSTICK_DOWN )
 	PORT_BIT( 0x0400, IP_ACTIVE_LOW, IPT_JOYSTICK_LEFT )
@@ -1877,6 +1856,17 @@ INPUT_PORTS_START( neogeo )
 	PORT_BIT( 0x2000, IP_ACTIVE_LOW, IPT_BUTTON2 ) PORT_CONDITION("DSW", 0xF000, NOTEQUALS, 0x2000)
 	PORT_BIT( 0x4000, IP_ACTIVE_LOW, IPT_BUTTON3 ) PORT_CONDITION("DSW", 0xF000, NOTEQUALS, 0x4000)
 	PORT_BIT( 0x8000, IP_ACTIVE_LOW, IPT_BUTTON4 ) PORT_CONDITION("DSW", 0xF000, NOTEQUALS, 0x8000)
+	PORT_BIT( 0x3000, IP_ACTIVE_LOW, IPT_BUTTON_AB ) PORT_NAME("P1 Button Combokey (Button 1 + Button 2)") PORT_CONDITION("DSW", 0xF000, NOTEQUALS, 0x3000)	
+	PORT_BIT( 0x5000, IP_ACTIVE_LOW, IPT_BUTTON_AC ) PORT_NAME("P1 Button Combokey (Button 1 + Button 3)") PORT_CONDITION("DSW", 0xF000, NOTEQUALS, 0x5000)
+	PORT_BIT( 0x9000, IP_ACTIVE_LOW, IPT_BUTTON_AD ) PORT_NAME("P1 Button Combokey (Button 1 + Button 4)") PORT_CONDITION("DSW", 0xF000, NOTEQUALS, 0x9000)	
+	PORT_BIT( 0x2000+0x4000, IP_ACTIVE_LOW, IPT_BUTTON_BC ) PORT_NAME("P1 Button Combokey (Button 2 + Button 3)") PORT_CONDITION("DSW", 0xF000, NOTEQUALS, 0x6000)
+	PORT_BIT( 0x2000+0x8000, IP_ACTIVE_LOW, IPT_BUTTON_BD ) PORT_NAME("P1 Button Combokey (Button 2 + Button 4)") PORT_CONDITION("DSW", 0xF000, NOTEQUALS, 0xA000)
+	PORT_BIT( 0x4000+0x8000, IP_ACTIVE_LOW, IPT_BUTTON_CD ) PORT_NAME("P1 Button Combokey (Button 3 + Button 4)") PORT_CONDITION("DSW", 0xF000, NOTEQUALS, 0xC000)
+	PORT_BIT( 0x1000+0x2000+0x4000, IP_ACTIVE_LOW, IPT_BUTTON_ABC ) PORT_NAME("P1 Button Combokey (Button 1 + Button 2 + Button 3)") PORT_CONDITION("DSW", 0xF000, NOTEQUALS, 0x7000)	
+	PORT_BIT( 0x1000+0x2000+0x8000, IP_ACTIVE_LOW, IPT_BUTTON_ABD ) PORT_NAME("P1 Button Combokey (Button 1 + Button 2 + Button 4)") PORT_CONDITION("DSW", 0xF000, NOTEQUALS, 0xB000)
+	PORT_BIT( 0x1000+0x4000+0x8000, IP_ACTIVE_LOW, IPT_BUTTON_ACD ) PORT_NAME("P1 Button Combokey (Button 1 + Button 3 + Button 4)") PORT_CONDITION("DSW", 0xF000, NOTEQUALS, 0xD000)
+	PORT_BIT( 0x2000+0x4000+0x8000, IP_ACTIVE_LOW, IPT_BUTTON_BCD ) PORT_NAME("P1 Button Combokey (Button 2 + Button 3 + Button 4)") PORT_CONDITION("DSW", 0xF000, NOTEQUALS, 0xE000)
+	PORT_BIT( 0x1000+0x2000+0x4000+0x8000, IP_ACTIVE_LOW, IPT_BUTTON_ABCD ) PORT_NAME("P1 Button Combokey (Button 1 + Button 2 + Button 3 + Button 4)") PORT_CONDITION("DSW", 0xF000, EQUALS, 0xF000)
 
 	PORT_START("P2")
 	PORT_BIT( 0x00ff, IP_ACTIVE_LOW, IPT_UNUSED )
@@ -1888,7 +1878,19 @@ INPUT_PORTS_START( neogeo )
 	PORT_BIT( 0x2000, IP_ACTIVE_LOW, IPT_BUTTON2 ) PORT_PLAYER(2) PORT_CONDITION("P2", 0xF000, NOTEQUALS, 0x2000)
 	PORT_BIT( 0x4000, IP_ACTIVE_LOW, IPT_BUTTON3 ) PORT_PLAYER(2) PORT_CONDITION("P2", 0xF000, NOTEQUALS, 0x4000)
 	PORT_BIT( 0x8000, IP_ACTIVE_LOW, IPT_BUTTON4 ) PORT_PLAYER(2) PORT_CONDITION("P2", 0xF000, NOTEQUALS, 0x8000)
-/*****************************************************************************************************************/
+	PORT_BIT( 0x3000, IP_ACTIVE_LOW, IPT_BUTTON_AB ) PORT_PLAYER(2) PORT_NAME("P2 Button Combokey (Button 1 + Button 2)") PORT_CONDITION("P2", 0xF000, NOTEQUALS, 0x3000)
+	PORT_BIT( 0x5000, IP_ACTIVE_LOW, IPT_BUTTON_AC ) PORT_PLAYER(2) PORT_NAME("P2 Button Combokey (Button 1 + Button 3)") PORT_CONDITION("P2", 0xF000, NOTEQUALS, 0x5000)
+	PORT_BIT( 0x9000, IP_ACTIVE_LOW, IPT_BUTTON_AD ) PORT_PLAYER(2) PORT_NAME("P2 Button Combokey (Button 1 + Button 4)") PORT_CONDITION("P2", 0xF000, NOTEQUALS, 0x9000)	
+	PORT_BIT( 0x2000+0x4000, IP_ACTIVE_LOW, IPT_BUTTON_BC ) PORT_PLAYER(2) PORT_NAME("P2 Button Combokey (Button 2 + Button 3)") PORT_CONDITION("P2", 0xF000, NOTEQUALS, 0x6000)
+	PORT_BIT( 0x2000+0x8000, IP_ACTIVE_LOW, IPT_BUTTON_BD ) PORT_PLAYER(2) PORT_NAME("P2 Button Combokey (Button 2 + Button 4)") PORT_CONDITION("P2", 0xF000, NOTEQUALS, 0xA000)
+	PORT_BIT( 0x4000+0x8000, IP_ACTIVE_LOW, IPT_BUTTON_CD ) PORT_PLAYER(2) PORT_NAME("P2 Button Combokey (Button 3 + Button 4)") PORT_CONDITION("P2", 0xF000, NOTEQUALS, 0xC000)
+	PORT_BIT( 0x1000+0x2000+0x4000, IP_ACTIVE_LOW, IPT_BUTTON_ABC ) PORT_PLAYER(2) PORT_NAME("P2 Button Combokey (Button 1 + Button 2 + Button 3)") PORT_CONDITION("P2", 0xF000, NOTEQUALS, 0x7000)
+	PORT_BIT( 0x1000+0x2000+0x8000, IP_ACTIVE_LOW, IPT_BUTTON_ABD ) PORT_PLAYER(2) PORT_NAME("P2 Button Combokey (Button 1 + Button 2 + Button 4)") PORT_CONDITION("P2", 0xF000, NOTEQUALS, 0xB000)
+	PORT_BIT( 0x1000+0x4000+0x8000, IP_ACTIVE_LOW, IPT_BUTTON_ACD ) PORT_PLAYER(2) PORT_NAME("P2 Button Combokey (Button 1 + Button 3 + Button 4)") PORT_CONDITION("P2", 0xF000, NOTEQUALS, 0xD000)
+	PORT_BIT( 0x2000+0x4000+0x8000, IP_ACTIVE_LOW, IPT_BUTTON_BCD ) PORT_PLAYER(2) PORT_NAME("P2 Button Combokey (Button 2 + Button 3 + Button 4)") PORT_CONDITION("P2", 0xF000, NOTEQUALS, 0xE000)
+	PORT_BIT( 0x1000+0x2000+0x4000+0x8000, IP_ACTIVE_LOW, IPT_BUTTON_ABCD ) PORT_PLAYER(2) PORT_NAME("P2 Button Combokey (Button 1 + Button 2 + Button 3 + Button 4)") PORT_CONDITION("P2", 0xF000, EQUALS, 0xF000)
+
+/****************************************************************************************************************************************************************************************************************/
 
 	PORT_START("SYSTEM")
 	PORT_BIT( 0x00ff, IP_ACTIVE_LOW, IPT_UNUSED )

@@ -13,9 +13,9 @@ Removed warning screen, startups, Decryption screen texts.
 
 Removed the following annoying messages: “WRONG LENGTH”, “NO_DUMP”, “WRONG CHECKSUMS”, “BAD_DUMP” And “THE PARENT FILE DOES NOT EXIST”.
 
-Added movement optimization for all fighting games “GSC2007”.
+Added movement optimization for all fighting games (By GSC2007).
 
-The Arcade64 “GUI” was modernized with new icons (KOF2112), a custom default configuration has been made.
+The Arcade64 “GUI” was modernized with new icons (By KOF2112), a custom default configuration has been made.
 
 It is already pre-configured, enforce aspect ratio is disabled, full screen mode and tricks are already enabled by default.
 

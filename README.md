@@ -25,17 +25,18 @@ Supports game list lst language files. The list language can be edited freely.
 
 NEOGEO, PGM, driver supports key combination settings.
 
-Added 12 new UI folders by default.
+Added 13 new UI folders by default.
  * Capcom
  * Dataeast
  * IGS
  * konami
  * Namco
+ * Nintendo
  * Neogeo
  * Midway
  * Sega
- * Taito
  * Seta
+ * Taito
  * Toaplan
  * Misc
 

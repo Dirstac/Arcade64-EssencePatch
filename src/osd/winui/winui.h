@@ -136,7 +136,7 @@
 #define MIN_VIEW_WIDTH		10
 
 #define NUM_TOOLBUTTONS     std::size(tbb)
-#define NUM_TOOLTIPS		(14) // 修改的 代码来源 (EKMAME)
+#define NUM_TOOLTIPS		(16) // 修改的 代码来源 (EKMAME)
 
 enum
 {

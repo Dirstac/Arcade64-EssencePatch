@@ -76,10 +76,15 @@ enum
 	FOLDER_CPS,
 	FOLDER_PGM,
 	FOLDER_NAMCO,		
+	FOLDER_SETA,
 	FOLDER_TAITO,		
 	FOLDER_KONAMI,		
 	FOLDER_SEGA,	
 	FOLDER_CAVE,
+	FOLDER_MIDWAY,
+	FOLDER_TOAPLAN,
+	FOLDER_NINTENDO,
+	FOLDER_DATAEAST,
 /******************/
 	MAX_FOLDERS
 };
@@ -163,9 +168,14 @@ void CreateNEOGEOFolders(int parent_index);
 void CreateCPSFolders(int parent_index);
 void CreatePGMFolders(int parent_index);
 void CreateNAMCOFolders(int parent_index);
+void CreateSETAFolders(int parent_index);
 void CreateTAITOFolders(int parent_index);
 void CreateKONAMIFolders(int parent_index);
 void CreateSEGAFolders(int parent_index);
 void CreateTOAFolders(int parent_index);
+void CreateMIDWAYFolders(int parent_index);
+void CreateTOAPLANFolders(int parent_index);
+void CreateNINTENDOFolders(int parent_index);
+void CreateDATAEASTFolders(int parent_index);
 /**********************************************/
 #endif

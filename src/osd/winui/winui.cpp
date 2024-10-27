@@ -7,6 +7,11 @@
 static int MIN_WIDTH  = DBU_MIN_WIDTH;
 static int MIN_HEIGHT = DBU_MIN_HEIGHT;
 
+// 修改的 代码来源 (EKMAME)
+/******************************************/
+static HIMAGELIST   hHeaderImages = NULL;
+/******************************************/
+
 typedef struct
 {
 	int resource;
@@ -250,6 +255,14 @@ typedef struct
 
 static void ResizeWindow(HWND hParent, Resize *r);
 
+// 修改的 代码来源 (EKMAME)
+/**********************************************************/
+#define LG_ICONMAP_WIDTH    GetSystemMetrics(SM_CXICON)
+#define LG_ICONMAP_HEIGHT   GetSystemMetrics(SM_CYICON)
+#define ICONMAP_WIDTH       GetSystemMetrics(SM_CXSMICON)
+#define ICONMAP_HEIGHT      GetSystemMetrics(SM_CYSMICON)
+/**********************************************************/
+
 /***************************************************************************
     Internal variables
  ***************************************************************************/
@@ -392,6 +405,9 @@ static const TBBUTTON tbb[] =
 	{0, 0,                      TBSTATE_ENABLED, BTNS_SEP,        {0, 0}, 0, 0},
 	{2, ID_VIEW_ICONS_LARGE,    TBSTATE_ENABLED, BTNS_CHECKGROUP, {0, 0}, 0, 2},
 	{3, ID_VIEW_ICONS_SMALL,    TBSTATE_ENABLED, BTNS_CHECKGROUP, {0, 0}, 0, 3},
+//	{11, ID_VIEW_LIST_MENU,  	TBSTATE_ENABLED, BTNS_CHECKGROUP, {0, 0}, 0, 4},
+	{5, ID_VIEW_DETAIL, 		TBSTATE_ENABLED, BTNS_CHECKGROUP, {0, 0}, 0, 5},
+//	{6, ID_VIEW_GROUPED,  		TBSTATE_ENABLED, BTNS_CHECKGROUP, {0, 0}, 0, 6},
 	{0, 0,                      TBSTATE_ENABLED, BTNS_SEP,        {0, 0}, 0, 0},
 	{4, ID_ENABLE_INDENT,       TBSTATE_ENABLED, BTNS_CHECK,      {0, 0}, 0, 12},
 	{0, 0,                      TBSTATE_ENABLED, BTNS_SEP,        {0, 0}, 0, 0},
@@ -420,6 +436,8 @@ static const wchar_t szTbStrings[NUM_TOOLTIPS][30] =
 	TEXT("Small icons"),
 // 修改的 代码来源 (EKMAME)
 /**********************************/
+	TEXT("Details icons"),
+	TEXT("List icons"),
 	TEXT("Language game list"),
 /**********************************/
 	TEXT("Refresh"),
@@ -441,6 +459,9 @@ static const int CommandToString[] =
 	ID_VIEW_ICONS_SMALL,
 // 修改的 代码来源 (EKMAME)
 /*************************/
+	ID_VIEW_LIST_MENU,
+	ID_VIEW_DETAIL,
+//	ID_VIEW_GROUPED,
 	ID_KOREAN_GAMELIST,
 /*************************/
 	ID_UPDATE_GAMELIST,
@@ -723,14 +744,14 @@ int MameUIMain(HINSTANCE hInstance, LPWSTR lpCmdLine)
 
 	// set up window class
 	memset(&wndclass, 0, sizeof(WNDCLASS));
-	wndclass.style = 0; //CS_HREDRAW | CS_VREDRAW;
+	wndclass.style = CS_HREDRAW | CS_VREDRAW; // 修改的 代码来源 (EKMAME)
 	wndclass.lpfnWndProc = MameWindowProc;
 	wndclass.cbClsExtra = 0;
 	wndclass.cbWndExtra = DLGWINDOWEXTRA;
 	wndclass.hInstance = hInstance;
 	wndclass.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_MAMEUI_ICON));
 	wndclass.hCursor = NULL;
-	wndclass.hbrBackground = GetSysColorBrush(COLOR_3DFACE);
+	wndclass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);// GetSysColorBrush(COLOR_3DFACE);  // 修改的 代码来源 (EKMAME)
 	wndclass.lpszMenuName = MAKEINTRESOURCE(IDR_UI_MENU);
 	wndclass.lpszClassName = TEXT("MainClass");
 
@@ -1353,9 +1374,24 @@ static void Win32UI_init(void)
 			break;
 
 		case VIEW_ICONS_SMALL :
-		default :
 			SetView(ID_VIEW_ICONS_SMALL);
 			break;
+
+// 修改的 代码来源 (EKMAME)
+/******************************************/
+		case VIEW_INLIST :
+			SetView(ID_VIEW_LIST_MENU);
+			break;
+
+		case VIEW_REPORT :
+			SetView(ID_VIEW_DETAIL);
+			break;
+		
+		case VIEW_GROUPED :
+		default :
+			SetView(ID_VIEW_GROUPED);
+			break;
+/******************************************/
 	}
 
 	UpdateListView();
@@ -1727,8 +1763,14 @@ static bool GameCheck(void)
 	AuditRefresh();
 
 	if (game_index == 0)
-		ProgressBarShow();
 
+// 修改的 代码来源 (EKMAME)
+/***********************************/
+	{
+		ProgressBarShow();
+	}
+/***********************************/
+	
 	if (bFolderCheck == true)
 	{
 		LVITEM lvi;
@@ -2690,21 +2732,40 @@ static void PollGUIJoystick()
 
 static void SetView(int menu_id)
 {
+
+// 修改的 代码来源 (EKMAME)
+/*********************************************************************************************************/
+	BOOL force_reset = false;
+
 	// first uncheck previous menu item, check new one
-	CheckMenuRadioItem(GetMenu(hMain), ID_VIEW_ICONS_LARGE, ID_VIEW_ICONS_SMALL, menu_id, MF_CHECKED);
+	//CheckMenuRadioItem(GetMenu(hMain), ID_VIEW_ICONS_LARGE, ID_VIEW_ICONS_SMALL, menu_id, MF_CHECKED);
+	CheckMenuRadioItem(GetMenu(hMain), ID_VIEW_ICONS_LARGE, ID_ENABLE_INDENT, menu_id, MF_CHECKED);
+/*********************************************************************************************************/
 	ToolBar_CheckButton(hToolBar, menu_id, MF_CHECKED);
 
+// 修改的 代码来源 (EKMAME)
+/*******************************************************************************************/
 	// Associate the image lists with the list view control.
-	if (menu_id == ID_VIEW_ICONS_LARGE)
-		(void)ListView_SetImageList(hWndList, hLarge, LVSIL_SMALL);
-	else
-		(void)ListView_SetImageList(hWndList, hSmall, LVSIL_SMALL);
+//	if (menu_id == ID_VIEW_ICONS_LARGE)
+//		(void)ListView_SetImageList(hWndList, hLarge, LVSIL_SMALL);
+//	else
+//		(void)ListView_SetImageList(hWndList, hSmall, LVSIL_SMALL);
+
+	if (Picker_GetViewID(hWndList) == VIEW_GROUPED || menu_id == ID_VIEW_GROUPED)
+	{
+		// this changes the sort order, so redo everything
+		force_reset = true;
+	}
 
 	for (int i = 0; i < sizeof(s_nPickers) / sizeof(s_nPickers[0]); i++)
 		Picker_SetViewID(GetDlgItem(hMain, s_nPickers[i]), menu_id - ID_VIEW_ICONS_LARGE);
 
-	for (int i = 0; i < sizeof(s_nPickers) / sizeof(s_nPickers[0]); i++)
-		Picker_Sort(GetDlgItem(hMain, s_nPickers[i]));
+	if(force_reset)
+	{
+		for (int i = 0; i < sizeof(s_nPickers) / sizeof(s_nPickers[0]); i++)
+			Picker_Sort(GetDlgItem(hMain, s_nPickers[i]));
+	}
+/*******************************************************************************************/
 }
 
 static void ResetListView()
@@ -2772,8 +2833,17 @@ static void ResetListView()
 			Picker_SetSelectedItem(hWndList, current_game);
 	}
 
+	/*RS Instead of the Arrange Call that was here previously on all Views
+         We now need to set the ViewMode for SmallIcon again,
+         for an explanation why, see SetView*/
+	if (GetViewMode() == VIEW_ICONS_SMALL)
+		SetView(ID_VIEW_ICONS_SMALL);
+
+// 修改的 代码来源 (EKMAME)
+/*************************************/
 	SetWindowRedraw(hWndList, true);
 	UpdateStatusBar();
+/*************************************/
 }
 
 static void UpdateGameList(void)
@@ -3076,6 +3146,21 @@ static bool MameCommand(HWND hWnd, int id, HWND hWndCtl, UINT codeNotify)
 			SetView(ID_VIEW_ICONS_SMALL);
 			UpdateListView();
 			return true;
+
+// 修改的 代码来源 (EKMAME)
+/******************************************/
+		case ID_VIEW_LIST_MENU:
+			SetView(ID_VIEW_LIST_MENU);
+			return true;
+
+		case ID_VIEW_DETAIL:
+			SetView(ID_VIEW_DETAIL);
+			return true;
+		
+		case ID_VIEW_GROUPED:
+			SetView(ID_VIEW_GROUPED);
+			return true;
+/******************************************/
 
 		/* Arrange Icons submenu */
 		case ID_VIEW_BYGAME:
@@ -3959,16 +4044,24 @@ static void InitListView(void)
 
 static void AddDriverIcon(int nItem, int default_icon_index)
 {
+// 修改的 代码来源 (EKMAME)
+/**************************************************************************/
+	HICON hIcon = 0;
+	int nParentIndex = -1;
+
 	/* if already set to rom or clone icon, we've been here before */
 	if (icon_index[nItem] == 1 || icon_index[nItem] == 3)
 		return;
 
-	HICON hIcon = LoadIconFromFile((char *)GetDriverGameName(nItem));
+	//HICON hIcon = LoadIconFromFile((char *)GetDriverGameName(nItem));
+      hIcon = LoadIconFromFile((char *)GetDriverGameName(nItem));
 
 	if (hIcon == NULL)
 	{
-		int nParentIndex = GetParentIndex(&driver_list::driver(nItem));
-
+		//int nParentIndex = GetParentIndex(&driver_list::driver(nItem));
+          nParentIndex = GetParentIndex(&driver_list::driver(nItem));
+/**************************************************************************/
+		
 		if( nParentIndex >= 0)
 		{
 			hIcon = LoadIconFromFile((char *)GetDriverGameName(nParentIndex));
@@ -4040,16 +4133,93 @@ static void ReloadIcons(void)
 	}
 }
 
+
+// 修改的 代码来源 (EKMAME)
+/********************************************************************************************************/
+static DWORD GetShellLargeIconSize(void)
+{
+	DWORD  dwSize = 32, dwLength = 512, dwType = REG_SZ;
+	HKEY   hKey;
+	LPTSTR tErrorMessage = NULL;
+
+	/* Get the Key */
+	LONG lRes = RegOpenKey(HKEY_CURRENT_USER, TEXT("Control Panel\\Desktop\\WindowMetrics"), &hKey);
+	if( lRes != ERROR_SUCCESS )
+	{
+		//GetSystemErrorMessage(lRes, &tErrorMessage);
+		MessageBox(GetMainWindow(), tErrorMessage, TEXT("Large shell icon size registry access"), MB_OK | MB_ICONERROR);
+		LocalFree(tErrorMessage);
+		return dwSize;
+	}
+
+	/* Save the last size */
+	TCHAR  szBuffer[512];
+	lRes = RegQueryValueEx(hKey, TEXT("Shell Icon Size"), NULL, &dwType, (LPBYTE)szBuffer, &dwLength);
+	if( lRes != ERROR_SUCCESS )
+	{
+		//GetSystemErrorMessage(lRes, &tErrorMessage);
+		MessageBox(GetMainWindow(), tErrorMessage, TEXT("Large shell icon size registry query"), MB_OK | MB_ICONERROR);
+		LocalFree(tErrorMessage);
+		RegCloseKey(hKey);
+		return dwSize;
+	}
+
+	dwSize = _ttol(szBuffer);
+	if (dwSize < 32)
+		dwSize = 32;
+
+	if (dwSize > 48)
+		dwSize = 48;
+
+	/* Clean up */
+	RegCloseKey(hKey);
+	return dwSize;
+}
+
+
+static DWORD GetShellSmallIconSize(void)
+{
+	DWORD dwSize = ICONMAP_WIDTH;
+
+	if (dwSize < 48)
+	{
+		if (dwSize < 32)
+			dwSize = 16;
+		else
+			dwSize = 32;
+	}
+	else
+	{
+		dwSize = 48;
+	}
+	return dwSize;
+/********************************************************************************************************/
+}
+
 // create iconlist for Listview control
 static void CreateIcons(void)
 {
+// 修改的 代码来源 (EKMAME)
+/********************************************************/
+	DWORD dwSmallIconSize = GetShellSmallIconSize();
+	DWORD dwLargeIconSize = GetShellLargeIconSize();
+	HICON hIcon;
+	DWORD dwStyle;
+/********************************************************/
 	int icon_count = 0;
-	int grow = 1000;
+	int grow = 5000;
 
 	while(g_iconData[icon_count].icon_name)
 		icon_count++;
 
-	hSmall = ImageList_Create(16, 16, ILC_COLORDDB | ILC_MASK, icon_count, icon_count + grow);
+// 修改的 代码来源 (EKMAME)
+/*****************************************************************************************************/
+	//hSmall = ImageList_Create(16, 16, ILC_COLORDDB | ILC_MASK, icon_count, icon_count + grow);
+	dwStyle = GetWindowLong(hWndList,GWL_STYLE);
+	SetWindowLong(hWndList,GWL_STYLE,(dwStyle & ~LVS_TYPEMASK) | LVS_ICON);
+/*****************************************************************************************************/
+
+	hSmall = ImageList_Create(dwSmallIconSize, dwSmallIconSize, ILC_COLORDDB | ILC_MASK, icon_count, icon_count + grow);
 
 	if (hSmall == NULL) 
 	{
@@ -4057,7 +4227,11 @@ static void CreateIcons(void)
 		PostQuitMessage(0);
 	}
 
-	hLarge = ImageList_Create(32, 32, ILC_COLORDDB | ILC_MASK, icon_count, icon_count + grow);
+// 修改的 代码来源 (EKMAME)
+/*************************************************************************************************************************/
+	//hLarge = ImageList_Create(32, 32, ILC_COLORDDB | ILC_MASK, icon_count, icon_count + grow);
+    hLarge = ImageList_Create(dwLargeIconSize, dwLargeIconSize, ILC_COLORDDB | ILC_MASK, icon_count, icon_count + grow);
+/*************************************************************************************************************************/
 
 	if (hLarge == NULL) 
 	{
@@ -4066,6 +4240,26 @@ static void CreateIcons(void)
 	}
 
 	ReloadIcons();
+
+// 修改的 代码来源 (EKMAME)
+/************************************************************************************/
+	// Associate the image lists with the list view control.
+	(void)ListView_SetImageList(hWndList, hSmall, LVSIL_SMALL);
+	(void)ListView_SetImageList(hWndList, hLarge, LVSIL_NORMAL);
+
+	// restore our view
+	SetWindowLong(hWndList,GWL_STYLE,dwStyle);
+
+	// Now set up header specific stuff
+	hHeaderImages = ImageList_Create(16,16,ILC_COLORDDB | ILC_MASK,2,2);
+	hIcon = LoadIcon(hInst,MAKEINTRESOURCE(IDI_HEADER_UP));
+	ImageList_AddIcon(hHeaderImages,hIcon);
+	hIcon = LoadIcon(hInst,MAKEINTRESOURCE(IDI_HEADER_DOWN));
+	ImageList_AddIcon(hHeaderImages,hIcon);
+
+	for (int i = 0; i < sizeof(s_nPickers) / sizeof(s_nPickers[0]); i++)
+		Picker_SetHeaderImageList(GetDlgItem(hMain, s_nPickers[i]), hHeaderImages);	
+/************************************************************************************/
 }
 
 
@@ -5439,7 +5633,13 @@ void UpdateListView(void)
 {
 	ResetWhichGamesInFolders();
 	ResetListView();
-	(void)ListView_RedrawItems(hWndList, ListView_GetTopIndex(hWndList), ListView_GetTopIndex(hWndList) + ListView_GetCountPerPage(hWndList));
+
+// 修改的 代码来源 (EKMAME)
+/***************************************************************************************************************************************************/
+    if( (GetViewMode() == VIEW_GROUPED) || (GetViewMode() == VIEW_REPORT ) )
+	    (void)ListView_RedrawItems(hWndList, ListView_GetTopIndex(hWndList), ListView_GetTopIndex(hWndList) + ListView_GetCountPerPage(hWndList));
+/***************************************************************************************************************************************************/
+	
 	SetFocus(hWndList);
 }
 

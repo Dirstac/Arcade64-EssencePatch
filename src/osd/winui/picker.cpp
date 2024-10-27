@@ -376,9 +376,32 @@ void Picker_SetViewID(HWND hWndPicker, int nViewID)
 	if (pPickerInfo->pCallbacks->pfnSetViewMode)
 		pPickerInfo->pCallbacks->pfnSetViewMode(pPickerInfo->nCurrentViewID);
 
+// 修改的 代码来源 (EKMAME)
+/********************************************/
+	LONG_PTR nListViewStyle;
+	switch(nViewID)
+	{
+		case VIEW_ICONS_LARGE:
+			nListViewStyle = LVS_ICON;
+			break;
+		case VIEW_ICONS_SMALL:
+			nListViewStyle = LVS_SMALLICON;
+			break;
+		case VIEW_INLIST:
+			nListViewStyle = LVS_LIST;
+			break;
+		case VIEW_GROUPED:
+		case VIEW_REPORT:
+		default:
+			nListViewStyle = LVS_REPORT;
+			break;
+	}
+/********************************************/
+
 	DWORD dwStyle = GetWindowLong(hWndPicker, GWL_STYLE);
 	dwStyle &= ~LVS_TYPEMASK;
-	dwStyle |= LVS_REPORT;
+	//dwStyle |= LVS_REPORT;
+	dwStyle |= nListViewStyle; // 修改的 代码来源 (EKMAME)
 	SetWindowLong(hWndPicker, GWL_STYLE, dwStyle);
 	RedrawWindow(hWndPicker, NULL, NULL, RDW_ERASE | RDW_INVALIDATE | RDW_FRAME);
 }
@@ -833,6 +856,16 @@ const wchar_t* const *Picker_GetColumnNames(HWND hWndPicker)
 
 	return pPickerInfo->ppszColumnNames;
 }
+
+// 修改的 代码来源 (EKMAME)
+/**************************************************************************************/
+void Picker_SetHeaderImageList(HWND hwndPicker, HIMAGELIST hHeaderImages)
+{
+	HWND hwndHeader;
+	hwndHeader = ListView_GetHeader(hwndPicker);
+	SendMessage(hwndHeader, HDM_SETIMAGELIST, 0, (LPARAM) (void *) hHeaderImages);
+}
+/**************************************************************************************/
 
 bool Picker_SaveColumnWidths(HWND hWndPicker)
 {

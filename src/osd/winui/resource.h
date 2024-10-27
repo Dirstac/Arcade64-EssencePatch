@@ -166,13 +166,20 @@
 /*******************************************/
 #define IDB_KLIST						285
 #define IDI_FOLDER_NEOGEO				286
-#define IDI_FOLDER_CAPCOM				292
-#define IDI_FOLDER_PGM					297
-#define IDI_FOLDER_NAMCO				287	
+#define IDI_FOLDER_NAMCO				287
 #define IDI_FOLDER_TAITO				288
 #define IDI_FOLDER_KONAMI				289
 #define IDI_FOLDER_SEGA 				290
 #define IDI_FOLDER_CAVE 				291
+#define IDI_FOLDER_CAPCOM				292
+#define IDI_FOLDER_NINTENDO				293
+#define IDI_FOLDER_MIDWAY				294
+#define IDI_FOLDER_DATAEAST				295
+#define IDI_FOLDER_TOAPLAN				296
+#define IDI_FOLDER_PGM					297	
+#define IDI_FOLDER_SETA				    298
+#define IDI_HEADER_UP                   299
+#define IDI_HEADER_DOWN                 300
 /*******************************************/
 #define IDC_LIST                        1000
 #define IDC_JOYSTICK                    1003
@@ -601,5 +608,8 @@
 // 修改的 代码来源 (EKMAME)
 /*******************************************/
 #define ID_KOREAN_GAMELIST              40157
+#define ID_VIEW_LIST_MENU				40160
+#define ID_VIEW_DETAIL					40161
+#define ID_VIEW_GROUPED					40163
 /*******************************************/
 #define IDC_STATIC                      1

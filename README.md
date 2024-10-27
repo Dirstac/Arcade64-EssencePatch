@@ -15,7 +15,7 @@ Removed the following annoying messages: “WRONG LENGTH”, “NO_DUMP”, “W
 
 Added movement optimization for all fighting games (By GSC2007).
 
-The Arcade64 “GUI” was modernized with new icons (By KOF2112), a custom default configuration has been made.
+The Arcade64 “GUI” was modernized with new icons (By KOF2112/EKMAME), a custom default configuration has been made.
 
 It is already pre-configured, enforce aspect ratio is disabled, full screen mode and tricks are already enabled by default.
 
@@ -26,14 +26,18 @@ Supports game list lst language files. The list language can be edited freely.
 NEOGEO, PGM, driver supports key combination settings.
 
 Added 8 new UI folders by default.
- * Neogeo
- * Cps
- * Pgm
- * Namco
- * Taito
+ * Capcom
+ * Dataeast
+ * IGS
  * konami
- * sega
- * cave
+ * Namco
+ * Neogeo
+ * Midway
+ * Sega
+ * Taito
+ * Seta
+ * Toaplan
+ * Misc
 
 How to compile
 ---------------------------------------

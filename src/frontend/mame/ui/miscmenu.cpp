@@ -410,12 +410,13 @@ bool menu_crosshair::handle(event const *ev)
 				break;
 			}
 		}
+
 		if (changed)
 			reset(reset_options::REMEMBER_REF); // rebuild the menu
 	}
+
 	// triggers an item reset for any changes
 	return false;
-
 }
 
 

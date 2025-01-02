@@ -150,15 +150,15 @@
 #define IDB_MANUAL                      270
 #define IDB_NOTEPAD                     271
 #define IDI_DISPLAYSHEET                272
-#define IDI_ADVANCEDSHEET               273
-#define IDI_SCREENSHEET                 274
-#define IDI_OPENGLSHEET                 275
-#define IDI_SHADERSHEET                 276
-#define IDI_VECTORSHEET                 277
-#define IDI_SOUNDSHEET                  278
-#define IDI_INPUTSHEET                  279
-#define IDI_CONTROLSHEET                280
-#define IDI_MISCSHEET                   281
+#define IDI_VECTORSHEET                 273
+#define IDI_SOUNDSHEET                  274
+#define IDI_CONTROLSHEET                275
+#define IDI_MISCSHEET                   276
+#define IDI_ADVANCEDSHEET               277
+#define IDI_SCREENSHEET                 278
+#define IDI_OPENGLSHEET                 279
+#define IDI_SHADERSHEET                 280
+#define IDI_INPUTSHEET                  281
 #define IDI_MISC2SHEET                  282
 #define IDI_SNAPSHEET                   283
 #define IDI_SHADER                      284
@@ -494,8 +494,6 @@
 #define ID_ABOUT                        40003
 #define ID_FILE_PLAY                    40004
 #define ID_HELP_ABOUT                   40006
-#define ID_VIEW_ICONS_LARGE             40009
-#define ID_VIEW_ICONS_SMALL             40010
 #define ID_OPTIONS_FONT                 40012
 #define ID_OPTIONS_FOLDERS_COLOR        40013
 #define ID_OPTIONS_DIR                  40014
@@ -568,7 +566,6 @@
 #define ID_OPTIONS_HISTORY_FONT         40114
 #define ID_OPTIONS_TREE_FONT            40115
 #define ID_VIEW_FULLSCREEN              40116
-#define ID_ENABLE_INDENT                40117
 #define ID_NOTEPAD                      40118
 #define ID_VIEW_TAB_SCREENSHOT          40120
 #define ID_VIEW_TAB_TITLE               40121
@@ -607,9 +604,12 @@
 #define ID_RC_CLEAN                     40157
 // 修改的 代码来源 (EKMAME)
 /*******************************************/
-#define ID_KOREAN_GAMELIST              40157
-#define ID_VIEW_LIST_MENU				40160
-#define ID_VIEW_DETAIL					40161
-#define ID_VIEW_GROUPED					40163
+#define ID_KOREAN_GAMELIST              40158
+#define ID_VIEW_ICONS_LARGE             40159
+#define ID_VIEW_ICONS_SMALL             40160
+#define ID_VIEW_LIST_MENU				40161
+#define ID_VIEW_DETAIL					40162
+#define ID_ENABLE_INDENT                40163
+#define ID_VIEW_GROUPED					40164
 /*******************************************/
 #define IDC_STATIC                      1

@@ -2078,11 +2078,9 @@ void CreateNEOGEOFolders(int parent_index)
 		if (s == NULL || s[0] == '\0')
 			continue;
 
-		if( (!strcmp("neogeo.cpp", s)))
-
-		{
-			AddGame(lpFolder, jj);
-		}
+		if (!strcmp("midas.cpp", s))			      AddGame(lpFolder, jj);
+		if (!strcmp("neogeo.cpp", s))			      AddGame(lpFolder, jj);
+		if (!strcmp("neopcb.cpp", s))			      AddGame(lpFolder, jj);
 	}
 }
 
@@ -2106,6 +2104,7 @@ void CreateCPSFolders(int parent_index)
 		if (!strcmp("1943.cpp", s))		              AddGame(lpFolder, jj);
 		if (!strcmp("alien.cpp", s))			      AddGame(lpFolder, jj);
 		if (!strcmp("bionicc.cpp", s))			      AddGame(lpFolder, jj);
+		if (!strcmp("chakumelo.cpp", s))		      AddGame(lpFolder, jj);
 		if (!strcmp("supduck.cpp", s))			      AddGame(lpFolder, jj);
 		if (!strcmp("blktiger.cpp", s))			      AddGame(lpFolder, jj);
 		if (!strcmp("blktiger_ms.cpp", s))			  AddGame(lpFolder, jj);
@@ -2124,8 +2123,10 @@ void CreateCPSFolders(int parent_index)
 		if (!strcmp("gunsmoke.cpp", s))			      AddGame(lpFolder, jj);
 		if (!strcmp("higemaru.cpp", s))			      AddGame(lpFolder, jj);
 		if (!strcmp("lastduel.cpp", s))			      AddGame(lpFolder, jj);
+		if (!strcmp("lastduel_ms.cpp", s))	          AddGame(lpFolder, jj);
 		if (!strcmp("lwings.cpp", s))			      AddGame(lpFolder, jj);
 		if (!strcmp("mitchell.cpp", s))		          AddGame(lpFolder, jj);
+		if (!strcmp("miteshin.cpp", s))		          AddGame(lpFolder, jj);
 		if (!strcmp("psrockman.cpp", s))			  AddGame(lpFolder, jj);
 		if (!strcmp("sf.cpp", s))			          AddGame(lpFolder, jj);
 		if (!strcmp("sidearms.cpp", s))			      AddGame(lpFolder, jj);
@@ -2167,6 +2168,9 @@ void CreatePGMFolders(int parent_index)
 		if (!strcmp("igs017.cpp", s))			      AddGame(lpFolder, jj);
 		if (!strcmp("igs_fear.cpp", s))			      AddGame(lpFolder, jj);
 		if (!strcmp("igs_m027.cpp", s))			      AddGame(lpFolder, jj);
+		if (!strcmp("igs_m027_023vid.cpp", s))		  AddGame(lpFolder, jj);
+		if (!strcmp("igs_m027_link.cpp", s))		  AddGame(lpFolder, jj);
+		if (!strcmp("igs_m027xa.cpp", s))			  AddGame(lpFolder, jj);
 		if (!strcmp("igs_m036.cpp", s))			      AddGame(lpFolder, jj);
 		if (!strcmp("iqblock.cpp", s))			      AddGame(lpFolder, jj);
 		if (!strcmp("lordgun.cpp", s))		          AddGame(lpFolder, jj);
@@ -2201,9 +2205,11 @@ void CreateNAMCOFolders(int parent_index)
 		if (!strcmp("dambustr.cpp", s))               AddGame(lpFolder, jj);
 		if (!strcmp("dangbar.cpp", s))                AddGame(lpFolder, jj);
 		if (!strcmp("dkmb.cpp", s))                   AddGame(lpFolder, jj);
+		if (!strcmp("fastfred.cpp", s))			      AddGame(lpFolder, jj);
 		if (!strcmp("gal3.cpp", s))                   AddGame(lpFolder, jj);
 		if (!strcmp("galaga.cpp", s))                 AddGame(lpFolder, jj);
 		if (!strcmp("galaxian.cpp", s))               AddGame(lpFolder, jj);
+		if (!strcmp("galaxian_rockclim.cpp", s))      AddGame(lpFolder, jj);
 		if (!strcmp("galaxold.cpp", s))               AddGame(lpFolder, jj);
 		if (!strcmp("gaplus.cpp", s))                 AddGame(lpFolder, jj);
 		if (!strcmp("kungfur.cpp", s))                AddGame(lpFolder, jj);
@@ -2229,11 +2235,15 @@ void CreateNAMCOFolders(int parent_index)
 		if (!strcmp("namcos23.cpp", s))               AddGame(lpFolder, jj);
 		if (!strcmp("namcos86.cpp", s))               AddGame(lpFolder, jj);
 		if (!strcmp("polepos.cpp", s))                AddGame(lpFolder, jj);
+		if (!strcmp("quickncrash.cpp", s))            AddGame(lpFolder, jj);
 		if (!strcmp("rallyx.cpp", s))                 AddGame(lpFolder, jj);
 		if (!strcmp("rbowlorama.cpp", s))             AddGame(lpFolder, jj);
+		if (!strcmp("scobra.cpp", s))			      AddGame(lpFolder, jj);
 		if (!strcmp("shootaway2.cpp", s))             AddGame(lpFolder, jj);
 		if (!strcmp("skykid.cpp", s))                 AddGame(lpFolder, jj);
+		if (!strcmp("scramble.cpp", s))			      AddGame(lpFolder, jj);
 		if (!strcmp("sweetland.cpp", s))              AddGame(lpFolder, jj);
+		if (!strcmp("sweetland4.cpp", s))             AddGame(lpFolder, jj);
 		if (!strcmp("tankbatt.cpp", s))               AddGame(lpFolder, jj);
 		if (!strcmp("tceptor.cpp", s))                AddGame(lpFolder, jj);
 		if (!strcmp("toypop.cpp", s))                 AddGame(lpFolder, jj);
@@ -2375,7 +2385,6 @@ void CreateKONAMIFolders(int parent_index)
 		if (!strcmp("ddribble.cpp", s))			AddGame(lpFolder, jj);
 		if (!strcmp("divebomb.cpp", s))			AddGame(lpFolder, jj);
 		if (!strcmp("djmain.cpp", s))			AddGame(lpFolder, jj);
-		if (!strcmp("fastfred.cpp", s))			AddGame(lpFolder, jj);
 		if (!strcmp("fastlane.cpp", s))			AddGame(lpFolder, jj);
 		if (!strcmp("finalizr.cpp", s))			AddGame(lpFolder, jj);
 		if (!strcmp("firebeat.cpp", s))			AddGame(lpFolder, jj);
@@ -2425,9 +2434,7 @@ void CreateKONAMIFolders(int parent_index)
 		if (!strcmp("rollerg.cpp", s))			AddGame(lpFolder, jj);
 		if (!strcmp("rungun.cpp", s))			AddGame(lpFolder, jj);
 		if (!strcmp("sbasketb.cpp", s))			AddGame(lpFolder, jj);
-		if (!strcmp("scobra.cpp", s))			AddGame(lpFolder, jj);
 		if (!strcmp("scotrsht.cpp", s))			AddGame(lpFolder, jj);
-		if (!strcmp("scramble.cpp", s))			AddGame(lpFolder, jj);
 		if (!strcmp("shaolins.cpp", s))			AddGame(lpFolder, jj);
 		if (!strcmp("simpsons.cpp", s))			AddGame(lpFolder, jj);
 		if (!strcmp("spy.cpp", s))			    AddGame(lpFolder, jj);

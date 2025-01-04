@@ -11,7 +11,7 @@ Added custom buttons and autofire.
 
 Removed warning screen, startups, Decryption screen texts.
 
-Removed the following annoying messages: “WRONG LENGTH”, “NO_DUMP”, “WRONG CHECKSUMS”, “BAD_DUMP” And “THE PARENT FILE DOES NOT EXIST”.
+Removed the following annoying messages: “WRONG LENGTH”, “NO_DUMP”, “WRONG CHECKSUMS”, “BAD_DUMP”.
 
 Added movement optimization for all fighting games (By GSC2007).
 

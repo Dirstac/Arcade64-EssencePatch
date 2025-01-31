@@ -1231,7 +1231,7 @@ static void SetMainTitle(void)
 {
 	char buffer[256];
 
-	snprintf(buffer, std::size(buffer), "%s %s", MAMEUINAME, GetVersionString());
+	snprintf(buffer, std::size(buffer), "%s %s", MAMEUINAME, build_version);
 	winui_set_window_text_utf8(hMain, buffer);
 }
 
@@ -5962,7 +5962,7 @@ static void SaveGameListToFile(char *szFile)
 	}
 
 	// Title
-	fprintf(f, "%s %s.%s", MAMEUINAME, GetVersionString(), CrLf);
+	fprintf(f, "%s %s.%s", MAMEUINAME, build_version, CrLf);
 	fprintf(f, "This is the current list of games.%s", CrLf);
 
 	// Current folder

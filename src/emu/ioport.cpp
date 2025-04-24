@@ -696,6 +696,8 @@ void digital_joystick::frame_update()
 			m_current4way &= ~(UP_BIT | DOWN_BIT);
 		}
 	}
+	else
+		m_current4way &= m_current;
 }
 
 

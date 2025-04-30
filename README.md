@@ -3,6 +3,8 @@ What is Arcade64 Essence Patch?
 
 This is a version that implements some features that the [PSARCADECLASSIC+](https://github.com/Gaston900/PSArcadeClassic) emulator had, to the most recent versions of [ARCADE64](https://arcade.mameworld.info/).
 
+I am only supporting the operating systems, Windows 7, Windows 8, Windows 10 and Windows 11.
+
 What has been optimized in this version?
 ---------------------------------------
 This command will help us have much easier access to the settings:
@@ -30,7 +32,7 @@ It is already pre-configured, enforce aspect ratio is disabled, full screen mode
 
 The cheat reference function, if the cloned game does not have a cheat file, it will reference the cheat file of the main ROM.
 
-Supports game list lst language files. The list language can be edited freely.
+Supports game list language files. The list language can be edited freely.
 
 NEOGEO, PGM, driver supports key combination settings.
 

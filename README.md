@@ -60,3 +60,7 @@ make OSD=winui PTR64=1 SUBTARGET=arcade SYMBOLS=0 NO_SYMBOLS=1 DEPRECATED=0
 ```
 
 The compilation [TOOL](https://github.com/mamedev/buildtools/releases) is suggested to be version msys64-2022-01-12.
+
+Open Source Software Projects
+------------------------------
+Although the source code is free to use, please note that the use of this code for any commercial exploitation or use of the project for fundraising purposes is prohibited.

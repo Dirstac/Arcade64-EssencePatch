@@ -32,7 +32,7 @@ It is already pre-configured, enforce aspect ratio is disabled, full screen mode
 
 The cheat reference function, if the cloned game does not have a cheat file, it will reference the cheat file of the main ROM.
 
-Supports game list language files. The list language can be edited freely.
+Supports game language files. The list language can be edited freely.
 
 NEOGEO, PGM, driver supports key combination settings.
 

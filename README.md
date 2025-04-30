@@ -5,7 +5,14 @@ This is a version that implements some features that the [PSARCADECLASSIC+](http
 
 What has been optimized in this version?
 ---------------------------------------
-The command of all the game systems was optimized, now it is much more practical to be able to play, the command of the arrow keys "Up, Down, Left, Right" comes by default, this command is used to be able to move and to take actions For shooting or jumping and throwing grenades, the A, S, D key is used and the rest of the keys are used for certain kinds of games Z, X, C, Q, W, E.
+This command will help us have much easier access to the settings:
+
+* To enter the BIOS, press the "0" key.
+
+Players 1 and 2 use this controller by default:
+
+* To move, use the arrow keys "Up, Down, Left, Right."
+* To perform actions, use the "A, S, D, Z" keys.
 
 Added custom buttons and autofire.
 

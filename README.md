@@ -11,8 +11,8 @@ This command will help us have much easier access to the settings:
 
 Players 1 and 2 use this controller by default:
 
-* To move, use the arrow keys "Up, Down, Left, Right."
-* To perform actions, use the "A, S, D, Z" keys.
+To move, use the arrow keys "Up, Down, Left, Right."
+To perform actions, use the "A, S, D, Z, X, C, Q, W, E" keys.
 
 Added custom buttons and autofire.
 

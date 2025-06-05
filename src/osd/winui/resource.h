@@ -150,6 +150,8 @@
 #define IDB_MANUAL                      270
 #define IDB_NOTEPAD                     271
 #define IDI_DISPLAYSHEET                272
+// 修改的 代码来源 (EKMAME)
+/*******************************************/
 #define IDI_VECTORSHEET                 273
 #define IDI_SOUNDSHEET                  274
 #define IDI_CONTROLSHEET                275
@@ -159,6 +161,7 @@
 #define IDI_OPENGLSHEET                 279
 #define IDI_SHADERSHEET                 280
 #define IDI_INPUTSHEET                  281
+/*******************************************/
 #define IDI_MISC2SHEET                  282
 #define IDI_SNAPSHEET                   283
 #define IDI_SHADER                      284

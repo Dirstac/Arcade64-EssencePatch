@@ -36,8 +36,6 @@ Supports game language files. The list language can be edited freely.
 
 NEOGEO, PGM, driver supports key combination settings.
 
-Added 13 new UI folders by default.
-
 How to compile
 ---------------------------------------
 In order to compile this version we will need to download the [ARCADE64](https://github.com/Robbbert/abcdefg/tags) source codes. How do we know which version we need? We will have to locate the latest compilation that I have released publicly.

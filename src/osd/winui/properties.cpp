@@ -422,7 +422,6 @@ void InitPropertyPage(HINSTANCE hInst, HWND hWnd, OPTIONS_TYPE opt_type, int fol
 		case OPTIONS_GAME:
 // 修改的 代码来源 (EKMAME)
 /**********************************************************************************************/
-			//snprintf(tmp, std::size(tmp), "Properties for %s", GetDriverGameTitle(g_nGame));
 			snprintf(tmp, std::size(tmp), "Properties for %s", GetDescriptionByIndex(g_nGame,GetUsekoreanList()));		
 /**********************************************************************************************/
 			break;
@@ -787,25 +786,14 @@ static void UpdateSheetCaption(HWND hWnd)
 // 修改的 代码来源 (EKMAME)
 /********************************************************************************************/
 	BYTE        bR, bG, bB, bSR, bSG, bSB, bER, bEG, bEB;
-	//DWORD       dwLColor, dwRColor;
+
 	int 		i, iWidth;
 
 	// Gradation color
-	//dwLColor = GetSysColor(COLOR_ACTIVECAPTION);
-	//dwRColor = GetSysColor(COLOR_GRADIENTACTIVECAPTION);
-	//bSR = GetRValue(dwLColor); bSG = GetGValue(dwLColor); bSB = GetBValue(dwLColor);
-	//bER = GetRValue(dwRColor); bEG = GetGValue(dwRColor); bEB = GetBValue(dwRColor);
 	bSR = 0;   bSG = 0; bSB = 128;
 	bER = 128; bEG =0;  bEB = 128;
 
 	memcpy(&rect, &rcTabCaption, sizeof(RECT));
-//	BeginPaint (hWnd, &ps);
-//	hDC = ps.hdc;
-//	hRgn = CreateRectRgn(rect.left, rect.top, rect.right - 2, rect.bottom);
-//	SelectClipRgn(hDC, hRgn);
-//	hBrush = CreateSolidBrush(RGB(127, 127, 127));
-//	FillRect(hDC, &rect, hBrush);
-//	DeleteObject(hBrush);
 
 	iWidth = rect.right - rect.left;
 	if (iWidth == 0)
@@ -1205,13 +1193,11 @@ intptr_t CALLBACK GamePropertiesDialogProc(HWND hDlg, UINT uMsg, WPARAM wParam, 
 			hBrushDlg = CreateSolidBrush(RGB(240, 240, 240));
 // 修改的 代码来源 (EKMAME)
 /*************************************************************************************************************************/
-			//snprintf(tmp, std::size(tmp), "Information for \"%s\"", GetDriverGameName(index));
             snprintf(tmp, std::size(tmp), "Information for \"%s\"", (char *)GetGameNameByIndex(index,GetUsekoreanList()));
 /*************************************************************************************************************************/
 			winui_set_window_text_utf8(hDlg, tmp);
 // 修改的 代码来源 (EKMAME)
 /*************************************************************************************************************************/
-			//winui_set_window_text_utf8(GetDlgItem(hDlg, IDC_PROP_TITLE), GetDriverGameTitle(index));
 		    winui_set_window_text_utf8(GetDlgItem(hDlg, IDC_PROP_TITLE), GetDescriptionByIndex(index,GetUsekoreanList()));	
 /*************************************************************************************************************************/
 			winui_set_window_text_utf8(GetDlgItem(hDlg, IDC_PROP_MANUFACTURED), GameInfoManufactured(index));

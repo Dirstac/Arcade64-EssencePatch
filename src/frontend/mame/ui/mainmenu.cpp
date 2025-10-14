@@ -50,7 +50,9 @@ enum : unsigned {
 // 修改的 代码来源 (EKMAME)
 /*********************/
 	AUTOFIRE,
+#ifdef USE_CUSTOM_BUTTON
 	CUSTOM_BUTTON,
+#endif /* USE_CUSTOM_BUTTON */
 /*********************/
 	INPUT_OPTIONS,
 	SETTINGS_DIP_SWITCHES,
@@ -134,8 +136,9 @@ void menu_main::populate()
 // 修改的 代码来源 (EKMAME)
 /*******************************************************************************/
 	item_append(_("menu-main", "Autofire Setting"), 0, (void *)AUTOFIRE);
-
+#ifdef USE_CUSTOM_BUTTON
 	item_append(_("menu-main", "Custom Buttons"), 0, (void *)CUSTOM_BUTTON);
+#endif /* USE_CUSTOM_BUTTON */
 /*******************************************************************************/
 
 	if (ui().machine_info().has_warnings())
@@ -254,10 +257,11 @@ bool menu_main::handle(event const *ev)
 		case AUTOFIRE:
 			menu::stack_push<menu_autofire>(ui(), container());
 			break;
-
+#ifdef USE_CUSTOM_BUTTON
 		case CUSTOM_BUTTON:
 			menu::stack_push<menu_custom_button>(ui(), container());		
 			break;
+#endif /* USE_CUSTOM_BUTTON */
 /****************************************************************************/
 
 		case SETTINGS_DIP_SWITCHES:

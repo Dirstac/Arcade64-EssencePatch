@@ -742,7 +742,7 @@ int MameUIMain(HINSTANCE hInstance, LPWSTR lpCmdLine)
 	wndclass.hInstance = hInstance;
 	wndclass.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_MAMEUI_ICON));
 	wndclass.hCursor = NULL;
-	wndclass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);// GetSysColorBrush(COLOR_3DFACE);  // 修改的 代码来源 (EKMAME)
+	wndclass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH); // 修改的 代码来源 (EKMAME)
 	wndclass.lpszMenuName = MAKEINTRESOURCE(IDR_UI_MENU);
 	wndclass.lpszClassName = TEXT("MainClass");
 
@@ -1193,7 +1193,7 @@ const char *funcGetParentName(const char *name)
 {
 	int index = GetGameNameIndex(name);// get current game index
 	int parentindex = GetParentIndex(&driver_list::driver(index));
-	//int parentindex = GetParentIndex_2(index);		   // get Parent current game
+
 	if( parentindex >= 0)
 	{
 		const char *parentname =  GetDriverGameName(parentindex);
@@ -2495,7 +2495,6 @@ static void EnableSelection(int nGame)
 
 // 修改的 代码来源 (EKMAME)
 /***************************************************************/
-    //pText = GetDriverGameTitle(nGame);
     pText = GetDescriptionByIndex(nGame, GetUsekoreanList());
 /***************************************************************/
 	
@@ -2503,7 +2502,6 @@ static void EnableSelection(int nGame)
 
 // 修改的 代码来源 (EKMAME)
 /***************************************************************/
-	//pName = GetDriverGameName(nGame);
 	pName = GetGameNameByIndex(nGame,GetUsekoreanList());
 /***************************************************************/
 
@@ -2521,7 +2519,6 @@ static void EnableSelection(int nGame)
 
 // 修改的 代码来源 (EKMAME)
 /************************************************************************/
-		//SetDefaultGame(GetDriverGameName(nGame));
 		SetDefaultGame(GetGameNameByIndex(nGame, GetUsekoreanList()));
 /************************************************************************/
 
@@ -2540,7 +2537,6 @@ static const char* GetCloneParentName(int nItem)
 
 // 修改的 代码来源 (EKMAME)
 /***********************************************************************************/
-			//return GetDriverGameTitle(nParentIndex);
 			return (char*)GetDescriptionByIndex(nParentIndex,GetUsekoreanList());
 /***********************************************************************************/
 	}
@@ -2729,7 +2725,6 @@ static void SetView(int menu_id)
 	BOOL force_reset = false;
 
 	// first uncheck previous menu item, check new one
-	//CheckMenuRadioItem(GetMenu(hMain), ID_VIEW_ICONS_LARGE, ID_VIEW_ICONS_SMALL, menu_id, MF_CHECKED);
 	CheckMenuRadioItem(GetMenu(hMain), ID_VIEW_ICONS_LARGE, ID_ENABLE_INDENT, menu_id, MF_CHECKED);
 /*********************************************************************************************************/
 	ToolBar_CheckButton(hToolBar, menu_id, MF_CHECKED);
@@ -2737,10 +2732,6 @@ static void SetView(int menu_id)
 // 修改的 代码来源 (EKMAME)
 /*******************************************************************************************/
 	// Associate the image lists with the list view control.
-//	if (menu_id == ID_VIEW_ICONS_LARGE)
-//		(void)ListView_SetImageList(hWndList, hLarge, LVSIL_SMALL);
-//	else
-//		(void)ListView_SetImageList(hWndList, hSmall, LVSIL_SMALL);
 
 	if (Picker_GetViewID(hWndList) == VIEW_GROUPED || menu_id == ID_VIEW_GROUPED)
 	{
@@ -2856,7 +2847,6 @@ static void UpdateGameList(void)
 // 修改的 代码来源 (EKMAME)
 /*************************************************************************************************/
 	SetDefaultGame(GetDescriptionByIndex(Picker_GetSelectedItem(hWndList), GetUsekoreanList()));
-	/*SetSelectedPick(0);*/ /* To avoid flickering. */	
 /*************************************************************************************************/
 }
 
@@ -3933,7 +3923,6 @@ const wchar_t *GamePicker_GetItemString(HWND hwndPicker, int nItem, int nColumn,
 
 // 修改的 代码来源 (EKMAME)
 /*************************************************************************/
-			//utf8_s = GetDriverGameTitle(nItem);
 			utf8_s = GetDescriptionByIndex(nItem, GetUsekoreanList());
 			break;
 /*************************************************************************/
@@ -4044,12 +4033,10 @@ static void AddDriverIcon(int nItem, int default_icon_index)
 	if (icon_index[nItem] == 1 || icon_index[nItem] == 3)
 		return;
 
-	//HICON hIcon = LoadIconFromFile((char *)GetDriverGameName(nItem));
       hIcon = LoadIconFromFile((char *)GetDriverGameName(nItem));
 
 	if (hIcon == NULL)
 	{
-		//int nParentIndex = GetParentIndex(&driver_list::driver(nItem));
           nParentIndex = GetParentIndex(&driver_list::driver(nItem));
 /**************************************************************************/
 
@@ -4205,7 +4192,6 @@ static void CreateIcons(void)
 
 // 修改的 代码来源 (EKMAME)
 /*****************************************************************************************************/
-	//hSmall = ImageList_Create(16, 16, ILC_COLORDDB | ILC_MASK, icon_count, icon_count + grow);
 	dwStyle = GetWindowLong(hWndList,GWL_STYLE);
 	SetWindowLong(hWndList,GWL_STYLE,(dwStyle & ~LVS_TYPEMASK) | LVS_ICON);
 /*****************************************************************************************************/
@@ -4220,7 +4206,6 @@ static void CreateIcons(void)
 
 // 修改的 代码来源 (EKMAME)
 /*************************************************************************************************************************/
-	//hLarge = ImageList_Create(32, 32, ILC_COLORDDB | ILC_MASK, icon_count, icon_count + grow);
     hLarge = ImageList_Create(dwLargeIconSize, dwLargeIconSize, ILC_COLORDDB | ILC_MASK, icon_count, icon_count + grow);
 /*************************************************************************************************************************/
 
@@ -4264,7 +4249,6 @@ int GamePicker_Compare(HWND hwndPicker, int index1, int index2, int sort_subitem
 			
 // 修改的 代码来源 (EKMAME)
 /***************************************************************************************************************************************/
-			//value = core_stricmp(GetDriverGameTitle(index1), GetDriverGameTitle(index2));
 			value = core_stricmp(GetDescriptionByIndex(index1,GetUsekoreanList()), GetDescriptionByIndex(index2, GetUsekoreanList()));
 			break;
 /***************************************************************************************************************************************/
@@ -5025,8 +5009,6 @@ static void UpdateMenu(HMENU hMenu)
 
 // 修改的 代码来源 (EKMAME)
 /*************************************************************************************************************************/
-		//wchar_t *t_description = win_wstring_from_utf8(ConvertAmpersandString(GetDriverGameTitle(nGame)));
-
 		wchar_t *t_description;
 
 		t_description= win_wstring_from_utf8(ConvertAmpersandString(GetDescriptionByIndex(nGame, GetUsekoreanList())));

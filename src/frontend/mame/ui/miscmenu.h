@@ -195,7 +195,7 @@ public:
 //-------------------------------------------------
 //  Custom Button menu
 //-------------------------------------------------
-
+#ifdef USE_CUSTOM_BUTTON
 class menu_custom_button : public menu {
 public:
 	menu_custom_button(mame_ui_manager &mui, render_container &container);
@@ -203,17 +203,7 @@ public:
 	virtual void populate() override;
 	virtual bool handle(event const *ev) override;
 };
-
-//#ifdef USE_SCALE_EFFECTS
-class menu_scale_effect : public menu 
-{
-public:
-	menu_scale_effect(mame_ui_manager &mui, render_container &container);
-	virtual ~menu_scale_effect() override;
-private:
-	virtual void populate() override;
-	virtual bool handle(event const *ev) override;
-};
+#endif /* USE_CUSTOM_BUTTON */
 /****************************************************************************/
 
 } // namespace ui

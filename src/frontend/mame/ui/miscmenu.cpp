@@ -731,7 +731,9 @@ void menu_autofire::populate()
 
 			if (name.c_str() != NULL && (
 			    (field.type() >= IPT_BUTTON1 && field.type() < IPT_BUTTON1 + MAX_NORMAL_BUTTONS)
-			    // || (field.type() >= IPT_CUSTOM1 && field.type() < IPT_CUSTOM1 + MAX_CUSTOM_BUTTONS)
+#ifdef USE_CUSTOM_BUTTON
+			     || (field.type() >= IPT_CUSTOM1 && field.type() < IPT_CUSTOM1 + MAX_CUSTOM_BUTTONS)
+#endif /* USE_CUSTOM_BUTTON */
 			   ))
 			{
 				ioport_field::user_settings settings;
@@ -766,6 +768,7 @@ void menu_autofire::populate()
 }
 #undef AUTOFIRE_ITEM_P1_DELAY
 
+#ifdef USE_CUSTOM_BUTTON
 /*-------------------------------------------------
     menu_custom_button - handle the custom button
     settings menu
@@ -882,6 +885,7 @@ void menu_custom_button::populate()
 		}
 	}
 }
+#endif /* USE_CUSTOM_BUTTON */
 /****************************************************************************************************************************/
 
 //-------------------------------------------------

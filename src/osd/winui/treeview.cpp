@@ -363,9 +363,6 @@ bool GameFiltered(int nGame, DWORD dwMask)
 	{
 // 修改的 代码来源 (EKMAME)
 /*******************************************************************************/
-		//if (MyStrStrI(GetDriverGameTitle(nGame), GetSearchText()) == NULL &&
-			//MyStrStrI(GetDriverGameName(nGame), GetSearchText()) == NULL)
-
 		if (MyStrStrI(GetDescriptionByIndex(nGame, GetUsekoreanList()), GetSearchText()) == NULL &&
 			MyStrStrI(GetGameNameByIndex(nGame,GetUsekoreanList()), GetSearchText()) == NULL )
 			return true;
@@ -374,12 +371,6 @@ bool GameFiltered(int nGame, DWORD dwMask)
 
 // 修改的 代码来源 (EKMAME)
 /*******************************************************************************/	
-	/*Filter Text is already global*/
-	//if (MyStrStrI(GetDriverGameTitle(nGame), GetFilterText()) == NULL &&
-		//MyStrStrI(GetDriverGameName(nGame), GetFilterText()) == NULL &&
-		//MyStrStrI(GetDriverFileName(nGame), GetFilterText()) == NULL &&
-		//MyStrStrI(GetDriverGameManufacturer(nGame), GetFilterText()) == NULL)
-
 	if (MyStrStrI(GetDescriptionByIndex(nGame, GetUsekoreanList()), GetFilterText()) == NULL &&
 		MyStrStrI(GetGameNameByIndex(nGame,GetUsekoreanList()), GetFilterText()) == NULL &&
 		MyStrStrI(GetDriverFileName(nGame), GetFilterText()) == NULL &&

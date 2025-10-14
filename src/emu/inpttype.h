@@ -143,11 +143,13 @@ enum ioport_type : osd::u32
 /***********************************/
 	// autofire control buttons
 	IPT_TOGGLE_AUTOFIRE,
+#ifdef USE_CUSTOM_BUTTON
 	// custom action buttons
 	IPT_CUSTOM1,
 	IPT_CUSTOM2,
 	IPT_CUSTOM3,
 	IPT_CUSTOM4,
+#endif /* USE_CUSTOM_BUTTON */
 /***********************************/
 
 	// mahjong inputs

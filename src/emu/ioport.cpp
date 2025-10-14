@@ -1340,7 +1340,6 @@ void ioport_field::frame_update(ioport_value &result)
 
 // 修改的 代码来源 (EKMAME)
 /******************************************************************************/
-	//bool curstate = m_digital_value || machine().input().seq_pressed(seq());
 	bool curstate = machine().ioport().auto_pressed(this);	
 /******************************************************************************/
 
@@ -1950,7 +1949,6 @@ time_t ioport_manager::initialize()
 
 // 修改的 代码来源 (EKMAME)
 /****************************************************/
-		//m_portlist.append(device, errors);
 		m_portlist.append_custom(device, errors);
 /****************************************************/
 
@@ -1977,11 +1975,10 @@ time_t ioport_manager::initialize()
 				port.second->init_live_state();	
 				for (ioport_field &field : port.second->fields())
 				{
-					//if (field.type_class() == INPUT_CLASS_CONTROLLER)
+
 					if (field.type_class()==INPUT_CLASS_CONTROLLER)
 					{
-						//if (players < field.player() + 1)
-						//players = field.player() + 1;
+
 					if (players < field.player() + 1) players = field.player() + 1;
 						field.set_player(field.player() + player_offset);
 					}
@@ -3151,7 +3148,6 @@ void ioport_manager::save_game_inputs(util::xml::data_node &parentnode)
 /**********************************************************************************************************/
 							{
 								portnode->set_attribute_int("value", field.live().value & field.mask());
-							//if (field.live().toggle != field.toggle())
 							}
 							if (field.live().toggle != field.toggle()) {
 								portnode->set_attribute("toggle", field.live().toggle ? "yes" : "no");
@@ -4435,4 +4431,3 @@ bool ioport_manager::auto_pressed(ioport_field *field)
 #undef IS_AUTOKEY
 }
 /****************************************************************************************************/
-

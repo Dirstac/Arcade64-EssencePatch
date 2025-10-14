@@ -2824,14 +2824,14 @@ static void ResetListView()
 			Picker_SetSelectedItem(hWndList, current_game);
 	}
 
+// 修改的 代码来源 (EKMAME)
+/*************************************/
 	/*RS Instead of the Arrange Call that was here previously on all Views
          We now need to set the ViewMode for SmallIcon again,
          for an explanation why, see SetView*/
 	if (GetViewMode() == VIEW_ICONS_SMALL)
 		SetView(ID_VIEW_ICONS_SMALL);
 
-// 修改的 代码来源 (EKMAME)
-/*************************************/
 	SetWindowRedraw(hWndList, true);
 	UpdateStatusBar();
 /*************************************/
@@ -4052,7 +4052,7 @@ static void AddDriverIcon(int nItem, int default_icon_index)
 		//int nParentIndex = GetParentIndex(&driver_list::driver(nItem));
           nParentIndex = GetParentIndex(&driver_list::driver(nItem));
 /**************************************************************************/
-		
+
 		if( nParentIndex >= 0)
 		{
 			hIcon = LoadIconFromFile((char *)GetDriverGameName(nParentIndex));
@@ -4196,10 +4196,10 @@ static void CreateIcons(void)
 	DWORD dwLargeIconSize = GetShellLargeIconSize();
 	HICON hIcon;
 	DWORD dwStyle;
-/********************************************************/
+
 	int icon_count = 0;
 	int grow = 5000;
-
+/********************************************************/
 	while(g_iconData[icon_count].icon_name)
 		icon_count++;
 
@@ -4210,7 +4210,7 @@ static void CreateIcons(void)
 	SetWindowLong(hWndList,GWL_STYLE,(dwStyle & ~LVS_TYPEMASK) | LVS_ICON);
 /*****************************************************************************************************/
 
-	hSmall = ImageList_Create(dwSmallIconSize, dwSmallIconSize, ILC_COLORDDB | ILC_MASK, icon_count, icon_count + grow);
+	hSmall = ImageList_Create(dwSmallIconSize, dwSmallIconSize, ILC_COLORDDB | ILC_MASK, icon_count, icon_count + grow); // 修改的 代码来源 (EKMAME)
 
 	if (hSmall == NULL) 
 	{
@@ -5630,7 +5630,7 @@ void UpdateListView(void)
     if( (GetViewMode() == VIEW_GROUPED) || (GetViewMode() == VIEW_REPORT ) )
 	    (void)ListView_RedrawItems(hWndList, ListView_GetTopIndex(hWndList), ListView_GetTopIndex(hWndList) + ListView_GetCountPerPage(hWndList));
 /***************************************************************************************************************************************************/
-	
+
 	SetFocus(hWndList);
 }
 

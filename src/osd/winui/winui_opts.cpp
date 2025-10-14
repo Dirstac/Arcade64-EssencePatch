@@ -137,7 +137,7 @@ const options_entry winui_options::s_option_entries[] =
 	{ MUIOPTION_UI_JOY_HISTORY_UP,			"2,0,4,0",  core_options::option_type::STRING, nullptr },
 	{ MUIOPTION_UI_JOY_HISTORY_DOWN,		"2,0,1,0",  core_options::option_type::STRING, nullptr },
 
-// 修改的 (加斯顿90)
+// 修改的 (EKMAME)
 /*******************************************************************************************************************/
 	{ nullptr,								nullptr,	core_options::option_type::HEADER, "Korean GAME List" },
 	{ MUIOPTION_USEKOREAN_GAMELIST,			"1",	    core_options::option_type::BOOLEAN, nullptr },
@@ -457,7 +457,7 @@ bool GetShowFolderList(void)
 	return winui_opts.bool_value(MUIOPTION_SHOW_FOLDER_SECTION);
 }
 
-// 修改的 (加斯顿90)
+// 修改的 (EKMAME)
 /*************************************************************************************/
 void SetUsekoreanList(bool val)
 {

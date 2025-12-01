@@ -5846,6 +5846,8 @@ ROM_END
  NEO-AEG PROGBK1Y / NEO-AEG CHA256RY
 ****************************************/
 
+// red Korean cartridges contain the same mask ROMs
+
 ROM_START( fatfury3 ) /* MVS AND AES VERSION */
 	ROM_REGION( 0x300000, "cslot1:maincpu", ROMREGION_BE|ROMREGION_16BIT )
 	ROM_LOAD16_WORD_SWAP( "069-p1.p1",   0x000000, 0x100000, CRC(a8bcfbbc) SHA1(519c4861151797e5f4d4f33432b83dfabed8e7c4) ) /* TC538200 */

@@ -1590,8 +1590,8 @@ void ngarcade_base_state::machine_start()
 	else if (m_edge)
 		main_program_space.install_read_handler(0x340000, 0x340001, 0, 0x01fffe, 0, read16smo_delegate(*this, FUNC(ngarcade_base_state::in1_edge_r)));
 
-	    main_program_space.install_read_port(0x300000, 0x300001, 0x01ff7e, "DSW"); // 修改的 (Remikare)
-		main_program_space.install_read_port(0x340000, 0x340001, 0x01fffe, "P2"); // 修改的 (Remikare)
+//	    main_program_space.install_read_port(0x300000, 0x300001, 0x01ff7e, "DSW"); // 修改的 (Remikare)
+//		main_program_space.install_read_port(0x340000, 0x340001, 0x01fffe, "P2"); // 修改的 (Remikare)
 
 	if (m_memcard)
 	{
@@ -1846,6 +1846,7 @@ INPUT_PORTS_START( neogeo )
 	PORT_DIPSETTING(    0x80, DEF_STR( Off ) )
 	PORT_DIPSETTING(    0x00, DEF_STR( On ) )
 
+#ifdef USE_FIX_BUTTON
 // 修改的 (Remikare) / (EKMAME) 
 /****************************************************************************************************************************************************************************************************************/
 	PORT_BIT( 0x0100, IP_ACTIVE_LOW, IPT_JOYSTICK_UP )
@@ -1891,6 +1892,7 @@ INPUT_PORTS_START( neogeo )
 	PORT_BIT( 0x1000+0x2000+0x4000+0x8000, IP_ACTIVE_LOW, IPT_BUTTON_ABCD ) PORT_PLAYER(2) PORT_NAME("P2 Button Combokey (Button 1 + Button 2 + Button 3 + Button 4)") PORT_CONDITION("P2", 0xF000, EQUALS, 0xF000)
 
 /****************************************************************************************************************************************************************************************************************/
+#endif /* USE_FIX_BUTTON */
 
 	PORT_START("SYSTEM")
 	PORT_BIT( 0x00ff, IP_ACTIVE_LOW, IPT_UNUSED )

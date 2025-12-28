@@ -120,5 +120,6 @@ void neogeo_cart(device_slot_interface &device)
 	device.option_add_internal("sma_mslug3d", NEOGEO_SMA_MSLUG3D_CART);
 	device.option_add_internal("pvc_mslug5d", NEOGEO_PVC_MSLUG5D_CART);
 	device.option_add_internal("pvc_mslug5e", NEOGEO_PVC_MSLUG5E_CART);
+	device.option_add_internal("pvc_svcd",    NEOGEO_PVC_SVCD_CART);
 /************************************************************************/
 }

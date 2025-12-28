@@ -78,41 +78,6 @@ void neogeo_pvc_mslug5_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
 	m_cmc_prot->sfix_decrypt(spr_region, spr_region_size, fix_region, fix_region_size);
 }
 
-// 修改的 (Gaston90)
-/*******************************************************************************************************************************************************/
-/*************************************************
- mslug5d
-**************************************************/
-
-DEFINE_DEVICE_TYPE(NEOGEO_PVC_MSLUG5D_CART, neogeo_pvc_mslug5d_cart_device, "neocart_mslug5d", "Neo Geo Metal Slug 5 Decrypted PVC Cart")
-
-neogeo_pvc_mslug5d_cart_device::neogeo_pvc_mslug5d_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_pvc_cart_device(mconfig, NEOGEO_PVC_MSLUG5D_CART, tag, owner, clock)
-{
-}
-
-void neogeo_pvc_mslug5d_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
-{
-	m_pvc_prot->mslug5_decrypt_68k(cpuregion, cpuregion_size);
-}
-
-/*************************************************
- mslug5e
-**************************************************/
-
-DEFINE_DEVICE_TYPE(NEOGEO_PVC_MSLUG5E_CART, neogeo_pvc_mslug5e_cart_device, "neocart_mslug5e", "Neo Geo Metal Slug 5 Protection PVC Cart")
-
-neogeo_pvc_mslug5e_cart_device::neogeo_pvc_mslug5e_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_pvc_cart_device(mconfig, NEOGEO_PVC_MSLUG5E_CART, tag, owner, clock)
-{
-}
-
-void neogeo_pvc_mslug5e_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
-{
-
-}
-/*******************************************************************************************************************************************************/
-
 /*************************************************
  svc
 **************************************************/
@@ -173,3 +138,56 @@ void neogeo_pvc_kof2003h_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
 	m_cmc_prot->cmc50_gfx_decrypt(spr_region, spr_region_size, KOF2003_GFX_KEY);
 	m_cmc_prot->sfix_decrypt(spr_region, spr_region_size, fix_region, fix_region_size);
 }
+
+// 修改的 (Gaston90)
+/*******************************************************************************************************************************************************/
+/*************************************************
+ mslug5d
+**************************************************/
+
+DEFINE_DEVICE_TYPE(NEOGEO_PVC_MSLUG5D_CART, neogeo_pvc_mslug5d_cart_device, "neocart_mslug5d", "Neo Geo Metal Slug 5 Decrypted PVC Cart")
+
+neogeo_pvc_mslug5d_cart_device::neogeo_pvc_mslug5d_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
+	neogeo_pvc_cart_device(mconfig, NEOGEO_PVC_MSLUG5D_CART, tag, owner, clock)
+{
+}
+
+void neogeo_pvc_mslug5d_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
+{
+	m_pvc_prot->mslug5_decrypt_68k(cpuregion, cpuregion_size);
+}
+
+/*************************************************
+ mslug5e
+**************************************************/
+
+DEFINE_DEVICE_TYPE(NEOGEO_PVC_MSLUG5E_CART, neogeo_pvc_mslug5e_cart_device, "neocart_mslug5e", "Neo Geo Metal Slug 5 Protection PVC Cart")
+
+neogeo_pvc_mslug5e_cart_device::neogeo_pvc_mslug5e_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
+	neogeo_pvc_cart_device(mconfig, NEOGEO_PVC_MSLUG5E_CART, tag, owner, clock)
+{
+}
+
+void neogeo_pvc_mslug5e_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
+{
+
+}
+
+/*************************************************
+ svcd
+**************************************************/
+
+DEFINE_DEVICE_TYPE(NEOGEO_PVC_SVCD_CART, neogeo_pvc_svcd_cart_device, "neocart_svcd", "Neo Geo SNK vs Capcom Decrypted PVC Cart")
+
+neogeo_pvc_svcd_cart_device::neogeo_pvc_svcd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
+	neogeo_pvc_cart_device(mconfig, NEOGEO_PVC_SVCD_CART, tag, owner, clock)
+{
+}
+
+void neogeo_pvc_svcd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
+{
+	m_pvc_prot->svc_px_decrypt(cpuregion, cpuregion_size);
+}
+
+
+/*******************************************************************************************************************************************************/

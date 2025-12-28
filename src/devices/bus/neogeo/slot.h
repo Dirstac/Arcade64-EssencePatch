@@ -80,6 +80,7 @@ enum
 	NEOGEO_MSLUG3D,
 	NEOGEO_MSLUG5D,
 	NEOGEO_MSLUG5E,
+    NEOGEO_SVCD,
 /**************************************/
 };
 

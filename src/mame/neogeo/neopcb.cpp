@@ -36,6 +36,7 @@ public:
 /****************************************************/
 	// fixed software configurations
 	void init_ms5pcbd();
+	void init_svcpcbd();
 /****************************************************/
 
 	void neopcb(machine_config &config);
@@ -578,6 +579,25 @@ void neopcb_state::init_ms5pcbd()
 
 	svcpcb_s1data_decrypt();
 }
+
+void neopcb_state::init_svcpcbd()
+{
+	install_common();
+	install_banked_bios();
+
+	m_sprgen->set_fixed_layer_bank_type(neosprite_base_device::FIX_BANKTYPE_KOF2000);
+
+	m_pvc_prot->svc_px_decrypt(cpuregion, cpuregion_size);
+//	m_pcm2_prot->swap(ym_region, ym_region_size, 3);
+	m_cmc_prot->cmc50_m1_decrypt(audiocrypt_region, audiocrypt_region_size, audiocpu_region, audio_region_size);
+
+//	svcpcb_gfx_decrypt();
+//	m_cmc_prot->cmc50_gfx_decrypt(spr_region, spr_region_size, SVC_GFX_KEY);
+	m_cmc_prot->sfix_decrypt(spr_region, spr_region_size, fix_region, fix_region_size);
+
+	svcpcb_s1data_decrypt();
+}
+
 /********************************************************************************************************************/
 } // anonymous namespace
 
@@ -621,6 +641,34 @@ ROM_START( ms5pcbd )
 	ROM_LOAD16_BYTE( "268pcbd.c4", 0x2000001, 0x1000000, CRC(49e902e8) SHA1(289a560ffe3d50abd773c61fa2df3c1f18d7e803) )
 ROM_END
 
+ROM_START( svcpcbd )
+	ROM_REGION( 0x2000000, "maincpu", 0 )
+	ROM_LOAD16_WORD_SWAP( "269-p1.p1", 0x000000, 0x2000000, CRC(432cfdfc) SHA1(19b40d32188a8bace6d2d570c6cf3d2f1e31e379) )
+
+	ROM_REGION( 0x80000, "fixed", 0 )
+	ROM_FILL( 0x000000, 0x80000, 0x000000 )
+	ROM_REGION( 0x20000, "fixedbios", 0 )
+	ROM_LOAD( "sfix.sfix", 0x000000, 0x20000, CRC(c2ea0cfd) SHA1(fd4a618cdcdbf849374f0a50dd8efe9dbab706c3) )
+
+	ROM_REGION16_BE( 0x80000, "mainbios", 0 )
+	ROM_LOAD16_WORD_SWAP( "sp-4x.sp1", 0x00000, 0x80000, CRC(b4590283) SHA1(47047ed5b6062babc0a0bebcc30e4b3f021e115a) )
+
+	ROM_REGION( 0x80000, "audiocrypt", 0 )
+	ROM_LOAD( "269-m1.m1", 0x00000, 0x80000, CRC(f6819d00) SHA1(d3bbe09df502464f104e53501708ac6e2c1832c6) ) /* mask rom TC534000 */
+	ROM_REGION( 0x90000, "audiocpu", ROMREGION_ERASEFF )
+
+	ROM_Y_ZOOM
+
+	ROM_REGION( 0x1000000, "ymsnd:adpcma", 0 )
+	ROM_LOAD( "269pcbd.v1", 0x000000, 0x800000, CRC(ff64cd56) SHA1(e2754c554ed5ca14c2020c5d931021d5ac82660c) )
+	ROM_LOAD( "269pcbd.v2", 0x800000, 0x800000, CRC(a8dd6446) SHA1(8972aab271c33f8af344bffe6359d9ddc4b8af2e) )
+
+	ROM_REGION( 0x4000000, "sprites", 0 )
+	ROM_LOAD16_BYTE( "269pcbd.c1", 0x0000000, 0x2000000, CRC(382ce01f) SHA1(8eec32f70169de83fc15df470aba9c51c312b577) )
+	ROM_LOAD16_BYTE( "269pcbd.c2", 0x0000001, 0x2000000, CRC(88ad01ec) SHA1(da223bc09aa465ea6c15954c45fefbf3ee79a4d7) )
+ROM_END
+
 /*    YEAR  NAME        PARENT    MACHINE    INPUT                  INIT           MONITOR */
 /* SNK Decrypted */
 GAME( 2003, ms5pcbd,    ms5pcb,   neopcb,   dualbios, neopcb_state, init_ms5pcbd,  ROT0, "SNK Playmore", "Metal Slug 5 (JAMMA PCB) (Decrypted C)", MACHINE_SUPPORTS_SAVE )
+GAME( 2003, svcpcbd,    svcpcb,   neopcb,   dualbios, neopcb_state, init_svcpcbd,  ROT0, "Playmore / Capcom", "SNK vs. Capcom - SVC Chaos (JAMMA PCB, NEO-MVH MVO PCB) (Decrypted C)", MACHINE_SUPPORTS_SAVE )

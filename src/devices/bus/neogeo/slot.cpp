@@ -206,6 +206,7 @@ static const neogeo_slot slot_list[] =
 	{ NEOGEO_MSLUG3D, "sma_mslug3d" },
 	{ NEOGEO_MSLUG5D, "pvc_mslug5d" },
 	{ NEOGEO_MSLUG5E, "pvc_mslug5e" },
+	{ NEOGEO_SVCD, "pvc_svcd" },
 /**************************************/
 };
 

@@ -35130,6 +35130,12 @@ zupapa
 samsh5pf
 
 @source:neogeo/neogeo.cpp
+kof2k3d
+kf2k3bd
+kof2k3hd
+kof2k3nd
+kf2k3pd
+kf2k3upd
 msboot
 ms3b6boot
 ms4boot
@@ -35153,9 +35159,18 @@ mslug5b6
 mslug5b7
 mslug5b8
 mslugxb
+svcd
+svcnd
+svcplusnd
+svcplusand
+svcsplusnd
+zupapad
+zupapand
 
 @source:neogeo/neopcb.cpp
+kf2k3pcbd
 ms5pcbd
+svcpcbd
 
 @source:neogeo/neogeocd.cpp
 neocd

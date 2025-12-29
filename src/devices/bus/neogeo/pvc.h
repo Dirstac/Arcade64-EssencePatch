@@ -148,15 +148,33 @@ public:
 
 DECLARE_DEVICE_TYPE(NEOGEO_PVC_SVCD_CART, neogeo_pvc_svcd_cart_device)
 
+/*************************************************
+ kof2003d
+**************************************************/
 
+class neogeo_pvc_kof2003d_cart_device : public neogeo_pvc_cart_device
+{
+public:
+	neogeo_pvc_kof2003d_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock);
+	virtual void decrypt_all(DECRYPT_ALL_PARAMS) override;
+	virtual int get_fixed_bank_type() override { return 2; }
+};
 
+DECLARE_DEVICE_TYPE(NEOGEO_PVC_KOF2003D_CART, neogeo_pvc_kof2003d_cart_device)
 
+/*************************************************
+ kof2003hd
+**************************************************/
 
+class neogeo_pvc_kof2003hd_cart_device : public neogeo_pvc_cart_device
+{
+public:
+	neogeo_pvc_kof2003hd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock);
+	virtual void decrypt_all(DECRYPT_ALL_PARAMS) override;
+	virtual int get_fixed_bank_type() override { return 2; }
+};
 
-
-
-
-
+DECLARE_DEVICE_TYPE(NEOGEO_PVC_KOF2003HD_CART, neogeo_pvc_kof2003hd_cart_device)
 
 /**************************************************************************************************************************/
 

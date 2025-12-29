@@ -77,6 +77,8 @@ enum
 
 // 修改的 (Gaston90) 
 /**************************************/
+    NEOGEO_KOF2K3D,
+	NEOGEO_KOF2K3HD,
 	NEOGEO_MSLUG3D,
 	NEOGEO_MSLUG5D,
 	NEOGEO_MSLUG5E,

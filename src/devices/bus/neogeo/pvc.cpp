@@ -189,5 +189,36 @@ void neogeo_pvc_svcd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
 	m_pvc_prot->svc_px_decrypt(cpuregion, cpuregion_size);
 }
 
+/*************************************************
+ kof2003d
+**************************************************/
+
+DEFINE_DEVICE_TYPE(NEOGEO_PVC_KOF2003D_CART, neogeo_pvc_kof2003d_cart_device, "neocart_kof2003d", "Neo Geo KoF 2003 Decrypted PVC Cart")
+
+neogeo_pvc_kof2003d_cart_device::neogeo_pvc_kof2003d_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
+	neogeo_pvc_cart_device(mconfig, NEOGEO_PVC_KOF2003D_CART, tag, owner, clock)
+{
+}
+
+void neogeo_pvc_kof2003d_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
+{
+	m_pvc_prot->kof2003_decrypt_68k(cpuregion, cpuregion_size);
+}
+
+/*************************************************
+ kof2003hd
+ **************************************************/
+
+DEFINE_DEVICE_TYPE(NEOGEO_PVC_KOF2003HD_CART, neogeo_pvc_kof2003hd_cart_device, "neocart_kof2003hd", "Neo Geo KoF 2003 Decrypted AES PVC Cart")
+
+neogeo_pvc_kof2003hd_cart_device::neogeo_pvc_kof2003hd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
+	neogeo_pvc_cart_device(mconfig, NEOGEO_PVC_KOF2003HD_CART, tag, owner, clock)
+{
+}
+
+void neogeo_pvc_kof2003hd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
+{
+	m_pvc_prot->kof2003h_decrypt_68k(cpuregion, cpuregion_size);
+}
 
 /*******************************************************************************************************************************************************/

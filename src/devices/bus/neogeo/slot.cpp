@@ -203,6 +203,11 @@ static const neogeo_slot slot_list[] =
 
 // 修改的 (Gaston90) 
 /**************************************/
+	{ NEOGEO_GAROUD, "sma_garoud" },
+	{ NEOGEO_GAROUHD, "sma_garouhd" },
+	{ NEOGEO_KOF99D, "sma_kof99d" },
+	{ NEOGEO_KOF2KD, "sma_kof2kd" },
+	{ NEOGEO_KOF2KND, "sma_kof2knd" },
 	{ NEOGEO_KOF2K3D, "pvc_kf2k3d" },
 	{ NEOGEO_KOF2K3HD, "pvc_kf2k3hd" },
 	{ NEOGEO_MSLUG3D, "sma_mslug3d" },

@@ -22,6 +22,11 @@ DEFINE_DEVICE_TYPE(NEOGEO_SMA_KOF2000_CART, neogeo_sma_kof2000_cart_device, "neo
 
 // 修改的 (Gaston90)
 /****************************************************************************************************************************************************/
+DEFINE_DEVICE_TYPE(NEOGEO_SMA_GAROUD_CART,  neogeo_sma_garoud_cart_device,   "neocart_garoud",  "Neo Geo Garou Decrypted SMA Cart")
+DEFINE_DEVICE_TYPE(NEOGEO_SMA_GAROUHD_CART, neogeo_sma_garouhd_cart_device,  "neocart_garouhd", "Neo Geo Garou Decrypted AES SMA Cart")
+DEFINE_DEVICE_TYPE(NEOGEO_SMA_KOF99D_CART,  neogeo_sma_kof99d_cart_device,   "neocart_kof99d",  "Neo Geo KoF 99 Decrypted SMA Cart")
+DEFINE_DEVICE_TYPE(NEOGEO_SMA_KOF2000D_CART,neogeo_sma_kof2000d_cart_device, "neocart_kof2000d","Neo Geo KoF 2000 Decrypted SMA Cart")
+DEFINE_DEVICE_TYPE(NEOGEO_SMA_KOF2000ND_CART,neogeo_sma_kof2000nd_cart_device, "neocart_kof2000nd", "Neo Geo KoF 2000 N Decrypted SMA Cart")
 DEFINE_DEVICE_TYPE(NEOGEO_SMA_MSLUG3D_CART, neogeo_sma_mslug3d_cart_device,  "neocart_mslug3d", "Neo Geo Metal Slug 3 Decrypted SMA Cart (green)")
 /****************************************************************************************************************************************************/
 
@@ -145,23 +150,6 @@ void neogeo_sma_mslug3a_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
 	m_cmc_prot->sfix_decrypt(spr_region, spr_region_size, fix_region, fix_region_size);
 }
 
-// 修改的 (Gaston90)
-/*******************************************************************************************************************************************************/
-/*************************************************
- mslug3d
- **************************************************/
-
-neogeo_sma_mslug3d_cart_device::neogeo_sma_mslug3d_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_sma_cart_device(mconfig, NEOGEO_SMA_MSLUG3D_CART, tag, owner, clock)
-{
-}
-
-void neogeo_sma_mslug3d_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
-{
-	m_sma_prot->mslug3_decrypt_68k(cpuregion);
-}
-/*******************************************************************************************************************************************************/
-
 /*************************************************
  kof2000
 **************************************************/
@@ -178,3 +166,90 @@ void neogeo_sma_kof2000_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
 	m_cmc_prot->cmc50_gfx_decrypt(spr_region, spr_region_size, KOF2000_GFX_KEY);
 	m_cmc_prot->sfix_decrypt(spr_region, spr_region_size, fix_region, fix_region_size);
 }
+
+// 修改的 (Gaston90)
+/*******************************************************************************************************************************************************/
+/*************************************************
+ garoud
+**************************************************/
+
+neogeo_sma_garoud_cart_device::neogeo_sma_garoud_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
+	neogeo_sma_cart_device(mconfig, NEOGEO_SMA_GAROUD_CART, tag, owner, clock)
+{
+}
+
+void neogeo_sma_garoud_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
+{
+	m_sma_prot->garou_decrypt_68k(cpuregion);
+}
+
+/*************************************************
+ garouhd
+ **************************************************/
+
+neogeo_sma_garouhd_cart_device::neogeo_sma_garouhd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
+	neogeo_sma_cart_device(mconfig, NEOGEO_SMA_GAROUHD_CART, tag, owner, clock)
+{
+}
+
+void neogeo_sma_garouhd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
+{
+	m_sma_prot->garouh_decrypt_68k(cpuregion);
+}
+
+/*************************************************
+ kof99d
+**************************************************/
+
+neogeo_sma_kof99d_cart_device::neogeo_sma_kof99d_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
+	neogeo_sma_cart_device(mconfig, NEOGEO_SMA_KOF99D_CART, tag, owner, clock)
+{
+}
+
+void neogeo_sma_kof99d_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
+{
+	m_sma_prot->kof99_decrypt_68k(cpuregion);
+}
+
+/*************************************************
+ kof2000d
+**************************************************/
+
+neogeo_sma_kof2000d_cart_device::neogeo_sma_kof2000d_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
+	neogeo_sma_cart_device(mconfig, NEOGEO_SMA_KOF2000D_CART, tag, owner, clock)
+{
+}
+
+void neogeo_sma_kof2000d_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
+{
+	m_sma_prot->kof2000_decrypt_68k(cpuregion);
+}
+
+/*************************************************
+ kof2000nd
+**************************************************/
+
+neogeo_sma_kof2000nd_cart_device::neogeo_sma_kof2000nd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
+	neogeo_sma_cart_device(mconfig, NEOGEO_SMA_KOF2000ND_CART, tag, owner, clock)
+{
+}
+
+void neogeo_sma_kof2000nd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
+{
+
+}
+
+/*************************************************
+ mslug3d
+ **************************************************/
+
+neogeo_sma_mslug3d_cart_device::neogeo_sma_mslug3d_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
+	neogeo_sma_cart_device(mconfig, NEOGEO_SMA_MSLUG3D_CART, tag, owner, clock)
+{
+}
+
+void neogeo_sma_mslug3d_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
+{
+	m_sma_prot->mslug3_decrypt_68k(cpuregion);
+}
+/*******************************************************************************************************************************************************/

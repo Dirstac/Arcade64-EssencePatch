@@ -117,6 +117,11 @@ void neogeo_cart(device_slot_interface &device)
 
 // 修改的 (Gaston90) 
 /************************************************************************/
+	device.option_add_internal("sma_garoud",  NEOGEO_SMA_GAROUD_CART);
+	device.option_add_internal("sma_garouhd", NEOGEO_SMA_GAROUHD_CART);
+	device.option_add_internal("sma_kof99d",  NEOGEO_SMA_KOF99D_CART);
+	device.option_add_internal("sma_kof2kd",  NEOGEO_SMA_KOF2000D_CART);
+	device.option_add_internal("sma_kof2knd", NEOGEO_SMA_KOF2000ND_CART);
 	device.option_add_internal("pvc_kf2k3d",  NEOGEO_PVC_KOF2003D_CART);
 	device.option_add_internal("pvc_kf2k3hd", NEOGEO_PVC_KOF2003HD_CART);
 	device.option_add_internal("sma_mslug3d", NEOGEO_SMA_MSLUG3D_CART);

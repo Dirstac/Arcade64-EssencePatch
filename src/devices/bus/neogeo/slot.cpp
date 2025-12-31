@@ -208,15 +208,21 @@ static const neogeo_slot slot_list[] =
 	{ NEOGEO_KOF99D, "sma_kof99d" },
 	{ NEOGEO_KOF2KD, "sma_kof2kd" },
 	{ NEOGEO_KOF2KND, "sma_kof2knd" },
+	{ NEOGEO_KOF2K2D, "k2k2_kof2k2d" },
+	{ NEOGEO_KOF2K2PD, "k2k2_kf2k2pd" },
+	{ NEOGEO_KOF2K2MPD, "boot_kf2k2mpd" },
+	{ NEOGEO_KOF2K2MP2D, "boot_kf2k2mp2d" },
 	{ NEOGEO_KOF2K3D, "pvc_kf2k3d" },
 	{ NEOGEO_KOF2K3HD, "pvc_kf2k3hd" },
+	{ NEOGEO_MATRIMD, "k2k2_matrimd" },
 	{ NEOGEO_MSLUG3D, "sma_mslug3d" },
 	{ NEOGEO_MSLUG5D, "pvc_mslug5d" },
 	{ NEOGEO_MSLUG5E, "pvc_mslug5e" },
+	{ NEOGEO_SAMSHO5D, "k2k2_samsh5d" },
+	{ NEOGEO_SAMSHO5SD, "k2k2_sams5sd" },
 	{ NEOGEO_SVCD, "pvc_svcd" },
 /**************************************/
 };
-
 
 static int neogeo_get_pcb_id(const char *slot)
 {

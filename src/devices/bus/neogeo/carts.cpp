@@ -122,11 +122,18 @@ void neogeo_cart(device_slot_interface &device)
 	device.option_add_internal("sma_kof99d",  NEOGEO_SMA_KOF99D_CART);
 	device.option_add_internal("sma_kof2kd",  NEOGEO_SMA_KOF2000D_CART);
 	device.option_add_internal("sma_kof2knd", NEOGEO_SMA_KOF2000ND_CART);
+	device.option_add_internal("k2k2_kof2k2d",NEOGEO_K2K2_KOF2002D_CART);
+	device.option_add_internal("k2k2_kf2k2pd", NEOGEO_K2K2_KF2K2PLSD_CART);
+	device.option_add_internal("boot_kf2k2mpd", NEOGEO_KF2K2MPD_CART);
+	device.option_add_internal("boot_kf2k2mp2d", NEOGEO_KF2K2MP2D_CART);
 	device.option_add_internal("pvc_kf2k3d",  NEOGEO_PVC_KOF2003D_CART);
 	device.option_add_internal("pvc_kf2k3hd", NEOGEO_PVC_KOF2003HD_CART);
+	device.option_add_internal("k2k2_matrimd",NEOGEO_K2K2_MATRIMD_CART);
 	device.option_add_internal("sma_mslug3d", NEOGEO_SMA_MSLUG3D_CART);
 	device.option_add_internal("pvc_mslug5d", NEOGEO_PVC_MSLUG5D_CART);
 	device.option_add_internal("pvc_mslug5e", NEOGEO_PVC_MSLUG5E_CART);
+	device.option_add_internal("k2k2_samsh5d",NEOGEO_K2K2_SAMSHO5D_CART);
+	device.option_add_internal("k2k2_sams5sd",NEOGEO_K2K2_SAMSHO5SPD_CART);
 	device.option_add_internal("pvc_svcd",    NEOGEO_PVC_SVCD_CART);
 /************************************************************************/
 }

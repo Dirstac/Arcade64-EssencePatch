@@ -195,6 +195,37 @@ void neogeo_kf2k2plsd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
 	m_prot->sx_decrypt(fix_region, fix_region_size, 2);
 }
 
+
+/*************************************************
+ kof2k4pls
+ **************************************************/
+
+DEFINE_DEVICE_TYPE(NEOGEO_K2K2_KOF2K4PLS_CART, neogeo_kof2k4pls_cart_device, "neocart_kof2k4pls", "Neo Geo KoF 2004 Plus bootleg Cart")
+
+neogeo_kof2k4pls_cart_device::neogeo_kof2k4pls_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
+	neogeo_kof2k2type_cart_device(mconfig, NEOGEO_K2K2_KOF2K4PLS_CART, tag, owner, clock)
+{
+}
+
+void neogeo_kof2k4pls_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
+{
+	uint8_t *src = cpuregion;
+	std::vector<uint8_t> dst(0x200000);
+
+	memcpy(&dst[0], src,0x100000);
+	memcpy(&dst[0x100000], src + 0x500000, 0x100000);
+	memcpy(src + 0x000000, &dst[0x1A0000], 0x020000);
+	memcpy(src + 0x020000, &dst[0x080000], 0x020000);
+	memcpy(src + 0x040000, &dst[0x140000], 0x020000);
+	memcpy(src + 0x060000, &dst[0x000000], 0x020000);
+	memcpy(src + 0x080000, &dst[0x180000], 0x020000);
+	memcpy(src + 0x0A0000, &dst[0x0A0000], 0x020000);
+	memcpy(src + 0x0C0000, &dst[0x100000], 0x020000);
+	memcpy(src + 0x0E0000, &dst[0x040000], 0x020000);
+
+	m_prot->sx_decrypt(fix_region, fix_region_size, 1);
+}
+
 /*************************************************
  matrimd
 **************************************************/

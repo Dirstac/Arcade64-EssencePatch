@@ -128,6 +128,7 @@ void neogeo_cart(device_slot_interface &device)
 	device.option_add_internal("boot_kf2k2mp2d", NEOGEO_KF2K2MP2D_CART);
 	device.option_add_internal("pvc_kf2k3d",  NEOGEO_PVC_KOF2003D_CART);
 	device.option_add_internal("pvc_kf2k3hd", NEOGEO_PVC_KOF2003HD_CART);
+	device.option_add_internal("k2k2_kof2k4pls", NEOGEO_K2K2_KOF2K4PLS_CART);
 	device.option_add_internal("k2k2_matrimd",NEOGEO_K2K2_MATRIMD_CART);
 	device.option_add_internal("sma_mslug3d", NEOGEO_SMA_MSLUG3D_CART);
 	device.option_add_internal("pvc_mslug5d", NEOGEO_PVC_MSLUG5D_CART);

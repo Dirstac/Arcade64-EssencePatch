@@ -689,6 +689,7 @@ public:
 	void kf2k2plsd(machine_config &config);
 	void kf2k2mpd(machine_config &config);
 	void kf2k2mp2d(machine_config &config);
+	void kof2k4pls(machine_config &config);
 	void kof99d(machine_config &config);
 	void kof2000d(machine_config &config);
 	void kof2000nd(machine_config &config);
@@ -3130,6 +3131,13 @@ void mvs_led_state::kf2k2plsd(machine_config &config)
 {
 	mv1_fixed(config);
 	cartslot_fixed(config, "k2k2_kf2k2pd");
+	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
+}
+
+void mvs_led_state::kof2k4pls(machine_config &config)
+{
+	mv1_fixed(config);
+	cartslot_fixed(config, "k2k2_kof2k4pls");
 	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
 }
 
@@ -13183,10 +13191,61 @@ ROM_START( kf2k3upd )
 	ROM_LOAD16_BYTE( "271b.c8", 0x3000001, 0x800000, CRC(75211f4d) SHA1(d82f044e816ee539ff131d9c931200c818d34cd0) )
 ROM_END
 
+ROM_START( kf2k4pls )
+	ROM_REGION( 0x600000, "cslot1:maincpu", ROMREGION_BE|ROMREGION_16BIT )
+	ROM_LOAD16_WORD_SWAP( "365pls.p1", 0x000000, 0x100000, CRC(ed97c684) SHA1(0eb8f18f422252c32186b7daa278c9206e189a1a) )
+	ROM_CONTINUE(       0x500000, 0x100000 )
+	ROM_LOAD16_WORD_SWAP( "365.p3",  0x400000, 0x100000, CRC(e6c50566) SHA1(cc6a3489a3bfeb4dcc65b6ddae0030f7e66fbabe) )
+	ROM_CONTINUE(       0x300000, 0x100000 )
+	ROM_CONTINUE(       0x200000, 0x100000 )
+	ROM_CONTINUE(       0x100000, 0x100000 )
+
+	NEO_SFIX_128K( "365pls.s1", CRC(cc0ab564) SHA1(83b86f61c2470f9eb4b7d92e5e6274d06f878fdc) )
+
+	NEO_BIOS_AUDIO_128K( "k2k4s-m1.bin", CRC(5a47d9ad) SHA1(0197737934653acc6c97221660d789e9914f3578) )
+
+	ROM_REGION( 0x1000000, "cslot1:ymsnd:adpcma", 0 )
+	ROM_LOAD( "k2k4s-v2.bin", 0x000000, 0x800000, CRC(e4ddfb3f) SHA1(eb8220ab01c16cf9244b7f3f9912bec0db561b85) )
+	ROM_LOAD( "k2k4s-v1.bin", 0x800000, 0x800000, CRC(b887d287) SHA1(f593a5722df6f6fac023d189a739a117e976bb2f) )
+
+	ROM_REGION( 0x4000000, "cslot1:sprites", 0 )
+	ROM_LOAD16_BYTE( "k2k4s-c4.bin", 0x0000000, 0x800000, CRC(7a050288) SHA1(55a20c5b01e11a859f096af3f8e09986025d288f) )
+	ROM_LOAD16_BYTE( "k2k4s-c8.bin", 0x0000001, 0x800000, CRC(e924afcf) SHA1(651e974f7339d2cdcfa58c5398013197a0525b77) )
+	ROM_LOAD16_BYTE( "k2k4s-c3.bin", 0x1000000, 0x800000, CRC(959fad0b) SHA1(63ab83ddc5f688dc8165a7ff8d262df3fcd942a2) ) /* Plane 0,1 */
+	ROM_LOAD16_BYTE( "k2k4s-c7.bin", 0x1000001, 0x800000, CRC(efe6a468) SHA1(2a414285e48aa948b5b0d4a9333bab083b5fb853) ) /* Plane 2,3 */
+	ROM_LOAD16_BYTE( "k2k4s-c2.bin", 0x2000000, 0x800000, CRC(74bba7c6) SHA1(e01adc7a4633bc0951b9b4f09abc07d728e9a2d9) ) /* Plane 0,1 */
+	ROM_LOAD16_BYTE( "k2k4s-c6.bin", 0x2000001, 0x800000, CRC(e20d2216) SHA1(5d28eea7b581e780b78f391a8179f1678ee0d9a5) ) /* Plane 2,3 */
+	ROM_LOAD16_BYTE( "k2k4s-c1.bin", 0x3000000, 0x800000, CRC(fa705b2b) SHA1(f314c66876589601806352484dd8e45bc41be692) ) /* Plane 0,1 */
+	ROM_LOAD16_BYTE( "k2k4s-c5.bin", 0x3000001, 0x800000, CRC(2c912ff9) SHA1(b624a625ea3e221808b7ea43fb0b1a51d8c1853e) ) /* Plane 2,3 */
+ROM_END
+
+ROM_START( lans2k4d )
+	ROM_REGION( 0x600000, "cslot1:maincpu", ROMREGION_BE|ROMREGION_16BIT )
+	ROM_LOAD16_WORD_SWAP( "246lnsq.p1", 0x000000, 0x100000, CRC(724576EA) SHA1(075f5d8ccb7303c8b6bebf630c4fa9c204554044) )
+	ROM_LOAD16_WORD_SWAP( "246-p2.sp2", 0x100000, 0x400000, CRC(72ea04c3) SHA1(4fb1d22c30f5f3db4637dd92a4d2705c88de399d) ) /* TC5332205 */
+
+	NEO_SFIX_128K( "246lnsq.s1", CRC(8699c63a) SHA1(d1a0345bcb4e3f6044c93abd52ff6fe6280dc5ee) )
+
+	NEO_BIOS_AUDIO_128K( "246-m1.m1", CRC(d0604ad1) SHA1(fae3cd52a177eadd5f5775ace957cc0f8301e65d) ) /* TC531001 */
+
+	ROM_REGION( 0x1000000, "cslot1:ymsnd:adpcma", 0 )
+	ROM_LOAD( "246-v1.v1", 0x000000, 0x400000, CRC(16986fc6) SHA1(cff3103dadf2f4390460456a5bd3fb5f28e21f6a) ) /* TC5332204 */
+	ROM_LOAD( "246-v2.v2", 0x400000, 0x400000, CRC(ada41e83) SHA1(78e37ffaaa5679c8775a3a71f6df7a0d15082bdc) ) /* TC5332204 */
+	ROM_LOAD( "246-v3.v3", 0x800000, 0x200000, CRC(a05ba5db) SHA1(09d739cad323d918f4196f91b654627fcafd8f4d) ) /* TC5316200 */
+
+	ROM_REGION( 0x3000000, "cslot1:sprites", 0 )
+	ROM_LOAD16_BYTE( "246-c1.c1", 0x0000000, 0x800000, CRC(47ac9ec5) SHA1(2d9eea11ba87baa23b18a1a3f607dc137846e807) )
+	ROM_LOAD16_BYTE( "246-c2.c2", 0x0000001, 0x800000, CRC(7bcab64f) SHA1(08d0edddd14b53d606e9a7a46aa4fb4e7398e0d0) )
+	ROM_LOAD16_BYTE( "246lnsq.c3", 0x1000000, 0x800000, CRC(b28d702a) SHA1(21d70c94ecf9ca519b4e50e2d31620f6dfab9ad0) )
+	ROM_LOAD16_BYTE( "246lnsq.c4", 0x1000001, 0x800000, CRC(da10dd64) SHA1(55bf0922a117325ef6479f654caf13b287a16f67) )
+	ROM_LOAD16_BYTE( "246lnsq.c5", 0x2000000, 0x800000, CRC(bab3b417) SHA1(232f718fecf597434b7a93602387fabab2bda9c0) )
+	ROM_LOAD16_BYTE( "246lnsq.c6", 0x2000001, 0x800000, CRC(4c089a28) SHA1(f854ce46b4723aa971de280007268d474d2a6361) )
+ROM_END
+
 ROM_START( matrimd )
 	ROM_REGION( 0x500000, "cslot1:maincpu", ROMREGION_BE|ROMREGION_16BIT )
-	ROM_LOAD16_WORD_SWAP( "266-p1.p1",  0x000000, 0x100000, CRC(5d4c2dc7) SHA1(8d723b0d28ec344eef26009b361a2b97d300dd51) ) /* mask rom TC538200 */
-	ROM_LOAD16_WORD_SWAP( "266-p2.sp2", 0x100000, 0x400000, CRC(a14b1906) SHA1(1daa14d73512f760ef569b06f9facb279437d1db) ) /* mask rom TC5332205 */
+	ROM_LOAD16_WORD_SWAP( "266-p1.p1",  0x000000, 0x100000, CRC(5d4c2dc7) SHA1(8d723b0d28ec344eef26009b361a2b97d300dd51) )
+	ROM_LOAD16_WORD_SWAP( "266-p2.sp2", 0x100000, 0x400000, CRC(a14b1906) SHA1(1daa14d73512f760ef569b06f9facb279437d1db) )
 
 	NEO_SFIX_512K( "266d.s1", CRC(10b1ce57) SHA1(de40a742508eb44995c1fb467aef5c3aed403497) )
 
@@ -14431,6 +14490,8 @@ GAME( 2003, kof2k3hd,   kof2003,  kof2003hd, neogeo,    mvs_led_state, empty_ini
 GAME( 2003, kof2k3nd,   kof2003,  neo304h,   neogeo,    mvs_led_state, empty_init, ROT0, "SNK Playmore", "The King of Fighters 2003 (Fully Decrypted)", MACHINE_SUPPORTS_SAVE )
 GAME( 2004, kf2k3pd,    kof2003,  neo304h,   neogeo,    mvs_led_state, empty_init, ROT0, "bootleg", "The King of Fighters 2004 Plus / Hero (The King of Fighters 2003 bootleg, Fully Decrypted)", MACHINE_SUPPORTS_SAVE )
 GAME( 2003, kf2k3upd,   kof2003,  neo304h,   neogeo,    mvs_led_state, empty_init, ROT0, "bootleg", "The King of Fighters 2004 Ultra Plus (The King of Fighters 2003 bootleg, Fully Decrypted)", MACHINE_SUPPORTS_SAVE )
+GAME( 2004, kf2k4pls,   kof2002,  kof2k4pls, neogeo,    mvs_led_state, empty_init, ROT0, "bootleg", "The King of Fighters Special Edition 2004 Plus (The King of Fighters 2002 bootleg)", MACHINE_SUPPORTS_SAVE )
+GAME( 2004, lans2k4d,   shocktr2, neo304h,   neogeo,    mvs_led_state, empty_init, ROT0, "bootleg", "Lansquenet 2004 (Shock Troopers - 2nd Squad bootleg / Fully Decrypted)", MACHINE_SUPPORTS_SAVE )
 GAME( 2003, matrimd,    matrim,   matrimd,   neogeo,    mvs_led_state, empty_init, ROT0, "Noise Factory / Atlus", "Matrimelee / Shin Gouketsuji Ichizoku Toukon (NGM-2660 ~ NGH-2660) (Decrypted C)", MACHINE_SUPPORTS_SAVE )
 GAME( 2003, matrimbd,   matrim,   neo304h,   neogeo,    mvs_led_state, empty_init, ROT0, "bootleg", "Matrimelee / Shin Gouketsuji Ichizoku Toukon (bootleg) (Decrypted C)", MACHINE_SUPPORTS_SAVE )
 GAME( 2003, matrimnd,   matrim,   neo304h,   neogeo,    mvs_led_state, empty_init, ROT0, "Noise Factory / Atlus", "Matrimelee / Shin Gouketsuji Ichizoku Toukon (Fully Decrypted)", MACHINE_SUPPORTS_SAVE )

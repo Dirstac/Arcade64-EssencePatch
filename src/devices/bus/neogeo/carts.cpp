@@ -117,21 +117,26 @@ void neogeo_cart(device_slot_interface &device)
 
 // 修改的 (Gaston90) 
 /************************************************************************/
+    device.option_add_internal("decrypt_cd",       NEOGEO_DECRYPT_CD_CART);
 	device.option_add_internal("decrypt_cthd2k3a", NEOGEO_DECRYPT_CTHD2K3A_CART);
 	device.option_add_internal("sma_garoud",       NEOGEO_SMA_DECRYPT_GAROUD_CART);
 	device.option_add_internal("sma_garouhd",      NEOGEO_SMA_DECRYPT_GAROUHD_CART);
+	device.option_add_internal("decrypt_jckeygpd", NEOGEO_DECRYPT_JOCKEYGPD_CART);
+	device.option_add_internal("decrypt_kf10thu",  NEOGEO_DECRYPT_KOF10THU_CART);
+	device.option_add_internal("decrypt_kof96ep",  NEOGEO_DECRYPT_KOF96EP_CART);
+	device.option_add_internal("decrypt_kof97pla", NEOGEO_DECRYPT_KOF97PLA_CART);
 	device.option_add_internal("sma_kof99d",       NEOGEO_SMA_DECRYPT_KOF99D_CART);
     device.option_add_internal("sma_kof2kd",       NEOGEO_SMA_DECRYPT_KOF2000D_CART);
 	device.option_add_internal("sma_kof2knd",      NEOGEO_SMA_DECRYPT_KOF2000ND_CART);
-	device.option_add_internal("decrypt_kof96ep",  NEOGEO_DECRYPT_KOF96EP_CART);
-	device.option_add_internal("decrypt_kf10thu",  NEOGEO_DECRYPT_KOF10THU_CART);
 	device.option_add_internal("decrypt_kof2k2d",  NEOGEO_DECRYPT_KOF2002D_CART);
+	device.option_add_internal("decrypt_kf2k1pa",  NEOGEO_DECRYPT_KF2K1PA_CART);
 	device.option_add_internal("decrypt_kf2k2pd",  NEOGEO_DECRYPT_KF2K2PLSD_CART);
 	device.option_add_internal("decrypt_kf2k2mpd", NEOGEO_DECRYPT_KF2K2MPD_CART);
 	device.option_add_internal("decrypt_kf2k2mp2d",NEOGEO_DECRYPT_KF2K2MP2D_CART);
 	device.option_add_internal("decrypt_kf2k3d",   NEOGEO_DECRYPT_KOF2003D_CART);
 	device.option_add_internal("decrypt_kf2k3hd",  NEOGEO_DECRYPT_KOF2003HD_CART);
 	device.option_add_internal("decrypt_kof2k4pls",NEOGEO_DECRYPT_KOF2K4PLS_CART);
+	device.option_add_internal("decrypt_kogd",     NEOGEO_DECRYPT_KOGD_CART);
 	device.option_add_internal("decrypt_matrimd",  NEOGEO_DECRYPT_MATRIMD_CART);
 	device.option_add_internal("sma_mslug3d",      NEOGEO_SMA_DECRYPT_MSLUG3D_CART);
 	device.option_add_internal("decrypt_mslug5d",  NEOGEO_DECRYPT_MSLUG5D_CART);

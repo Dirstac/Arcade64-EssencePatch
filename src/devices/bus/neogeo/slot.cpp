@@ -205,6 +205,7 @@ static const neogeo_slot slot_list[] =
 /**************************************/
 	{ NEOGEO_CD, "decrypt_cd" },
 	{ NEOGEO_CTHD2K3A, "decrypt_cthd2k3a" },
+	{ NEOGEO_FR2CD, "decrypt_fr2cd" },
 	{ NEOGEO_GAROUD, "sma_garoud" },
 	{ NEOGEO_GAROUHD, "sma_garouhd" },
 	{ NEOGEO_JCKEYGPD, "decrypt_jckeygpd" },
@@ -225,6 +226,7 @@ static const neogeo_slot slot_list[] =
 	{ NEOGEO_KOGD, "decrypt_kogd" },
 	{ NEOGEO_MATRIMD, "decrypt_matrimd" },
 	{ NEOGEO_MSLUG3D, "sma_mslug3d" },
+	{ NEOGEO_MSLUG4E, "decrypt_mslug4e" },
 	{ NEOGEO_MSLUG5D, "decrypt_mslug5d" },
 	{ NEOGEO_MSLUG5E, "decrypt_mslug5e" },
 	{ NEOGEO_SAMSHO5D, "decrypt_samsh5d" },

@@ -208,6 +208,69 @@ void neogeo_jockeygpd_cart_device::device_add_mconfig(machine_config &config)
 }
 
 /*************************************************
+ fr2cd
+**************************************************/
+
+DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_FR2CD_CART, neogeo_fr2cd_cart_device, "neocart_kof2003d", "Neo Geo KoF 2003 Decrypted PVC Cart")
+
+neogeo_fr2cd_cart_device::neogeo_fr2cd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
+	neogeo_decrypt_cart_device(mconfig, NEOGEO_DECRYPT_FR2CD_CART, tag, owner, clock)
+{
+}
+
+void neogeo_fr2cd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
+{
+//// Fix rebooting at start
+
+	uint16_t *mem16 = (uint16_t*)cpuregion;
+
+	// change jsr to C004DA
+	mem16[0x01AF8 /2] = 0x04DA; // C00552 (Not used?)
+	mem16[0x01BF6 /2] = 0x04DA; // C0056A (fixes crash)
+	mem16[0x01ED8 /2] = 0x04DA; // C00570 (Not used?)
+	mem16[0x1C384 /2] = 0x04DA; // C00552 (fixes crash)
+
+	// 0x001C06 - this routine can cause a loop/freeze
+	mem16[0x01C06 /2] = 0x4E75;
+
+//// Fix text on bottom line
+
+	uint8_t *dst = fix_region;
+
+	// Move text for credit + coin info (Thanks to Kanyero), overwrites "MA" in neogeo logo
+	memcpy(dst, dst + 0x600, 0x140);
+
+	// Patch out neogeo intro (because of above line)
+//  mem16[0x114 /2]=0x200;
+
+
+//// Optional stuff
+
+
+	// Hack in the proper identification (see setup menu [F2])
+	mem16[0x3a6 / 2] = 0x4649;
+	mem16[0x3a8 / 2] = 0x4e41;
+	mem16[0x3aa / 2] = 0x4c20;
+	mem16[0x3ac / 2] = 0x524f;
+	mem16[0x3ae / 2] = 0x4d41;
+	mem16[0x3b0 / 2] = 0x4e43;
+	mem16[0x3b2 / 2] = 0x4520;
+	mem16[0x3b4 / 2] = 0x3220;
+	uint8_t  *mem8 = cpuregion;
+	memcpy(mem8+0x61e, mem8+0x3a6, 16);
+	memcpy(mem8+0x896, mem8+0x3a6, 16);
+
+	// Album Fix
+	mem16[0x1C382 /2] = 0x0008; // C00552
+	mem16[0x1C384 /2] = 0x0000;
+	mem16[0x80000 /2] = 0x33FC;
+	mem16[0x80002 /2] = 0x0001;
+	mem16[0x80004 /2] = 0x0020;
+	mem16[0x80006 /2] = 0x0002;
+	mem16[0x80008 /2] = 0x4E75;
+}
+
+/*************************************************
  kof96ep
  **************************************************/
 
@@ -468,6 +531,24 @@ neogeo_matrimd_cart_device::neogeo_matrimd_cart_device(const machine_config &mco
 void neogeo_matrimd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
 {
 	m_kof2k2_prot->matrim_decrypt_68k(cpuregion, cpuregion_size);
+}
+
+/*************************************************
+ mslug4e
+**************************************************/
+
+DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_MSLUG4E_CART, neogeo_mslug4e_cart_device, "neocart_mslug4e", "Neo Geo Metal Slug 4 Earlier Cart")
+
+neogeo_mslug4e_cart_device::neogeo_mslug4e_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
+	neogeo_decrypt_cart_device(mconfig, NEOGEO_DECRYPT_MSLUG4E_CART, tag, owner, clock)
+{
+}
+
+void neogeo_mslug4e_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
+{
+    m_cmc_prot->cmc50_m1_decrypt(audiocrypt_region, audiocrypt_region_size, audiocpu_region, audio_region_size);
+	m_cmc_prot->cmc50_gfx_decrypt(spr_region, spr_region_size, MSLUG4_GFX_KEY);
+   m_pcm2_prot->decrypt(ym_region, ym_region_size, 8);
 }
 
 /*************************************************

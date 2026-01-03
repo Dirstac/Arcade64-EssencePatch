@@ -114,7 +114,7 @@ public:
 DECLARE_DEVICE_TYPE(NEOGEO_DECRYPT_CTHD2K3A_CART, neogeo_cthd2k3a_cart_device)
 
 /*************************************************
- jockeygp
+ jckeygpd
  **************************************************/
 
 class neogeo_jockeygpd_cart_device : public neogeo_decrypt_cart_device
@@ -138,6 +138,20 @@ private:
 };
 
 DECLARE_DEVICE_TYPE(NEOGEO_DECRYPT_JOCKEYGPD_CART, neogeo_jockeygpd_cart_device)
+
+/*************************************************
+ fr2cd
+ **************************************************/
+
+class neogeo_fr2cd_cart_device : public neogeo_decrypt_cart_device
+{
+public:
+	neogeo_fr2cd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock);
+	virtual void decrypt_all(DECRYPT_ALL_PARAMS) override;
+	virtual int get_fixed_bank_type() override { return 0; }
+};
+
+DECLARE_DEVICE_TYPE(NEOGEO_DECRYPT_FR2CD_CART, neogeo_fr2cd_cart_device)
 
 /*************************************************
  kof96ep
@@ -326,6 +340,20 @@ public:
 };
 
 DECLARE_DEVICE_TYPE(NEOGEO_DECRYPT_MATRIMD_CART, neogeo_matrimd_cart_device)
+
+/*************************************************
+ mslug4e
+**************************************************/
+
+class neogeo_mslug4e_cart_device : public neogeo_decrypt_cart_device
+{
+public:
+	neogeo_mslug4e_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock);
+	virtual void decrypt_all(DECRYPT_ALL_PARAMS) override;
+	virtual int get_fixed_bank_type() override { return 1; }
+};
+
+DECLARE_DEVICE_TYPE(NEOGEO_DECRYPT_MSLUG4E_CART, neogeo_mslug4e_cart_device)
 
 /*************************************************
  mslug5d

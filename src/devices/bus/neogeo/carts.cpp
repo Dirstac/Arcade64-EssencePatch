@@ -119,6 +119,7 @@ void neogeo_cart(device_slot_interface &device)
 /************************************************************************/
     device.option_add_internal("decrypt_cd",       NEOGEO_DECRYPT_CD_CART);
 	device.option_add_internal("decrypt_cthd2k3a", NEOGEO_DECRYPT_CTHD2K3A_CART);
+	device.option_add_internal("decrypt_fr2cd",    NEOGEO_DECRYPT_FR2CD_CART);
 	device.option_add_internal("sma_garoud",       NEOGEO_SMA_DECRYPT_GAROUD_CART);
 	device.option_add_internal("sma_garouhd",      NEOGEO_SMA_DECRYPT_GAROUHD_CART);
 	device.option_add_internal("decrypt_jckeygpd", NEOGEO_DECRYPT_JOCKEYGPD_CART);
@@ -139,6 +140,7 @@ void neogeo_cart(device_slot_interface &device)
 	device.option_add_internal("decrypt_kogd",     NEOGEO_DECRYPT_KOGD_CART);
 	device.option_add_internal("decrypt_matrimd",  NEOGEO_DECRYPT_MATRIMD_CART);
 	device.option_add_internal("sma_mslug3d",      NEOGEO_SMA_DECRYPT_MSLUG3D_CART);
+	device.option_add_internal("decrypt_mslug4e",  NEOGEO_DECRYPT_MSLUG4E_CART);
 	device.option_add_internal("decrypt_mslug5d",  NEOGEO_DECRYPT_MSLUG5D_CART);
 	device.option_add_internal("decrypt_mslug5e",  NEOGEO_DECRYPT_MSLUG5E_CART);
 	device.option_add_internal("decrypt_samsh5d",  NEOGEO_DECRYPT_SAMSHO5D_CART);

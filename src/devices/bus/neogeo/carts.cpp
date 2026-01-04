@@ -116,19 +116,16 @@ void neogeo_cart(device_slot_interface &device)
 	device.option_add_internal("boot_sbp",      NEOGEO_SBP_CART);
 
 // 修改的 (Gaston90) 
-/************************************************************************/
+/******************************************************************************************/
+
+// ==================================================================> NEOGEO_DECRYPT_CART_DEVICE
     device.option_add_internal("decrypt_cd",       NEOGEO_DECRYPT_CD_CART);
 	device.option_add_internal("decrypt_cthd2k3a", NEOGEO_DECRYPT_CTHD2K3A_CART);
 	device.option_add_internal("decrypt_fr2cd",    NEOGEO_DECRYPT_FR2CD_CART);
-	device.option_add_internal("sma_garoud",       NEOGEO_SMA_DECRYPT_GAROUD_CART);
-	device.option_add_internal("sma_garouhd",      NEOGEO_SMA_DECRYPT_GAROUHD_CART);
 	device.option_add_internal("decrypt_jckeygpd", NEOGEO_DECRYPT_JOCKEYGPD_CART);
 	device.option_add_internal("decrypt_kf10thu",  NEOGEO_DECRYPT_KOF10THU_CART);
 	device.option_add_internal("decrypt_kof96ep",  NEOGEO_DECRYPT_KOF96EP_CART);
 	device.option_add_internal("decrypt_kof97pla", NEOGEO_DECRYPT_KOF97PLA_CART);
-	device.option_add_internal("sma_kof99d",       NEOGEO_SMA_DECRYPT_KOF99D_CART);
-    device.option_add_internal("sma_kof2kd",       NEOGEO_SMA_DECRYPT_KOF2000D_CART);
-	device.option_add_internal("sma_kof2knd",      NEOGEO_SMA_DECRYPT_KOF2000ND_CART);
 	device.option_add_internal("decrypt_kof2k2d",  NEOGEO_DECRYPT_KOF2002D_CART);
 	device.option_add_internal("decrypt_kf2k1pa",  NEOGEO_DECRYPT_KF2K1PA_CART);
 	device.option_add_internal("decrypt_kf2k2pd",  NEOGEO_DECRYPT_KF2K2PLSD_CART);
@@ -139,12 +136,34 @@ void neogeo_cart(device_slot_interface &device)
 	device.option_add_internal("decrypt_kof2k4pls",NEOGEO_DECRYPT_KOF2K4PLS_CART);
 	device.option_add_internal("decrypt_kogd",     NEOGEO_DECRYPT_KOGD_CART);
 	device.option_add_internal("decrypt_matrimd",  NEOGEO_DECRYPT_MATRIMD_CART);
-	device.option_add_internal("sma_mslug3d",      NEOGEO_SMA_DECRYPT_MSLUG3D_CART);
 	device.option_add_internal("decrypt_mslug4e",  NEOGEO_DECRYPT_MSLUG4E_CART);
 	device.option_add_internal("decrypt_mslug5d",  NEOGEO_DECRYPT_MSLUG5D_CART);
 	device.option_add_internal("decrypt_mslug5e",  NEOGEO_DECRYPT_MSLUG5E_CART);
 	device.option_add_internal("decrypt_samsh5d",  NEOGEO_DECRYPT_SAMSHO5D_CART);
 	device.option_add_internal("decrypt_sams5sd",  NEOGEO_DECRYPT_SAMSHO5SPD_CART);
 	device.option_add_internal("decrypt_svcd",     NEOGEO_DECRYPT_SVCD_CART);
-/************************************************************************/
+
+// ==================================================================> NEOGEO_SMA_DECRYPT_CART_DEVICE
+	device.option_add_internal("sma_garoud",       NEOGEO_DECRYPT_SMA_GAROUD_CART);
+	device.option_add_internal("sma_garouhd",      NEOGEO_DECRYPT_SMA_GAROUHD_CART);
+	device.option_add_internal("sma_kof99d",       NEOGEO_DECRYPT_SMA_KOF99D_CART);
+    device.option_add_internal("sma_kof2kd",       NEOGEO_DECRYPT_SMA_KOF2000D_CART);
+	device.option_add_internal("sma_kof2knd",      NEOGEO_DECRYPT_SMA_KOF2000ND_CART);
+	device.option_add_internal("sma_mslug3d",      NEOGEO_DECRYPT_SMA_MSLUG3D_CART);
+
+// ==================================================================> NEOGEO_SMA_DARKSOFT_CART_DEVICE
+    device.option_add_internal("sma_garoudd",      NEOGEO_DARKSOFT_SMA_GAROUDD_CART);
+	device.option_add_internal("sma_garouhdd",     NEOGEO_DARKSOFT_SMA_GAROUHDD_CART);
+	device.option_add_internal("sma_kof99dd",      NEOGEO_DARKSOFT_SMA_KOF99DD_CART);
+    device.option_add_internal("sma_kof2kdd",      NEOGEO_DARKSOFT_SMA_KOF2000DD_CART);
+	device.option_add_internal("sma_mslug3dd",     NEOGEO_DARKSOFT_SMA_MSLUG3DD_CART);
+
+// ==================================================================> NEOGEO_DARKSOFT_DECRYPT_CART_DEVICE
+	device.option_add_internal("darksoft_decrypt",    NEOGEO_DARKSOFT_DECRYPT_CART);
+    device.option_add_internal("darksoft_ct2k3spdd",  NEOGEO_DARKSOFT_CT2K3SPDD_CART);
+    device.option_add_internal("darksoft_jockeygpdd", NEOGEO_DARKSOFT_JOCKEYGPDD_CART);
+    device.option_add_internal("darksoft_kof98dd",    NEOGEO_DARKSOFT_KOF98DD_CART);
+	device.option_add_internal("darksoft_kof2k2dd",   NEOGEO_DARKSOFT_KOF2002DD_CART);
+
+/******************************************************************************************/
 }

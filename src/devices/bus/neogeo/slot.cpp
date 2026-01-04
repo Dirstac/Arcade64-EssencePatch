@@ -202,19 +202,16 @@ static const neogeo_slot slot_list[] =
 	{ NEOGEO_KOF10TH, "boot_kf10th" },
 
 // 修改的 (Gaston90) 
-/**************************************/
+/******************************************************************/
+
+// ===============================> NEOGEO_DECRYPT_CART_DEVICE
 	{ NEOGEO_CD, "decrypt_cd" },
 	{ NEOGEO_CTHD2K3A, "decrypt_cthd2k3a" },
 	{ NEOGEO_FR2CD, "decrypt_fr2cd" },
-	{ NEOGEO_GAROUD, "sma_garoud" },
-	{ NEOGEO_GAROUHD, "sma_garouhd" },
 	{ NEOGEO_JCKEYGPD, "decrypt_jckeygpd" },
 	{ NEOGEO_KOF10THU, "decrypt_kf10thu" },
 	{ NEOGEO_KOF96EP, "decrypt_kof96ep" },
 	{ NEOGEO_KOF97PLA, "decrypt_kof97pla" },
-	{ NEOGEO_KOF99D, "sma_kof99d" },
-	{ NEOGEO_KOF2KD, "sma_kof2kd" },
-	{ NEOGEO_KOF2KND, "sma_kof2knd" },
 	{ NEOGEO_KOF2K2D, "decrypt_kof2k2d" },
 	{ NEOGEO_KF2K1PA, "decrypt_kf2k1pa" },
 	{ NEOGEO_KOF2K2PD, "decrypt_kf2k2pd" },
@@ -225,14 +222,36 @@ static const neogeo_slot slot_list[] =
 	{ NEOGEO_KOF2K4PLS, "decrypt_kof2k4pls" },
 	{ NEOGEO_KOGD, "decrypt_kogd" },
 	{ NEOGEO_MATRIMD, "decrypt_matrimd" },
-	{ NEOGEO_MSLUG3D, "sma_mslug3d" },
 	{ NEOGEO_MSLUG4E, "decrypt_mslug4e" },
 	{ NEOGEO_MSLUG5D, "decrypt_mslug5d" },
 	{ NEOGEO_MSLUG5E, "decrypt_mslug5e" },
 	{ NEOGEO_SAMSHO5D, "decrypt_samsh5d" },
 	{ NEOGEO_SAMSHO5SD, "decrypt_sams5sd" },
 	{ NEOGEO_SVCD, "decrypt_svcd" },
-/**************************************/
+
+// ===============================> NEOGEO_SMA_DECRYPT_CART_DEVICE
+	{ NEOGEO_GAROUD, "sma_garoud" },
+	{ NEOGEO_GAROUHD, "sma_garouhd" },
+	{ NEOGEO_KOF99D, "sma_kof99d" },
+	{ NEOGEO_KOF2KD, "sma_kof2kd" },
+	{ NEOGEO_KOF2KND, "sma_kof2knd" },
+	{ NEOGEO_MSLUG3D, "sma_mslug3d" },
+
+// ===============================> NEOGEO_SMA_DARKSOFT_CART_DEVICE
+	{ NEOGEO_GAROUDD, "sma_garoudd" },
+	{ NEOGEO_GAROUHDD, "sma_garouhdd" },
+	{ NEOGEO_KOF99DD, "sma_kof99dd" },
+	{ NEOGEO_KOF2KDD, "sma_kof2kdd" },
+	{ NEOGEO_MSLUG3DD, "sma_mslug3dd" },
+
+// ===============================> NEOGEO_DARKSOFT_DECRYPT_CART_DEVICE
+	{ NEOGEO_DARKSOFT, "darksoft_decrypt" },
+	{ NEOGEO_CT2K3SPDD, "darksoft_ct2k3spdd" },
+    { NEOGEO_JOCKEYGPDD, "darksoft_jockeygpdd" },
+    { NEOGEO_KOF98DD, "darksoft_kof98dd" },
+	{ NEOGEO_KOF2K2DD, "darksoft_kof2k2dd" },
+
+/******************************************************************/
 };
 
 static int neogeo_get_pcb_id(const char *slot)

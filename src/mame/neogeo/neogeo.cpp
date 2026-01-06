@@ -728,13 +728,22 @@ public:
 	void kof2000dd(machine_config &config);
 	void mslug3dd(machine_config &config);
 
+// ===============================> NEOGEO_DARKSOFT_CTHD2K3_CART_DEVICE
+    void ct2k3spdd(machine_config &config);
+
 // ===============================> NEOGEO_DARKSOFT_CART_DEVICE
     void darksoft(machine_config &config);
-    void ct2k3spdd(machine_config &config);
     void jockeygpdd(machine_config &config);
+    void kf2k3upldd(machine_config &config);
+	void kf2k3pldd(machine_config &config);
     void kof98dd(machine_config &config);
 	void kof2002dd(machine_config &config);
+	void kof2003dd(machine_config &config);
 	void mahjongdd(machine_config &config);
+    void matrimdd(machine_config &config);
+	void mslug5dd(machine_config &config);
+    void svcdd(machine_config &config);
+	void vlinerdd(machine_config &config);
 
 /************************************************************************/
 
@@ -1626,6 +1635,16 @@ void neogeo_base_state::set_slot_idx(int slot)
 			space.install_write_handler(0x2fffe4, 0x2fffe5, write16smo_delegate(*this, FUNC(neogeo_base_state::write_bankprot)));
 			space.install_read_handler(0x2fe446, 0x2fe447, read16m_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_r)));
 			break;
+		case NEOGEO_KF2K3UPLDD:
+			// addon_r here gives m_overlay member from bootleg protection (possibly hack?)
+			space.install_read_handler(0x2fe000, 0x2fffff, read16m_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_r)));
+			space.install_write_handler(0x2fe000, 0x2fffff, write16s_delegate(*this, FUNC(neogeo_base_state::write_bankprot_kf2k3bl)));
+			space.install_read_handler(0x58196, 0x58197, read16sm_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::addon_r)));
+			break;
+		case NEOGEO_KF2K3PLDD:
+			space.install_read_handler(0x2fe000, 0x2fffff, read16m_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_r)));
+			space.install_write_handler(0x2fe000, 0x2fffff, write16s_delegate(*this, FUNC(neogeo_base_state::write_bankprot_kf2k3bl)));
+			break;
 		case NEOGEO_KOF98DD:
 			space.install_read_handler(0x00100, 0x00103, read16m_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_r)));
 			space.install_write_handler(0x20aaaa, 0x20aaab, write16s_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_w)));
@@ -1657,13 +1676,25 @@ void neogeo_base_state::set_slot_idx(int slot)
 			space.install_read_handler(0x0ffffe, 0x0fffff, read16m_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_r)));
 			break;
 		case NEOGEO_KOF2K3D:
+		case NEOGEO_KOF2K3DD:
 		case NEOGEO_KOF2K3HD:
 		case NEOGEO_MSLUG5D:
-        case NEOGEO_MSLUG5E:
+        case NEOGEO_MSLUG5DD:
+		case NEOGEO_MSLUG5E:
 		case NEOGEO_SVCD:
+		case NEOGEO_SVCDD:	
 			space.install_read_handler(0x2fe000, 0x2fffff, read16m_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_r)));
 			space.install_write_handler(0x2fe000, 0x2fffff, write16s_delegate(*this, FUNC(neogeo_base_state::write_bankprot_pvc)));
 			break;
+		case NEOGEO_VLINERDD:
+			space.install_read_handler(0x200000, 0x201fff, read16sm_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::ram_r)));
+			space.install_write_handler(0x200000, 0x201fff, write16s_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::ram_w)));
+			// custom input handling... install it here for the moment.
+			space.install_read_port(0x300000, 0x300001, 0x01ff7e, "DSW");
+			space.install_read_port(0x280000, 0x280001, "IN5");
+			space.install_read_port(0x2c0000, 0x2c0001, "IN6");
+			break;
+
 /******************************************************************************************************************************************************/
 		}
 	}
@@ -3406,7 +3437,16 @@ void mvs_led_state::mslug3dd(machine_config &config)
 	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
 }
 
-// =======================================================================> NEOGEO_DARKSOFT_DECRYPT_CART_DEVICE
+// =======================================================================> NEOGEO_DARKSOFT_CTHD2K3_CART_DEVICE
+
+void mvs_led_state::ct2k3spdd(machine_config &config)
+{
+	mv1_fixed(config);
+	cartslot_fixed(config, "darksoft_ct2k3spdd");
+	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
+}
+
+// =======================================================================> NEOGEO_DARKSOFT_CART_DEVICE
 
 void mvs_led_state::darksoft(machine_config &config)
 {
@@ -3428,17 +3468,24 @@ void mvs_state::irrmazedd(machine_config &config)
 	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
 }
 
-void mvs_led_state::ct2k3spdd(machine_config &config)
-{
-	mv1_fixed(config);
-	cartslot_fixed(config, "darksoft_ct2k3spdd");
-	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
-}
-
 void mvs_led_state::jockeygpdd(machine_config &config)
 {
 	mv1_fixed(config);
 	cartslot_fixed(config, "darksoft_jockeygpdd");
+	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
+}
+
+void mvs_led_state::kf2k3upldd(machine_config &config)
+{
+	mv1_fixed(config);
+	cartslot_fixed(config, "darksoft_kf2k3upldd");
+	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
+}
+
+void mvs_led_state::kf2k3pldd(machine_config &config)
+{
+	mv1_fixed(config);
+	cartslot_fixed(config, "darksoft_kf2k3pldd");
 	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
 }
 
@@ -3456,6 +3503,13 @@ void mvs_led_state::kof2002dd(machine_config &config)
 	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
 }
 
+void mvs_led_state::kof2003dd(machine_config &config)
+{
+	mv1_fixed(config);
+	cartslot_fixed(config, "darksoft_kof2k3dd");
+	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
+}
+
 void mvs_led_state::mahjongdd(machine_config &config)
 {
 	mv1_fixed(config);
@@ -3470,6 +3524,38 @@ void mvs_led_state::mahjongdd(machine_config &config)
 	m_ctrl1->set_fixed(false);
 
 	cartslot_fixed(config, "darksoft_decrypt");
+}
+
+void mvs_led_state::matrimdd(machine_config &config)
+{
+	mv1_fixed(config);
+	cartslot_fixed(config, "darksoft_matrimdd");
+}
+
+void mvs_led_state::mslug5dd(machine_config &config)
+{
+	mv1_fixed(config);
+	cartslot_fixed(config, "darksoft_mslug5dd");
+	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
+}
+
+void mvs_led_state::svcdd(machine_config &config)
+{
+	mv1_fixed(config);
+	cartslot_fixed(config, "darksoft_svcdd");
+	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
+}
+
+void mvs_led_state::vlinerdd(machine_config &config)
+{
+	mv1_fixed(config);
+
+	// input handlers are installed at DRIVER_INIT...
+	config.device_remove("edge");
+	config.device_remove("ctrl1");
+	config.device_remove("ctrl2");
+
+	cartslot_fixed(config, "darksoft_vlinerdd");
 }
 
 /************************************************************************************************/
@@ -15054,7 +15140,9 @@ ROM_START( mslug4dd )
 	ROM_REGION( 0x500000, "cslot1:maincpu", ROMREGION_BE|ROMREGION_16BIT )
 	ROM_LOAD16_WORD_SWAP( "prom", 0x000000, 0x500000, CRC(c6dbdff1) SHA1(35f72712147cfa5bcfc39c3f5d8cb570757daa6b) )
 
-	NEO_SFIX_512K( "srom", CRC(1eaa05e0) SHA1(73a7e158c3c4fa602e17dcb517190fd91a9dbab8) )
+//	NEO_SFIX_512K( "srom", CRC(1eaa05e0) SHA1(73a7e158c3c4fa602e17dcb517190fd91a9dbab8) )
+      
+	NEO_SFIX_128K( "srom", CRC(a9446774) SHA1(c5a309fd8ee6d6750a15c82e710218a3755e38b2) )
 
 	NEO_BIOS_AUDIO_128K( "m1rom", CRC(ef5db532) SHA1(4aeba9e206b8f309610eb7e1891644f39aa61830) )
 
@@ -15069,7 +15157,9 @@ ROM_START( mslug4hdd )
 	ROM_REGION( 0x500000, "cslot1:maincpu", ROMREGION_BE|ROMREGION_16BIT )
 	ROM_LOAD16_WORD_SWAP( "promh", 0x000000, 0x500000, CRC(9dd8a0bd) SHA1(2330bca1d871ab4bd14e42c78f6cd2984eba63fa) )
 
-	NEO_SFIX_512K( "srom", CRC(1eaa05e0) SHA1(73a7e158c3c4fa602e17dcb517190fd91a9dbab8) )
+//	NEO_SFIX_512K( "srom", CRC(1eaa05e0) SHA1(73a7e158c3c4fa602e17dcb517190fd91a9dbab8) )
+      
+	NEO_SFIX_128K( "srom", CRC(a9446774) SHA1(c5a309fd8ee6d6750a15c82e710218a3755e38b2) )
 
 	NEO_BIOS_AUDIO_128K( "m1rom", CRC(ef5db532) SHA1(4aeba9e206b8f309610eb7e1891644f39aa61830) )
 
@@ -24259,8 +24349,8 @@ GAME( 1991, burningfpadd,burningf, darksoft,   neogeo,   mvs_led_state,   empty_
 GAME( 1996, crswd2bldd,  crswd2bl, darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "bootleg (Razoola)", "Crossed Swords 2 (bootleg of CD version) (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 1991, crsworddd,   crsword,  darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "Alpha Denshi Co.", "Crossed Swords (ALM-002 ~ ALH-002) (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 2003, ct2k3sadd,   kof2001,  darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "bootleg (Phenixsoft)", "Crouching Tiger Hidden Dragon 2003 Super Plus alternate (The King of Fighters 2001 bootleg) (Darksoft)", MACHINE_SUPPORTS_SAVE ) /* Hack / Bootleg of kof2001 */
-//GAME( 2003, ct2k3spdd,   kof2001,  ct2k3spdd,  neogeo,   mvs_led_state,   empty_init, ROT0, "bootleg (Phenixsoft)", "Crouching Tiger Hidden Dragon 2003 Super Plus (The King of Fighters 2001 bootleg) (Darksoft)", MACHINE_SUPPORTS_SAVE ) /* Protected Hack / Bootleg of kof2001 */
-//GAME( 2003, cthd2003dd,  kof2001,  ct2k3spdd,  neogeo,   mvs_led_state,   empty_init, ROT0, "bootleg (Phenixsoft)", "Crouching Tiger Hidden Dragon 2003 (The King of Fighters 2001 bootleg, set 1) (Darksoft)", MACHINE_SUPPORTS_SAVE ) /* Protected Hack / Bootleg of kof2001 */
+GAME( 2003, ct2k3spdd,   kof2001,  ct2k3spdd,  neogeo,   mvs_led_state,   empty_init, ROT0, "bootleg (Phenixsoft)", "Crouching Tiger Hidden Dragon 2003 Super Plus (The King of Fighters 2001 bootleg) (Darksoft)", MACHINE_SUPPORTS_SAVE ) /* Protected Hack / Bootleg of kof2001 */
+GAME( 2003, cthd2003dd,  kof2001,  ct2k3spdd,  neogeo,   mvs_led_state,   empty_init, ROT0, "bootleg (Phenixsoft)", "Crouching Tiger Hidden Dragon 2003 (The King of Fighters 2001 bootleg, set 1) (Darksoft)", MACHINE_SUPPORTS_SAVE ) /* Protected Hack / Bootleg of kof2001 */
 GAME( 1999, ctomadaydd,  ctomaday, darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "Visco", "Captain Tomaday (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 1990, cyberlipdd,  cyberlip, darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "SNK", "Cyber-Lip (NGM-010) (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 2000, diggermadd,  diggerma, darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "Kyle Hodgetts", "Digger Man (prototype) (Darksoft)", MACHINE_SUPPORTS_SAVE )
@@ -24315,8 +24405,8 @@ GAME( 2001, kof2001dd,   kof2001,  darksoft,   neogeo,   mvs_led_state,   empty_
 GAME( 2001, kof2001hdd,  kof2001,  darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "Eolith / SNK", "The King of Fighters 2001 (NGH-2621) (Darksoft)", MACHINE_SUPPORTS_SAVE ) /* Encrypted GFX */
 GAME( 2002, kof2002dd,   kof2002,  darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "Eolith / Playmore", "The King of Fighters 2002 (NGM-2650 ~ NGH-2650) (Darksoft)", MACHINE_SUPPORTS_SAVE ) /* Encrypted GFX */
 GAME( 2002, kof2002bdd,  kof2002,  kof2002dd,  neogeo,   mvs_led_state,   empty_init, ROT0, "bootleg", "The King of Fighters 2002 (bootleg) (Darksoft)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2003, kof2003dd,   kof2003,  kof2003dd,  neogeo,   mvs_led_state,   empty_init, ROT0, "SNK Playmore", "The King of Fighters 2003 (NGM-2710) (Darksoft)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2003, kof2003hdd,  kof2003,  kof2003dd,  neogeo,   mvs_led_state,   empty_init, ROT0, "SNK Playmore", "The King of Fighters 2003 (NGH-2710) (Darksoft)", MACHINE_SUPPORTS_SAVE )
+GAME( 2003, kof2003dd,   kof2003,  kof2003dd,  neogeo,   mvs_led_state,   empty_init, ROT0, "SNK Playmore", "The King of Fighters 2003 (NGM-2710) (Darksoft)", MACHINE_SUPPORTS_SAVE )
+GAME( 2003, kof2003hdd,  kof2003,  kof2003dd,  neogeo,   mvs_led_state,   empty_init, ROT0, "SNK Playmore", "The King of Fighters 2003 (NGH-2710) (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 2002, kof10thdd,   kof2002,  darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "bootleg", "The King of Fighters 10th Anniversary (The King of Fighters 2002 bootleg) (Darksoft)", MACHINE_SUPPORTS_SAVE ) // fake SNK copyright
 GAME( 2005, kf10thepdd,  kof2002,  darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "bootleg", "The King of Fighters 10th Anniversary Extra Plus (The King of Fighters 2002 bootleg) (Darksoft)", MACHINE_SUPPORTS_SAVE ) // fake SNK copyright
 GAME( 2004, kf2k5unidd,  kof2002,  darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "bootleg", "The King of Fighters 10th Anniversary 2005 Unique (The King of Fighters 2002 bootleg) (Darksoft)", MACHINE_SUPPORTS_SAVE ) // fake SNK copyright
@@ -24363,21 +24453,21 @@ GAME( 1990, maglorddd,   maglord,  darksoft,   neogeo,   mvs_led_state,   empty_
 GAME( 1990, maglordhdd,  maglord,  darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "Alpha Denshi Co.", "Magician Lord (NGH-005) (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 1990, mahretsudd,  mahretsu, darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "SNK", "Mahjong Kyo Retsuden (NGM-004 ~ NGH-004) (Darksoft)", MACHINE_SUPPORTS_SAVE ) // does not support mahjong panel in MVS mode
 GAME( 1995, marukodqdd,  marukodq, darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "Takara", "Chibi Marukochan Deluxe Quiz (Darksoft)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2003, matrimdd,    matrim,   matrimdd,   neogeo,   mvs_led_state,   empty_init, ROT0, "Noise Factory / Atlus", "Matrimelee / Shin Gouketsuji Ichizoku Toukon (NGM-2660 ~ NGH-2660) (Darksoft)", MACHINE_SUPPORTS_SAVE )
+GAME( 2003, matrimdd,    matrim,   matrimdd,   neogeo,   mvs_led_state,   empty_init, ROT0, "Noise Factory / Atlus", "Matrimelee / Shin Gouketsuji Ichizoku Toukon (NGM-2660 ~ NGH-2660) (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 1997, miexchngdd,  miexchng, darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "Face", "Money Puzzle Exchanger / Money Idol Exchanger (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 2002, ms4plusdd,   mslug4,   darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "Bootleg", "Metal Slug 4 Plus (Bootleg) (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 2003, ms5plusdd,   mslug5,   darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "Bootleg", "Metal Slug 5 Plus (Bootleg) (Darksoft)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2003, ms5pcbdd,    mslug5,   mslug5dd,   neogeo,   mvs_led_state,   empty_init, ROT0, "SNK Playmore", "Metal Slug 5 (JAMMA PCB) (Darksoft)", MACHINE_SUPPORTS_SAVE )
+GAME( 2003, ms5pcbdd,    mslug5,   mslug5dd,   neogeo,   mvs_led_state,   empty_init, ROT0, "SNK Playmore", "Metal Slug 5 (JAMMA PCB) (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 1996, mslugdd,     mslug,    darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "Nazca", "Metal Slug (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 1998, mslug2dd,    mslug2,   darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "SNK", "Metal Slug 2 (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 1998, mslug2tdd,   mslug2,   darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "SNK", "Metal Slug 2 Turbo (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 2000, mslug3dd,    mslug3,   mslug3dd,   neogeo,   mvs_led_state,   empty_init, ROT0, "SNK", "Metal Slug 3 (NGM-2560) (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 2000, mslug3hdd,   mslug3,   mslug3dd,   neogeo,   mvs_led_state,   empty_init, ROT0, "SNK", "Metal Slug 3 (NGH-2560) (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 2000, mslug3b6dd,  mslug3,   darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "SNK", "Metal Slug 6 (Metal Slug 3 Bootleg) (Darksoft)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2002, mslug4dd,    mslug4,   mslug4dd,   neogeo,   mvs_led_state,   empty_init, ROT0, "Mega / Noise Factory / Playmore", "Metal Slug 4 (NGM-2630) (Darksoft)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2002, mslug4hdd,   mslug4,   mslug4dd,   neogeo,   mvs_led_state,   empty_init, ROT0, "Mega / Noise Factory / Playmore", "Metal Slug 4 (NGH-2630) (Darksoft)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2003, mslug5dd,    mslug5,   mslug5dd,   neogeo,   mvs_led_state,   empty_init, ROT0, "SNK Playmore", "Metal Slug 5 (NGM-2680) (Darksoft)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2003, mslug5hdd,   mslug5,   mslug5dd,   neogeo,   mvs_led_state,   empty_init, ROT0, "SNK Playmore", "Metal Slug 5 (NGH-2680) (Darksoft)", MACHINE_SUPPORTS_SAVE )
+GAME( 2002, mslug4dd,    mslug4,   darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "Mega / Noise Factory / Playmore", "Metal Slug 4 (NGM-2630) (Darksoft)", MACHINE_SUPPORTS_SAVE )
+GAME( 2002, mslug4hdd,   mslug4,   darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "Mega / Noise Factory / Playmore", "Metal Slug 4 (NGH-2630) (Darksoft)", MACHINE_SUPPORTS_SAVE )
+GAME( 2003, mslug5dd,    mslug5,   mslug5dd,   neogeo,   mvs_led_state,   empty_init, ROT0, "SNK Playmore", "Metal Slug 5 (NGM-2680) (Darksoft)", MACHINE_SUPPORTS_SAVE )
+GAME( 2003, mslug5hdd,   mslug5,   mslug5dd,   neogeo,   mvs_led_state,   empty_init, ROT0, "SNK Playmore", "Metal Slug 5 (NGH-2680) (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 1999, mslugxdd,    mslugx,   darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "SNK", "Metal Slug X (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 1990, minasandd,   minasan,  mahjongdd,  neogeo_mj,mvs_led_state,   empty_init, ROT0, "Monolith Corp.", "Minasan no Okagesamadesu! Dai Sugoroku Taikai (MOM-001 ~ MOH-001) (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 1995, moshougidd,  moshougi, darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "ADK / SNK", "Shougi no Tatsujin - Master of Shougi (Darksoft)", MACHINE_SUPPORTS_SAVE )
@@ -24467,13 +24557,13 @@ GAME( 1995, stakwindd,   stakwin,  darksoft,   neogeo,   mvs_led_state,   empty_
 GAME( 1996, stakwin2dd,  stakwin2, darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "Saurus", "Stakes Winner 2 (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 1994, strhoopdd,   strhoop,  darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "Data East Corporation", "Street Hoop / Street Slam / Dunk Dream (DEM-004 ~ DEH-004) (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 1990, superspydd,  superspy, darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "SNK", "The Super Spy (NGM-011 ~ NGH-011) (Darksoft)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2003, svcdd,       svc,      svcdd,      neogeo,   mvs_led_state,   empty_init, ROT0, "Playmore / Capcom", "SNK vs. Capcom - SVC Chaos (NGM-2690 ~ NGH-2690) (Darksoft)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2003, svcbootdd,   svc,      svcdd,      neogeo,   mvs_led_state,   empty_init, ROT0, "bootleg", "SNK vs. Capcom - SVC Chaos (bootleg) (Darksoft)", MACHINE_SUPPORTS_SAVE )
+GAME( 2003, svcdd,       svc,      svcdd,      neogeo,   mvs_led_state,   empty_init, ROT0, "Playmore / Capcom", "SNK vs. Capcom - SVC Chaos (NGM-2690 ~ NGH-2690) (Darksoft)", MACHINE_SUPPORTS_SAVE )
+GAME( 2003, svcbootdd,   svc,      svcdd,      neogeo,   mvs_led_state,   empty_init, ROT0, "bootleg", "SNK vs. Capcom - SVC Chaos (bootleg) (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 2003, svcplusdd,   svc,      darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "bootleg", "SNK vs. Capcom - SVC Chaos Plus (bootleg, set 1) (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 2003, svcplusadd,  svc,      darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "bootleg", "SNK vs. Capcom - SVC Chaos Plus (bootleg, set 2) (Darksoft)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2003, svcsplusdd,  svc,      svcdd,      neogeo,   mvs_led_state,   empty_init, ROT0, "bootleg", "SNK vs. Capcom - SVC Chaos Super Plus (bootleg) (Darksoft)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2003, svcpcbdd,    svc,      svcdd,      neogeo,   mvs_led_state,   empty_init, ROT0, "bootleg", "SNK vs. Capcom - SVC Chaos (JAMMA PCB, set 1) (Darksoft)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2003, svcpcbadd,   svc,      svcdd,      neogeo,   mvs_led_state,   empty_init, ROT0, "bootleg", "SNK vs. Capcom - SVC Chaos (JAMMA PCB, set 2) (Darksoft)", MACHINE_SUPPORTS_SAVE )
+GAME( 2003, svcsplusdd,  svc,      svcdd,      neogeo,   mvs_led_state,   empty_init, ROT0, "bootleg", "SNK vs. Capcom - SVC Chaos Super Plus (bootleg) (Darksoft)", MACHINE_SUPPORTS_SAVE )
+GAME( 2003, svcpcbdd,    svc,      svcdd,      neogeo,   mvs_led_state,   empty_init, ROT0, "bootleg", "SNK vs. Capcom - SVC Chaos (JAMMA PCB, set 1) (Darksoft)", MACHINE_SUPPORTS_SAVE )
+GAME( 2003, svcpcbadd,   svc,      svcdd,      neogeo,   mvs_led_state,   empty_init, ROT0, "bootleg", "SNK vs. Capcom - SVC Chaos (JAMMA PCB, set 2) (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 1994, tophuntrdd,  tophuntr, darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "SNK", "Top Hunter - Roddy & Cathy (NGM-046) (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 1994, tophuntrhdd, tophuntr, darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "SNK", "Top Hunter - Roddy & Cathy (NGH-046) (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 1990, tpgolfdd,    tpgolf,   darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "SNK", "Top Player's Golf (NGM-003 ~ NGH-003) (Darksoft)", MACHINE_SUPPORTS_SAVE )
@@ -24482,11 +24572,11 @@ GAME( 1996, turfmastdd,  turfmast, darksoft,   neogeo,   mvs_led_state,   empty_
 GAME( 1996, twinspridd,  twinspri, darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "ADK / SNK",        "Twinkle Star Sprites (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 1996, twsoc96dd,   twsoc96,  darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "Tecmo", "Tecmo World Soccer '96 (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 1992, viewpoindd,  viewpoin, darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "Sammy / Aicom", "Viewpoint (Darksoft)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2001, vlinerdd,    vliner,   vlinerdd,   vliner,   mvs_led_state,   empty_init, ROT0, "Dyna / BrezzaSoft", "V-Liner (v0.7a) (Darksoft)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2001, vliner7edd,  vliner,   vlinerdd,   vliner,   mvs_led_state,   empty_init, ROT0, "Dyna / BrezzaSoft", "V-Liner (v0.7e) (Darksoft)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2001, vliner6edd,  vliner,   vlinerdd,   vliner,   mvs_led_state,   empty_init, ROT0, "Dyna / BrezzaSoft", "V-Liner (v0.6e) (Darksoft)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2001, vliner54dd,  vliner,   vlinerdd,   vliner,   mvs_led_state,   empty_init, ROT0, "Dyna / BrezzaSoft", "V-Liner (v0.54) (Darksoft)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2001, vliner53dd,  vliner,   vlinerdd,   vliner,   mvs_led_state,   empty_init, ROT0, "Dyna / BrezzaSoft", "V-Liner (v0.53) (Darksoft)", MACHINE_SUPPORTS_SAVE )
+GAME( 2001, vlinerdd,    vliner,   vlinerdd,   vliner,   mvs_led_state,   empty_init, ROT0, "Dyna / BrezzaSoft", "V-Liner (v0.7a) (Darksoft)", MACHINE_SUPPORTS_SAVE )
+GAME( 2001, vliner7edd,  vliner,   vlinerdd,   vliner,   mvs_led_state,   empty_init, ROT0, "Dyna / BrezzaSoft", "V-Liner (v0.7e) (Darksoft)", MACHINE_SUPPORTS_SAVE )
+GAME( 2001, vliner6edd,  vliner,   vlinerdd,   vliner,   mvs_led_state,   empty_init, ROT0, "Dyna / BrezzaSoft", "V-Liner (v0.6e) (Darksoft)", MACHINE_SUPPORTS_SAVE )
+GAME( 2001, vliner54dd,  vliner,   vlinerdd,   vliner,   mvs_led_state,   empty_init, ROT0, "Dyna / BrezzaSoft", "V-Liner (v0.54) (Darksoft)", MACHINE_SUPPORTS_SAVE )
+GAME( 2001, vliner53dd,  vliner,   vlinerdd,   vliner,   mvs_led_state,   empty_init, ROT0, "Dyna / BrezzaSoft", "V-Liner (v0.53) (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 1996, wakuwak7dd,  wakuwak7, darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "Sunsoft", "Waku Waku 7 (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 1992, wh1dd,       wh1,      darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "Alpha Denshi Co.", "World Heroes (ALM-005) (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 1992, wh1hdd,      wh1,      darksoft,   neogeo,   mvs_led_state,   empty_init, ROT0, "Alpha Denshi Co.", "World Heroes (ALH-005) (Darksoft)", MACHINE_SUPPORTS_SAVE )

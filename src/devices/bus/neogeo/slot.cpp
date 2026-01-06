@@ -244,12 +244,21 @@ static const neogeo_slot slot_list[] =
 	{ NEOGEO_KOF2KDD, "sma_kof2kdd" },
 	{ NEOGEO_MSLUG3DD, "sma_mslug3dd" },
 
+// ===============================> NEOGEO_DARKSOFT_CTHD2K3_CART_DEVICE
+	{ NEOGEO_CT2K3SPDD, "darksoft_ct2k3spdd" },
+
 // ===============================> NEOGEO_DARKSOFT_DECRYPT_CART_DEVICE
 	{ NEOGEO_DARKSOFT, "darksoft_decrypt" },
-	{ NEOGEO_CT2K3SPDD, "darksoft_ct2k3spdd" },
     { NEOGEO_JOCKEYGPDD, "darksoft_jockeygpdd" },
+    { NEOGEO_KF2K3UPLDD, "darksoft_kf2k3upldd" },
+	{ NEOGEO_KF2K3PLDD, "darksoft_kf2k3pldd" },
     { NEOGEO_KOF98DD, "darksoft_kof98dd" },
 	{ NEOGEO_KOF2K2DD, "darksoft_kof2k2dd" },
+    { NEOGEO_KOF2K3DD, "darksoft_kof2k3dd" },
+    { NEOGEO_MATRIMDD, "darksoft_matrimdd" },
+	{ NEOGEO_MSLUG5DD, "darksoft_mslug5dd" },
+	{ NEOGEO_SVCDD, "darksoft_svcdd" },
+	{ NEOGEO_VLINERDD, "darksoft_vlinerdd" },
 
 /******************************************************************/
 };

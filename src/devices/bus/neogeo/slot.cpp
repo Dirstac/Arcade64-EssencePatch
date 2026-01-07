@@ -217,17 +217,24 @@ static const neogeo_slot slot_list[] =
 	{ NEOGEO_KOF2K2PD, "decrypt_kf2k2pd" },
 	{ NEOGEO_KOF2K2MPD, "decrypt_kf2k2mpd" },
 	{ NEOGEO_KOF2K2MP2D, "decrypt_kf2k2mp2d" },
-	{ NEOGEO_KOF2K3D, "decrypt_kf2k3d" },
-	{ NEOGEO_KOF2K3HD, "decrypt_kf2k3hd" },
 	{ NEOGEO_KOF2K4PLS, "decrypt_kof2k4pls" },
 	{ NEOGEO_KOGD, "decrypt_kogd" },
 	{ NEOGEO_MATRIMD, "decrypt_matrimd" },
 	{ NEOGEO_MSLUG4E, "decrypt_mslug4e" },
-	{ NEOGEO_MSLUG5D, "decrypt_mslug5d" },
-	{ NEOGEO_MSLUG5E, "decrypt_mslug5e" },
 	{ NEOGEO_SAMSHO5D, "decrypt_samsh5d" },
 	{ NEOGEO_SAMSHO5SD, "decrypt_sams5sd" },
-	{ NEOGEO_SVCD, "decrypt_svcd" },
+
+// ===============================> NEOGEO_DECRYPT_PVC_CART_DEVICE
+	{ NEOGEO_MSLUG5D, "pvcd_mslug5d" },
+	{ NEOGEO_MSLUG5E, "pvcd_mslug5e" },
+	{ NEOGEO_KOF2K3D, "pvcd_kf2k3d" },
+	{ NEOGEO_KOF2K3HD, "pvcd_kf2k3hd" },
+	{ NEOGEO_SVCD, "pvcd_svcd" },
+
+// ===============================> NEOGEO_DARKSOFT_PVC_CART_DEVICE
+    { NEOGEO_KOF2K3DD, "pvcdd_kof2k3dd" },
+	{ NEOGEO_MSLUG5DD, "pvcdd_mslug5dd" },
+	{ NEOGEO_SVCDD, "pvcdd_svcdd" },
 
 // ===============================> NEOGEO_SMA_DECRYPT_CART_DEVICE
 	{ NEOGEO_GAROUD, "sma_garoud" },
@@ -254,10 +261,7 @@ static const neogeo_slot slot_list[] =
 	{ NEOGEO_KF2K3PLDD, "darksoft_kf2k3pldd" },
     { NEOGEO_KOF98DD, "darksoft_kof98dd" },
 	{ NEOGEO_KOF2K2DD, "darksoft_kof2k2dd" },
-    { NEOGEO_KOF2K3DD, "darksoft_kof2k3dd" },
     { NEOGEO_MATRIMDD, "darksoft_matrimdd" },
-	{ NEOGEO_MSLUG5DD, "darksoft_mslug5dd" },
-	{ NEOGEO_SVCDD, "darksoft_svcdd" },
 	{ NEOGEO_VLINERDD, "darksoft_vlinerdd" },
 
 /******************************************************************/

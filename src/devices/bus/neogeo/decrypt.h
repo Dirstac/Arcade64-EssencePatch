@@ -80,7 +80,6 @@ protected:
 	required_device<cmc_prot_device> m_cmc_prot;
 	required_device<pcm2_prot_device> m_pcm2_prot;
 	required_device<pvc_prot_device> m_pvc_prot;
-
 };
 
 // device type definition
@@ -380,6 +379,32 @@ public:
 DECLARE_DEVICE_TYPE(NEOGEO_DECRYPT_MATRIMD_CART, neogeo_decrypt_matrimd_cart_device)
 
 /*************************************************
+ mslug3hd
+**************************************************/
+
+class neogeo_decrypt_mslug3hd_cart_device : public neogeo_decrypt_cart_device
+{
+public:
+	neogeo_decrypt_mslug3hd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock);
+	virtual int get_fixed_bank_type() override { return 1; }
+};
+
+DECLARE_DEVICE_TYPE(NEOGEO_DECRYPT_MSLUG3HD_CART, neogeo_decrypt_mslug3hd_cart_device)
+
+/*************************************************
+ mslug4d
+**************************************************/
+
+class neogeo_decrypt_mslug4d_cart_device : public neogeo_decrypt_cart_device
+{
+public:
+	neogeo_decrypt_mslug4d_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock);
+	virtual int get_fixed_bank_type() override { return 1; }
+};
+
+DECLARE_DEVICE_TYPE(NEOGEO_DECRYPT_MSLUG4D_CART, neogeo_decrypt_mslug4d_cart_device)
+
+/*************************************************
  mslug4e
 **************************************************/
 
@@ -623,6 +648,20 @@ public:
 };
 
 DECLARE_DEVICE_TYPE(NEOGEO_DECRYPT_SMA_MSLUG3D_CART, neogeo_decrypt_sma_mslug3d_cart_device)
+
+/*************************************************
+ mslug3nd
+ **************************************************/
+
+class neogeo_decrypt_sma_mslug3nd_cart_device : public neogeo_sma_decrypt_cart_device
+{
+public:
+	neogeo_decrypt_sma_mslug3nd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock);
+	virtual int get_fixed_bank_type() override { return 1; }
+	virtual uint32_t get_bank_base(uint16_t sel) override { return m_sma_prot->mslug3_bank_base(sel); }
+};
+
+DECLARE_DEVICE_TYPE(NEOGEO_DECRYPT_SMA_MSLUG3ND_CART, neogeo_decrypt_sma_mslug3nd_cart_device)
 
 // ================================================================> NEOGEO_SMA_DARKSOFT_CART_DEVICE
 /*************************************************

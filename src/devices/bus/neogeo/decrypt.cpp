@@ -124,6 +124,7 @@ DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_SMA_KOF99D_CART,          neogeo_decrypt_sma_k
 DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_SMA_KOF2000D_CART,        neogeo_decrypt_sma_kof2000d_cart_device,    "neocart_kof2000d",        "Neo Geo KoF 2000 Decrypted SMA Cart")
 DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_SMA_KOF2000ND_CART,       neogeo_decrypt_sma_kof2000nd_cart_device,   "neocart_kof2000nd",       "Neo Geo KoF 2000 N Decrypted SMA Cart")
 DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_SMA_MSLUG3D_CART,         neogeo_decrypt_sma_mslug3d_cart_device,     "neocart_mslug3d",         "Neo Geo Metal Slug 3 Decrypted SMA Cart (green)")
+DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_SMA_MSLUG3ND_CART,        neogeo_decrypt_sma_mslug3nd_cart_device,    "neocart_mslug3nd",        "Neo Geo Metal Slug 3 ND Decrypted Cart (green)")
 
 // ================================================================> NEOGEO_SMA_DARKSOFT_CART_DEVICE
 DEFINE_DEVICE_TYPE(NEOGEO_DARKSOFT_SMA_GAROUDD_CART,        neogeo_darksoft_sma_garoudd_cart_device,    "neocart_garoudd",         "Neo Geo Garou Darksoft SMA Cart")
@@ -597,6 +598,28 @@ void neogeo_decrypt_matrimd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
 }
 
 /*************************************************
+ mslug3hd
+**************************************************/
+
+DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_MSLUG3HD_CART, neogeo_decrypt_mslug3hd_cart_device, "neocart_mslug3hd", "Neo Geo Metal Slug 3 Decrypted AES CMC42 Cart")
+
+neogeo_decrypt_mslug3hd_cart_device::neogeo_decrypt_mslug3hd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
+	neogeo_decrypt_cart_device(mconfig, NEOGEO_DECRYPT_MSLUG3HD_CART, tag, owner, clock)
+{
+}
+
+/*************************************************
+ mslug4d
+**************************************************/
+
+DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_MSLUG4D_CART, neogeo_decrypt_mslug4d_cart_device, "neocart_mslug4d", "Neo Geo Metal Slug 4 Decrypted Cart")
+
+neogeo_decrypt_mslug4d_cart_device::neogeo_decrypt_mslug4d_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
+	neogeo_decrypt_cart_device(mconfig, NEOGEO_DECRYPT_MSLUG4D_CART, tag, owner, clock)
+{
+}
+
+/*************************************************
  mslug4e
 **************************************************/
 
@@ -851,6 +874,15 @@ neogeo_decrypt_sma_mslug3d_cart_device::neogeo_decrypt_sma_mslug3d_cart_device(c
 void neogeo_decrypt_sma_mslug3d_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
 {
 	m_sma_prot->mslug3_decrypt_68k(cpuregion);
+}
+
+/*************************************************
+ mslug3nd
+ **************************************************/
+
+neogeo_decrypt_sma_mslug3nd_cart_device::neogeo_decrypt_sma_mslug3nd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
+	neogeo_sma_decrypt_cart_device(mconfig, NEOGEO_DECRYPT_SMA_MSLUG3ND_CART, tag, owner, clock)
+{
 }
 
 // ================================================================> NEOGEO_SMA_DARKSOFT_CART_DEVICE

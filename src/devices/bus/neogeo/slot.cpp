@@ -220,7 +220,9 @@ static const neogeo_slot slot_list[] =
 	{ NEOGEO_KOF2K4PLS, "boot_kof2k4pls" },
 	{ NEOGEO_KOGD, "boot_kogd" },
 	{ NEOGEO_MATRIMD, "decrypt_matrimd" },
-	{ NEOGEO_MSLUG4E, "decrypt_mslug4e" },
+	{ NEOGEO_MSLUG3HD, "cmc42_mslug3hd" },
+	{ NEOGEO_MSLUG4D, "pcm2_mslug4d" },
+	{ NEOGEO_MSLUG4E, "pcm2_mslug4e" },
 	{ NEOGEO_SAMSHO5D, "decrypt_samsh5d" },
 	{ NEOGEO_SAMSHO5SD, "decrypt_sams5sd" },
 
@@ -243,6 +245,7 @@ static const neogeo_slot slot_list[] =
 	{ NEOGEO_KOF2KD, "sma_kof2kd" },
 	{ NEOGEO_KOF2KND, "sma_kof2knd" },
 	{ NEOGEO_MSLUG3D, "sma_mslug3d" },
+	{ NEOGEO_MSLUG3ND, "sma_mslug3nd" },
 
 // ===============================> NEOGEO_SMA_DARKSOFT_CART_DEVICE
 	{ NEOGEO_GAROUDD, "sma_garoudd" },

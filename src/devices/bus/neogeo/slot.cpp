@@ -275,6 +275,7 @@ static const neogeo_slot slot_list[] =
     { NEOGEO_KOF98DD, "darksoft_kof98dd" },
 	{ NEOGEO_KOF2K2DD, "darksoft_kof2k2dd" },
     { NEOGEO_MATRIMDD, "darksoft_matrimdd" },
+    { NEOGEO_MSLUG4DD, "darksoft_mslug4dd" },
 	{ NEOGEO_VLINERDD, "darksoft_vlinerdd" },
 
 /******************************************************************/

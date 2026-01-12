@@ -1223,6 +1223,23 @@ void neogeo_darksoft_matrimdd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
 }
 
 /*************************************************
+ mslug4dd
+**************************************************/
+
+DEFINE_DEVICE_TYPE(NEOGEO_DARKSOFT_MSLUG4DD_CART, neogeo_darksoft_mslug4dd_cart_device, "neocart_mslug4dd", "Neo Geo Metal Slug 4 Darksoft Cart")
+
+neogeo_darksoft_mslug4dd_cart_device::neogeo_darksoft_mslug4dd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
+	neogeo_decrypt_cart_device(mconfig, NEOGEO_DARKSOFT_MSLUG4DD_CART, tag, owner, clock)
+{
+}
+
+void neogeo_darksoft_mslug4dd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
+{
+
+    m_prot->darksoft_cx_decrypt(spr_region, spr_region_size);
+}
+
+/*************************************************
  V-Linerdd : this is plain NeoGeo cart + RAM
  **************************************************/
 

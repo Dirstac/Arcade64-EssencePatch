@@ -189,6 +189,7 @@ void neogeo_cart(device_slot_interface &device)
     device.option_add_internal("darksoft_kof98dd",    NEOGEO_DARKSOFT_KOF98DD_CART);
 	device.option_add_internal("darksoft_kof2k2dd",   NEOGEO_DARKSOFT_KOF2002DD_CART);
     device.option_add_internal("darksoft_matrimdd",   NEOGEO_DARKSOFT_MATRIMDD_CART);
+	device.option_add_internal("darksoft_mslug4dd",   NEOGEO_DARKSOFT_MSLUG4DD_CART);
     device.option_add_internal("darksoft_vlinerdd",   NEOGEO_DARKSOFT_VLINERDD_CART);
 
 /******************************************************************************************/

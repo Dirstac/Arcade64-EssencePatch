@@ -763,6 +763,7 @@ public:
 	void kof2002dd(machine_config &config);
 	void mahjongdd(machine_config &config);
     void matrimdd(machine_config &config);
+	void mslug4dd(machine_config &config);
 	void vlinerdd(machine_config &config);
 
 /************************************************************************/
@@ -1774,9 +1775,6 @@ void ngarcade_base_state::machine_start()
 	else if (m_edge)
 		main_program_space.install_read_handler(0x340000, 0x340001, 0, 0x01fffe, 0, read16smo_delegate(*this, FUNC(ngarcade_base_state::in1_edge_r)));
 
-//	    main_program_space.install_read_port(0x300000, 0x300001, 0x01ff7e, "DSW"); // 修改的 (Remikare)
-//		main_program_space.install_read_port(0x340000, 0x340001, 0x01fffe, "P2"); // 修改的 (Remikare)
-
 	if (m_memcard)
 	{
 		main_program_space.unmap_readwrite(0x800000, 0xbfffff);
@@ -2029,54 +2027,6 @@ INPUT_PORTS_START( neogeo )
 	PORT_DIPNAME( 0x80, 0x80, "Freeze" ) PORT_DIPLOCATION("SW:8")
 	PORT_DIPSETTING(    0x80, DEF_STR( Off ) )
 	PORT_DIPSETTING(    0x00, DEF_STR( On ) )
-
-#ifdef USE_FIX_BUTTON
-// 修改的 (Remikare) / (EKMAME) 
-/****************************************************************************************************************************************************************************************************************/
-	PORT_BIT( 0x0100, IP_ACTIVE_LOW, IPT_JOYSTICK_UP )
-	PORT_BIT( 0x0200, IP_ACTIVE_LOW, IPT_JOYSTICK_DOWN )
-	PORT_BIT( 0x0400, IP_ACTIVE_LOW, IPT_JOYSTICK_LEFT )
-	PORT_BIT( 0x0800, IP_ACTIVE_LOW, IPT_JOYSTICK_RIGHT )
-	PORT_BIT( 0x1000, IP_ACTIVE_LOW, IPT_BUTTON1 ) PORT_CONDITION("DSW", 0xF000, NOTEQUALS, 0x1000)
-	PORT_BIT( 0x2000, IP_ACTIVE_LOW, IPT_BUTTON2 ) PORT_CONDITION("DSW", 0xF000, NOTEQUALS, 0x2000)
-	PORT_BIT( 0x4000, IP_ACTIVE_LOW, IPT_BUTTON3 ) PORT_CONDITION("DSW", 0xF000, NOTEQUALS, 0x4000)
-	PORT_BIT( 0x8000, IP_ACTIVE_LOW, IPT_BUTTON4 ) PORT_CONDITION("DSW", 0xF000, NOTEQUALS, 0x8000)
-	PORT_BIT( 0x3000, IP_ACTIVE_LOW, IPT_BUTTON_AB ) PORT_NAME("P1 Button Combokey (Button 1 + Button 2)") PORT_CONDITION("DSW", 0xF000, NOTEQUALS, 0x3000)	
-	PORT_BIT( 0x5000, IP_ACTIVE_LOW, IPT_BUTTON_AC ) PORT_NAME("P1 Button Combokey (Button 1 + Button 3)") PORT_CONDITION("DSW", 0xF000, NOTEQUALS, 0x5000)
-	PORT_BIT( 0x9000, IP_ACTIVE_LOW, IPT_BUTTON_AD ) PORT_NAME("P1 Button Combokey (Button 1 + Button 4)") PORT_CONDITION("DSW", 0xF000, NOTEQUALS, 0x9000)	
-	PORT_BIT( 0x2000+0x4000, IP_ACTIVE_LOW, IPT_BUTTON_BC ) PORT_NAME("P1 Button Combokey (Button 2 + Button 3)") PORT_CONDITION("DSW", 0xF000, NOTEQUALS, 0x6000)
-	PORT_BIT( 0x2000+0x8000, IP_ACTIVE_LOW, IPT_BUTTON_BD ) PORT_NAME("P1 Button Combokey (Button 2 + Button 4)") PORT_CONDITION("DSW", 0xF000, NOTEQUALS, 0xA000)
-	PORT_BIT( 0x4000+0x8000, IP_ACTIVE_LOW, IPT_BUTTON_CD ) PORT_NAME("P1 Button Combokey (Button 3 + Button 4)") PORT_CONDITION("DSW", 0xF000, NOTEQUALS, 0xC000)
-	PORT_BIT( 0x1000+0x2000+0x4000, IP_ACTIVE_LOW, IPT_BUTTON_ABC ) PORT_NAME("P1 Button Combokey (Button 1 + Button 2 + Button 3)") PORT_CONDITION("DSW", 0xF000, NOTEQUALS, 0x7000)	
-	PORT_BIT( 0x1000+0x2000+0x8000, IP_ACTIVE_LOW, IPT_BUTTON_ABD ) PORT_NAME("P1 Button Combokey (Button 1 + Button 2 + Button 4)") PORT_CONDITION("DSW", 0xF000, NOTEQUALS, 0xB000)
-	PORT_BIT( 0x1000+0x4000+0x8000, IP_ACTIVE_LOW, IPT_BUTTON_ACD ) PORT_NAME("P1 Button Combokey (Button 1 + Button 3 + Button 4)") PORT_CONDITION("DSW", 0xF000, NOTEQUALS, 0xD000)
-	PORT_BIT( 0x2000+0x4000+0x8000, IP_ACTIVE_LOW, IPT_BUTTON_BCD ) PORT_NAME("P1 Button Combokey (Button 2 + Button 3 + Button 4)") PORT_CONDITION("DSW", 0xF000, NOTEQUALS, 0xE000)
-	PORT_BIT( 0x1000+0x2000+0x4000+0x8000, IP_ACTIVE_LOW, IPT_BUTTON_ABCD ) PORT_NAME("P1 Button Combokey (Button 1 + Button 2 + Button 3 + Button 4)") PORT_CONDITION("DSW", 0xF000, EQUALS, 0xF000)
-
-	PORT_START("P2")
-	PORT_BIT( 0x00ff, IP_ACTIVE_LOW, IPT_UNUSED )
-	PORT_BIT( 0x0100, IP_ACTIVE_LOW, IPT_JOYSTICK_UP ) PORT_PLAYER(2)
-	PORT_BIT( 0x0200, IP_ACTIVE_LOW, IPT_JOYSTICK_DOWN ) PORT_PLAYER(2)
-	PORT_BIT( 0x0400, IP_ACTIVE_LOW, IPT_JOYSTICK_LEFT ) PORT_PLAYER(2)
-	PORT_BIT( 0x0800, IP_ACTIVE_LOW, IPT_JOYSTICK_RIGHT ) PORT_PLAYER(2)
-	PORT_BIT( 0x1000, IP_ACTIVE_LOW, IPT_BUTTON1 ) PORT_PLAYER(2) PORT_CONDITION("P2", 0xF000, NOTEQUALS, 0x1000)
-	PORT_BIT( 0x2000, IP_ACTIVE_LOW, IPT_BUTTON2 ) PORT_PLAYER(2) PORT_CONDITION("P2", 0xF000, NOTEQUALS, 0x2000)
-	PORT_BIT( 0x4000, IP_ACTIVE_LOW, IPT_BUTTON3 ) PORT_PLAYER(2) PORT_CONDITION("P2", 0xF000, NOTEQUALS, 0x4000)
-	PORT_BIT( 0x8000, IP_ACTIVE_LOW, IPT_BUTTON4 ) PORT_PLAYER(2) PORT_CONDITION("P2", 0xF000, NOTEQUALS, 0x8000)
-	PORT_BIT( 0x3000, IP_ACTIVE_LOW, IPT_BUTTON_AB ) PORT_PLAYER(2) PORT_NAME("P2 Button Combokey (Button 1 + Button 2)") PORT_CONDITION("P2", 0xF000, NOTEQUALS, 0x3000)
-	PORT_BIT( 0x5000, IP_ACTIVE_LOW, IPT_BUTTON_AC ) PORT_PLAYER(2) PORT_NAME("P2 Button Combokey (Button 1 + Button 3)") PORT_CONDITION("P2", 0xF000, NOTEQUALS, 0x5000)
-	PORT_BIT( 0x9000, IP_ACTIVE_LOW, IPT_BUTTON_AD ) PORT_PLAYER(2) PORT_NAME("P2 Button Combokey (Button 1 + Button 4)") PORT_CONDITION("P2", 0xF000, NOTEQUALS, 0x9000)	
-	PORT_BIT( 0x2000+0x4000, IP_ACTIVE_LOW, IPT_BUTTON_BC ) PORT_PLAYER(2) PORT_NAME("P2 Button Combokey (Button 2 + Button 3)") PORT_CONDITION("P2", 0xF000, NOTEQUALS, 0x6000)
-	PORT_BIT( 0x2000+0x8000, IP_ACTIVE_LOW, IPT_BUTTON_BD ) PORT_PLAYER(2) PORT_NAME("P2 Button Combokey (Button 2 + Button 4)") PORT_CONDITION("P2", 0xF000, NOTEQUALS, 0xA000)
-	PORT_BIT( 0x4000+0x8000, IP_ACTIVE_LOW, IPT_BUTTON_CD ) PORT_PLAYER(2) PORT_NAME("P2 Button Combokey (Button 3 + Button 4)") PORT_CONDITION("P2", 0xF000, NOTEQUALS, 0xC000)
-	PORT_BIT( 0x1000+0x2000+0x4000, IP_ACTIVE_LOW, IPT_BUTTON_ABC ) PORT_PLAYER(2) PORT_NAME("P2 Button Combokey (Button 1 + Button 2 + Button 3)") PORT_CONDITION("P2", 0xF000, NOTEQUALS, 0x7000)
-	PORT_BIT( 0x1000+0x2000+0x8000, IP_ACTIVE_LOW, IPT_BUTTON_ABD ) PORT_PLAYER(2) PORT_NAME("P2 Button Combokey (Button 1 + Button 2 + Button 4)") PORT_CONDITION("P2", 0xF000, NOTEQUALS, 0xB000)
-	PORT_BIT( 0x1000+0x4000+0x8000, IP_ACTIVE_LOW, IPT_BUTTON_ACD ) PORT_PLAYER(2) PORT_NAME("P2 Button Combokey (Button 1 + Button 3 + Button 4)") PORT_CONDITION("P2", 0xF000, NOTEQUALS, 0xD000)
-	PORT_BIT( 0x2000+0x4000+0x8000, IP_ACTIVE_LOW, IPT_BUTTON_BCD ) PORT_PLAYER(2) PORT_NAME("P2 Button Combokey (Button 2 + Button 3 + Button 4)") PORT_CONDITION("P2", 0xF000, NOTEQUALS, 0xE000)
-	PORT_BIT( 0x1000+0x2000+0x4000+0x8000, IP_ACTIVE_LOW, IPT_BUTTON_ABCD ) PORT_PLAYER(2) PORT_NAME("P2 Button Combokey (Button 1 + Button 2 + Button 3 + Button 4)") PORT_CONDITION("P2", 0xF000, EQUALS, 0xF000)
-
-/****************************************************************************************************************************************************************************************************************/
-#endif /* USE_FIX_BUTTON */
 
 	PORT_START("SYSTEM")
 	PORT_BIT( 0x00ff, IP_ACTIVE_LOW, IPT_UNUSED )
@@ -3678,6 +3628,13 @@ void mvs_led_state::matrimdd(machine_config &config)
 {
 	mv1_fixed(config);
 	cartslot_fixed(config, "darksoft_matrimdd");
+}
+
+void mvs_led_state::mslug4dd(machine_config &config)
+{
+	mv1_fixed(config);
+	cartslot_fixed(config, "darksoft_mslug4dd");
+	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
 }
 
 void mvs_led_state::vlinerdd(machine_config &config)
@@ -15203,10 +15160,10 @@ ROM_START( mslug2dd )
 
 	NEO_BIOS_AUDIO_128K( "m1rom", CRC(94520ebd) SHA1(f8a1551cebcb91e416f30f50581feed7f72899e9) )
 
-	ROM_REGION( 0x800000, "cslot1:ymsnd:adpcma", 0 ) \
+	ROM_REGION( 0x800000, "cslot1:ymsnd:adpcma", 0 )
 	ROM_LOAD( "vroma0", 0x000000, 0x800000, CRC(d19e4594) SHA1(dd60bf9ec16af8718d698effb1eb48cb928fe267) )
 
-	ROM_REGION( 0x2000000, "cslot1:sprites", 0 ) \
+	ROM_REGION( 0x2000000, "cslot1:sprites", 0 )
 	ROM_LOAD( "crom0", 0x0000000, 0x2000000, CRC(fc9260fe) SHA1(9bb1da87524326dd9fdfa73f202f09411f65f6c5) )
 ROM_END
 
@@ -15218,10 +15175,10 @@ ROM_START( mslug2tdd )
 
 	NEO_BIOS_AUDIO_128K( "m1rom", CRC(94520ebd) SHA1(f8a1551cebcb91e416f30f50581feed7f72899e9) )
 
-	ROM_REGION( 0x800000, "cslot1:ymsnd:adpcma", 0 ) \
+	ROM_REGION( 0x800000, "cslot1:ymsnd:adpcma", 0 )
 	ROM_LOAD( "vroma0", 0x000000, 0x800000, CRC(d19e4594) SHA1(dd60bf9ec16af8718d698effb1eb48cb928fe267) )
 
-	ROM_REGION( 0x2000000, "cslot1:sprites", 0 ) \
+	ROM_REGION( 0x2000000, "cslot1:sprites", 0 )
 	ROM_LOAD( "crom0", 0x0000000, 0x2000000, CRC(fc9260fe) SHA1(9bb1da87524326dd9fdfa73f202f09411f65f6c5) )
 ROM_END
 
@@ -15274,9 +15231,7 @@ ROM_START( mslug4dd )
 	ROM_REGION( 0x500000, "cslot1:maincpu", ROMREGION_BE|ROMREGION_16BIT )
 	ROM_LOAD16_WORD_SWAP( "prom", 0x000000, 0x500000, CRC(c6dbdff1) SHA1(35f72712147cfa5bcfc39c3f5d8cb570757daa6b) )
 
-//	NEO_SFIX_512K( "srom", CRC(1eaa05e0) SHA1(73a7e158c3c4fa602e17dcb517190fd91a9dbab8) )
-      
-	NEO_SFIX_128K( "srom", CRC(a9446774) SHA1(c5a309fd8ee6d6750a15c82e710218a3755e38b2) )
+	NEO_SFIX_512K( "srom", CRC(1eaa05e0) SHA1(73a7e158c3c4fa602e17dcb517190fd91a9dbab8) )
 
 	NEO_BIOS_AUDIO_128K( "m1rom", CRC(ef5db532) SHA1(4aeba9e206b8f309610eb7e1891644f39aa61830) )
 
@@ -15291,9 +15246,7 @@ ROM_START( mslug4hdd )
 	ROM_REGION( 0x500000, "cslot1:maincpu", ROMREGION_BE|ROMREGION_16BIT )
 	ROM_LOAD16_WORD_SWAP( "promh", 0x000000, 0x500000, CRC(9dd8a0bd) SHA1(2330bca1d871ab4bd14e42c78f6cd2984eba63fa) )
 
-//	NEO_SFIX_512K( "srom", CRC(1eaa05e0) SHA1(73a7e158c3c4fa602e17dcb517190fd91a9dbab8) )
-      
-	NEO_SFIX_128K( "srom", CRC(a9446774) SHA1(c5a309fd8ee6d6750a15c82e710218a3755e38b2) )
+    NEO_SFIX_512K( "srom", CRC(1eaa05e0) SHA1(73a7e158c3c4fa602e17dcb517190fd91a9dbab8) )
 
 	NEO_BIOS_AUDIO_128K( "m1rom", CRC(ef5db532) SHA1(4aeba9e206b8f309610eb7e1891644f39aa61830) )
 
@@ -30327,8 +30280,8 @@ GAME( 1998, mslug2tdd,   mslug2,   darksoft,   neogeo,   mvs_led_state,  empty_i
 GAME( 2000, mslug3dd,    mslug3,   mslug3dd,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Metal Slug 3 (NGM-2560) (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 2000, mslug3hdd,   mslug3,   mslug3dd,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Metal Slug 3 (NGH-2560) (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 2000, mslug3b6dd,  mslug3,   darksoft,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Metal Slug 6 (bootleg of Metal Slug 3) (Darksoft)", MACHINE_SUPPORTS_SAVE )
-GAME( 2002, mslug4dd,    mslug4,   darksoft,   neogeo,   mvs_led_state,  empty_init, ROT0, "Mega / Noise Factory / Playmore", "Metal Slug 4 (NGM-2630) (Darksoft)", MACHINE_SUPPORTS_SAVE )
-GAME( 2002, mslug4hdd,   mslug4,   darksoft,   neogeo,   mvs_led_state,  empty_init, ROT0, "Mega / Noise Factory / Playmore", "Metal Slug 4 (NGH-2630) (Darksoft)", MACHINE_SUPPORTS_SAVE )
+GAME( 2002, mslug4dd,    mslug4,   mslug4dd,   neogeo,   mvs_led_state,  empty_init, ROT0, "Mega / Noise Factory / Playmore", "Metal Slug 4 (NGM-2630) (Darksoft)", MACHINE_SUPPORTS_SAVE )
+GAME( 2002, mslug4hdd,   mslug4,   mslug4dd,   neogeo,   mvs_led_state,  empty_init, ROT0, "Mega / Noise Factory / Playmore", "Metal Slug 4 (NGH-2630) (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 2003, mslug5dd,    mslug5,   mslug5dd,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK Playmore", "Metal Slug 5 (NGM-2680) (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 2003, mslug5hdd,   mslug5,   mslug5dd,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK Playmore", "Metal Slug 5 (NGH-2680) (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 1999, mslugxdd,    mslugx,   darksoft,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Metal Slug X - Super Vehicle-001 (Darksoft)", MACHINE_SUPPORTS_SAVE )

@@ -697,14 +697,16 @@ public:
 	void kf2k2plsd(machine_config &config);
 	void kf2k2mpd(machine_config &config);
 	void kf2k2mp2d(machine_config &config);
+	void kf2k3upld(machine_config &config);
+	void kf2k3pld(machine_config &config);
 	void kof2k4pls(machine_config &config);
 	void kof96ep(machine_config &config);
 	void kof97pla(machine_config &config);
 	void kof2002d(machine_config &config);
 	void kogd(machine_config &config);
 	void matrimd(machine_config &config);
+	void matrimnd(machine_config &config);
 	void mslug3hd(machine_config &config);
-	void mslug3nd(machine_config &config);
 	void mslug4d(machine_config &config);
 	void mslug4e(machine_config &config);
 	void samsho5d(machine_config &config);
@@ -715,8 +717,10 @@ public:
 	void mslug5d(machine_config &config);
     void mslug5e(machine_config &config);
 	void kof2003d(machine_config &config);
+	void kof2003nd(machine_config &config);
 	void kof2003hd(machine_config &config);
 	void svcd(machine_config &config);
+	void svcnd(machine_config &config);
 
 // ===============================> NEOGEO_DARKSOFT_PVC_CART_DEVICE
 	void kof2003dd(machine_config &config);
@@ -725,11 +729,15 @@ public:
 
 // ===============================> NEOGEO_SMA_DECRYPT_CART_DEVICE
 	void garoud(machine_config &config);
+	void garound(machine_config &config);
 	void garouhd(machine_config &config);
+	void garouhnd(machine_config &config);
 	void kof99d(machine_config &config);
+	void kof99nd(machine_config &config);
 	void kof2000d(machine_config &config);
 	void kof2000nd(machine_config &config);
 	void mslug3d(machine_config &config);
+	void mslug3nd(machine_config &config);
 
 // ===============================> NEOGEO_SMA_DARKSOFT_CART_DEVICE
 	void garoudd(machine_config &config);
@@ -739,6 +747,8 @@ public:
 	void mslug3dd(machine_config &config);
 
 // ===============================> NEOGEO_DARKSOFT_CTHD2K3_CART_DEVICE
+    void cthd2k3d(machine_config &config);
+    void ct2k3spd(machine_config &config);
     void ct2k3spdd(machine_config &config);
 
 // ===============================> NEOGEO_DARKSOFT_CART_DEVICE
@@ -1616,6 +1626,8 @@ void neogeo_base_state::set_slot_idx(int slot)
 
 // 修改的 (Gaston90) 
 /******************************************************************************************************************************************************/
+		case NEOGEO_CTHD2K3D:
+		case NEOGEO_CT2K3SPD:
 		case NEOGEO_CT2K3SPDD:
 			space.install_write_handler(0x2ffff0, 0x2ffff1, write16smo_delegate(*this, FUNC(neogeo_base_state::write_bankprot)));
 			break;
@@ -1626,6 +1638,7 @@ void neogeo_base_state::set_slot_idx(int slot)
 			break;
 		case NEOGEO_GAROUD:
 		case NEOGEO_GAROUDD:
+		case NEOGEO_GAROUND:
 			// addon_r here gives SMA random number
 			space.install_write_handler(0x2fffc0, 0x2fffc1, write16smo_delegate(*this, FUNC(neogeo_base_state::write_bankprot)));
 			space.install_read_handler(0x2fe446, 0x2fe447, read16m_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_r)));
@@ -1634,6 +1647,7 @@ void neogeo_base_state::set_slot_idx(int slot)
 			break;
 		case NEOGEO_GAROUHD:
 		case NEOGEO_GAROUHDD:
+		case NEOGEO_GAROUHND:
 			// addon_r here gives SMA random number
 			space.install_write_handler(0x2fffc0, 0x2fffc1, write16smo_delegate(*this, FUNC(neogeo_base_state::write_bankprot)));
 			space.install_read_handler(0x2fe446, 0x2fe447, read16m_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_r)));
@@ -1647,12 +1661,14 @@ void neogeo_base_state::set_slot_idx(int slot)
 			space.install_write_handler(0x2fffe4, 0x2fffe5, write16smo_delegate(*this, FUNC(neogeo_base_state::write_bankprot)));
 			space.install_read_handler(0x2fe446, 0x2fe447, read16m_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_r)));
 			break;
+		case NEOGEO_KF2K3UPLD:
 		case NEOGEO_KF2K3UPLDD:
 			// addon_r here gives m_overlay member from bootleg protection (possibly hack?)
 			space.install_read_handler(0x2fe000, 0x2fffff, read16m_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_r)));
 			space.install_write_handler(0x2fe000, 0x2fffff, write16s_delegate(*this, FUNC(neogeo_base_state::write_bankprot_kf2k3bl)));
 			space.install_read_handler(0x58196, 0x58197, read16sm_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::addon_r)));
 			break;
+		case NEOGEO_KF2K3PLD:
 		case NEOGEO_KF2K3PLDD:
 			space.install_read_handler(0x2fe000, 0x2fffff, read16m_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_r)));
 			space.install_write_handler(0x2fe000, 0x2fffff, write16s_delegate(*this, FUNC(neogeo_base_state::write_bankprot_kf2k3bl)));
@@ -1663,6 +1679,7 @@ void neogeo_base_state::set_slot_idx(int slot)
 			break;
 		case NEOGEO_KOF99D:
         case NEOGEO_KOF99DD:
+        case NEOGEO_KOF99ND:
 			// addon_r here gives SMA random number
 			space.install_write_handler(0x2ffff0, 0x2ffff1, write16smo_delegate(*this, FUNC(neogeo_base_state::write_bankprot)));
 			space.install_read_handler(0x2fe446, 0x2fe447, read16m_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_r)));
@@ -1671,12 +1688,6 @@ void neogeo_base_state::set_slot_idx(int slot)
 			break;
 		case NEOGEO_KOF2KD:
         case NEOGEO_KOF2KDD:
-			// addon_r here gives SMA random number
-			space.install_write_handler(0x2fffec, 0x2fffed, write16smo_delegate(*this, FUNC(neogeo_base_state::write_bankprot)));
-			space.install_read_handler(0x2fe446, 0x2fe447, read16m_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_r)));
-			space.install_read_handler(0x2fffd8, 0x2fffd9, read16sm_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::addon_r)));
-			space.install_read_handler(0x2fffda, 0x2fffdb, read16sm_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::addon_r)));
-			break;
 		case NEOGEO_KOF2KND:
 			// addon_r here gives SMA random number
 			space.install_write_handler(0x2fffec, 0x2fffed, write16smo_delegate(*this, FUNC(neogeo_base_state::write_bankprot)));
@@ -1688,12 +1699,14 @@ void neogeo_base_state::set_slot_idx(int slot)
 			space.install_read_handler(0x0ffffe, 0x0fffff, read16m_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_r)));
 			break;
 		case NEOGEO_KOF2K3D:
+		case NEOGEO_KOF2K3ND:
 		case NEOGEO_KOF2K3DD:
 		case NEOGEO_KOF2K3HD:
 		case NEOGEO_MSLUG5D:
         case NEOGEO_MSLUG5DD:
 		case NEOGEO_MSLUG5E:
 		case NEOGEO_SVCD:
+		case NEOGEO_SVCND:		
 		case NEOGEO_SVCDD:	
 			space.install_read_handler(0x2fe000, 0x2fffff, read16m_delegate(*m_slots[m_curr_slot], FUNC(neogeo_cart_slot_device::protection_r)));
 			space.install_write_handler(0x2fe000, 0x2fffff, write16s_delegate(*this, FUNC(neogeo_base_state::write_bankprot_pvc)));
@@ -3229,7 +3242,7 @@ void mvs_led_state::fr2cd(machine_config &config)
 void mvs_led_state::jckeygpd(machine_config &config)
 {
 	mv1_fixed(config);
-	cartslot_fixed(config, "decrypt_jckeygpd");
+	cartslot_fixed(config, "cmc50_jckeygpd");
 	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
 }
 
@@ -3268,6 +3281,20 @@ void mvs_led_state::kf2k2mp2d(machine_config &config)
 	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
 }
 
+void mvs_led_state::kf2k3upld(machine_config &config)
+{
+	mv1_fixed(config);
+	cartslot_fixed(config, "boot_kf2k3upld");
+	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
+}
+
+void mvs_led_state::kf2k3pld(machine_config &config)
+{
+	mv1_fixed(config);
+	cartslot_fixed(config, "boot_kf2k3pld");
+	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
+}
+
 void mvs_led_state::kof2k4pls(machine_config &config)
 {
 	mv1_fixed(config);
@@ -3292,7 +3319,7 @@ void mvs_led_state::kof97pla(machine_config &config)
 void mvs_led_state::kof2002d(machine_config &config)
 {
 	mv1_fixed(config);
-	cartslot_fixed(config, "decrypt_kof2k2d");
+	cartslot_fixed(config, "k2k2_kof2k2d");
 	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
 }
 
@@ -3305,7 +3332,13 @@ void mvs_led_state::kogd(machine_config &config)
 void mvs_led_state::matrimd(machine_config &config)
 {
 	mv1_fixed(config);
-	cartslot_fixed(config, "decrypt_matrimd");
+	cartslot_fixed(config, "k2k2_matrimd");
+}
+
+void mvs_led_state::matrimnd(machine_config &config)
+{
+	mv1_fixed(config);
+	cartslot_fixed(config, "k2k2_matrimnd");
 }
 
 void mvs_led_state::mslug3hd(machine_config &config)
@@ -3332,14 +3365,14 @@ void mvs_led_state::mslug4e(machine_config &config)
 void mvs_led_state::samsho5d(machine_config &config)
 {
 	mv1_fixed(config);
-	cartslot_fixed(config, "decrypt_samsh5d");
+	cartslot_fixed(config, "k2k2_samsh5d");
 	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
 }
 
 void mvs_led_state::samsh5spd(machine_config &config)
 {
 	mv1_fixed(config);
-	cartslot_fixed(config, "decrypt_sams5sd");
+	cartslot_fixed(config, "k2k2_sams5sd");
 	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
 }
 
@@ -3373,6 +3406,13 @@ void mvs_led_state::kof2003d(machine_config &config)
 	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
 }
 
+void mvs_led_state::kof2003nd(machine_config &config)
+{
+	mv1_fixed(config);
+	cartslot_fixed(config, "pvcd_kf2k3nd");
+	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
+}
+
 void mvs_led_state::kof2003hd(machine_config &config)
 {
 	mv1_fixed(config);
@@ -3384,6 +3424,13 @@ void mvs_led_state::svcd(machine_config &config)
 {
 	mv1_fixed(config);
 	cartslot_fixed(config, "pvcd_svcd");
+	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
+}
+
+void mvs_led_state::svcnd(machine_config &config)
+{
+	mv1_fixed(config);
+	cartslot_fixed(config, "pvcd_svcnd");
 	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
 }
 
@@ -3417,16 +3464,35 @@ void mvs_led_state::garoud(machine_config &config)
 	cartslot_fixed(config, "sma_garoud");
 }
 
+void mvs_led_state::garound(machine_config &config)
+{
+	mv1_fixed(config);
+	cartslot_fixed(config, "sma_garound");
+}
+
 void mvs_led_state::garouhd(machine_config &config)
 {
 	mv1_fixed(config);
 	cartslot_fixed(config, "sma_garouhd");
 }
 
+void mvs_led_state::garouhnd(machine_config &config)
+{
+	mv1_fixed(config);
+	cartslot_fixed(config, "sma_garouhnd");
+}
+
 void mvs_led_state::kof99d(machine_config &config)
 {
 	mv1_fixed(config);
 	cartslot_fixed(config, "sma_kof99d");
+	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
+}
+
+void mvs_led_state::kof99nd(machine_config &config)
+{
+	mv1_fixed(config);
+	cartslot_fixed(config, "sma_kof99nd");
 	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
 }
 
@@ -3493,6 +3559,20 @@ void mvs_led_state::mslug3dd(machine_config &config)
 }
 
 // =======================================================================> NEOGEO_DARKSOFT_CTHD2K3_CART_DEVICE
+
+void mvs_led_state::cthd2k3d(machine_config &config)
+{
+	mv1_fixed(config);
+	cartslot_fixed(config, "boot_cthd2k3d");
+	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
+}
+
+void mvs_led_state::ct2k3spd(machine_config &config)
+{
+	mv1_fixed(config);
+	cartslot_fixed(config, "boot_ct2k3spd");
+	m_screen->set_visarea(NEOGEO_HBEND+8, NEOGEO_HBSTART-8-1, NEOGEO_VBEND, NEOGEO_VBSTART-1);
+}
 
 void mvs_led_state::ct2k3spdd(machine_config &config)
 {
@@ -12786,7 +12866,7 @@ GAME( 2002, kf2k2mp2,   kof2002,  kf2k2mp2,  neogeo,    mvs_led_state, empty_ini
 GAME( 2002, kof10th,    kof2002,  kof10th,   neogeo,    mvs_led_state, empty_init, ROT0, "bootleg", "The King of Fighters 10th Anniversary (bootleg of The King of Fighters 2002)", MACHINE_SUPPORTS_SAVE ) // fake SNK copyright
 GAME( 2005, kf10thep,   kof2002,  kf10thep,  neogeo,    mvs_led_state, empty_init, ROT0, "bootleg", "The King of Fighters 10th Anniversary Extra Plus (bootleg of The King of Fighters 2002)", MACHINE_SUPPORTS_SAVE ) // fake SNK copyright
 GAME( 2004, kf2k5uni,   kof2002,  kf2k5uni,  neogeo,    mvs_led_state, empty_init, ROT0, "bootleg", "The King of Fighters 10th Anniversary 2005 Unique (bootleg of The King of Fighters 2002, set 2)", MACHINE_SUPPORTS_SAVE ) // fake SNK copyright
-GAME( 2004, kof2k4se,   kof2002,  kof2k4se,  neogeo,    mvs_led_state, empty_init, ROT0, "bootleg", "The King of Fighters Special Edition 2004 (bootleg of The King of Fighters 2002)", MACHINE_SUPPORTS_SAVE ) /* Hack / Bootleg of kof2002 */
+GAME( 2004, kof2k4se,   neogeo,   kof2k4se,  neogeo,    mvs_led_state, empty_init, ROT0, "bootleg", "The King of Fighters Special Edition 2004 (bootleg of The King of Fighters 2002)", MACHINE_SUPPORTS_SAVE ) /* Hack / Bootleg of kof2002 */
 GAME( 2003, mslug5,     neogeo,   mslug5,    neogeo,    mvs_led_state, empty_init, ROT0, "SNK Playmore", "Metal Slug 5 (NGM-2680)", MACHINE_SUPPORTS_SAVE )
 GAME( 2003, mslug5h,    mslug5,   mslug5,    neogeo,    mvs_led_state, empty_init, ROT0, "SNK Playmore", "Metal Slug 5 (NGH-2680)", MACHINE_SUPPORTS_SAVE ) /* Also found in later MVS carts */
 GAME( 2003, ms5plus,    mslug5,   ms5plus,   neogeo,    mvs_led_state, empty_init, ROT0, "bootleg", "Metal Slug 5 Plus (bootleg)", MACHINE_SUPPORTS_SAVE )
@@ -17378,7 +17458,7 @@ ROM_START( bakatononds )
 	ROM_IGNORE( 0x63F000 )
 
 	ROM_REGION(0x6C1000, "asis", 0)
-	ROM_LOAD("b2b.neo", 0x000000, 0x001000, CRC(4e1acd2b) SHA1(dcb2f8db549c6891a283c17eee3ab1be330f8efb) )
+	ROM_LOAD("bakatono.neo", 0x000000, 0x001000, CRC(4e1acd2b) SHA1(dcb2f8db549c6891a283c17eee3ab1be330f8efb) )
 	ROM_CONTINUE(0x000000, 0x6C0000)
 
 	NEO_SFIX_128K( "srom", CRC(f3ef4485) SHA1(c30bfceed7e669e4c97b0b3ec2e9f4271e5b6662) )
@@ -17462,7 +17542,7 @@ ROM_START( blazstarnds )
 	ROM_IGNORE( 0x283F000 )
 
 	ROM_REGION(0x2B41000, "asis", 0)
-	ROM_LOAD("bjourneyh.neo", 0x000000, 0x001000, CRC(21aa3a79) SHA1(4a7706aba7ede5acb4417d36d14c93940d61ad3a) )
+	ROM_LOAD("blazstar.neo", 0x000000, 0x001000, CRC(21aa3a79) SHA1(4a7706aba7ede5acb4417d36d14c93940d61ad3a) )
 	ROM_CONTINUE(0x000000, 0x2B40000)
 
 	NEO_SFIX_128K( "srom", CRC(d56cb498) SHA1(420ce56431dc7f3f7de84fcbc8c0a17b5eab205e) )
@@ -17525,7 +17605,7 @@ ROM_START( bstarsnds )
 	ROM_IGNORE( 0x5DF000 )
 
 	ROM_REGION(0x661000, "asis", 0)
-	ROM_LOAD("breakrev.neo", 0x000000, 0x001000, CRC(221e9fdb) SHA1(7bb409546fc6f652fbf568cd9766d115f5c1daf2) )
+	ROM_LOAD("bstars.neo", 0x000000, 0x001000, CRC(221e9fdb) SHA1(7bb409546fc6f652fbf568cd9766d115f5c1daf2) )
 	ROM_CONTINUE(0x000000, 0x660000)
 
 	NEO_SFIX_128K( "srom", CRC(1a7fd0c6) SHA1(3fc701b7afddab369ddf9dedfbc5e1aaf80b8af3) )
@@ -17731,7 +17811,7 @@ ROM_START( ct2k3sands )
 
 	NEO_SFIX_128K( "sromsa", CRC(4e1f7eae) SHA1(3302ad290804272447ccd2e8edd3ce968f043db1) )
 
-	NEO_BIOS_AUDIO_128K( "m1romsa", CRC(1a8c274b) SHA1(5f6f9c533f4a296a18c741ce59a69cf6f5c836b9) )
+	NEO_BIOS_AUDIO_128K( "m1roms", CRC(7dfce5c0) SHA1(56084223e23ad5ca60f7d819bdcd2c61c0a7d523) )
 
 	ROM_REGION( 0x1000000, "cslot1:ymsnd:adpcma", 0 )
 	ROM_COPY("asis", 0x540000, 0x00000, 0x1000000)
@@ -18537,7 +18617,7 @@ ROM_END
 
 ROM_START( jockeygpands )
 	ROM_REGION( 0x200000, "cslot1:maincpu", ROMREGION_BE|ROMREGION_16BIT )
-	ROM_LOAD16_WORD_SWAP( "jockeygpa", 0x000000, 0x001000, CRC(23102f16) SHA1(68b64475709d7e2a7501b320540622a3a22e4bf9) )
+	ROM_LOAD16_WORD_SWAP( "jockeygpa.neo", 0x000000, 0x001000, CRC(23102f16) SHA1(68b64475709d7e2a7501b320540622a3a22e4bf9) )
     ROM_CONTINUE( 0x000000, 0x101000 )
 	ROM_IGNORE( 0x129F000 )
 
@@ -18676,7 +18756,7 @@ ROM_START( kf2k2plands )
 	ROM_IGNORE( 0x503F000 )
 
 	ROM_REGION( 0x5541000, "asis", 0)
-	ROM_LOAD("kf2k2mp2.neo", 0x000000, 0x001000, CRC(9feb8a4c) SHA1(6e838a005017c73acd72981c3782deaa09d81b9b) )
+	ROM_LOAD("kf2k2pla.neo", 0x000000, 0x001000, CRC(9feb8a4c) SHA1(6e838a005017c73acd72981c3782deaa09d81b9b) )
 	ROM_CONTINUE(0x000000, 0x5540000)
 
 	NEO_SFIX_128K( "srompla", CRC(1a3ed064) SHA1(9749bb55c750e6b65d651998c2649c5fb68db68e) )
@@ -20488,7 +20568,7 @@ ROM_START( neobombends )
 	ROM_IGNORE( 0xF3F000 )
 
 	ROM_REGION( 0x1041000, "asis", 0)
-	ROM_LOAD("ncommand.neo", 0x000000, 0x001000, CRC(452609d6) SHA1(96f3e143939e779a4323818602b897288a43ed2d) )
+	ROM_LOAD("neobombe.neo", 0x000000, 0x001000, CRC(452609d6) SHA1(96f3e143939e779a4323818602b897288a43ed2d) )
 	ROM_CONTINUE(0x000000, 0x1040000)
 
 	NEO_SFIX_128K( "srom", CRC(4b3fa119) SHA1(41cb0909bfb017eb6f2c530cb92a423319ed7ab1) )
@@ -20509,7 +20589,7 @@ ROM_START( neocup98nds )
 	ROM_IGNORE( 0x163F000 )
 
 	ROM_REGION( 0x1841000, "asis", 0)
-	ROM_LOAD("ncommand.neo", 0x000000, 0x001000, CRC(3896f2d9) SHA1(c0f3dbd94673e160d45e2655491a0733ecf7764f) )
+	ROM_LOAD("neocup98.neo", 0x000000, 0x001000, CRC(3896f2d9) SHA1(c0f3dbd94673e160d45e2655491a0733ecf7764f) )
 	ROM_CONTINUE(0x000000, 0x1840000)
 
 	NEO_SFIX_128K( "srom", CRC(9bddb697) SHA1(2f479bcd5a433201168792a578de3057252d649f) )
@@ -30192,8 +30272,8 @@ GAME( 2003, kof2003dd,   kof2003,  kof2003dd,  neogeo,   mvs_led_state,  empty_i
 GAME( 2003, kof2003hdd,  kof2003,  kof2003dd,  neogeo,   mvs_led_state,  empty_init, ROT0, "SNK Playmore", "The King of Fighters 2003 (NGH-2710) (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 2002, kof10thdd,   kof2002,  darksoft,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters 10th Anniversary (bootleg of The King of Fighters 2002) (Darksoft)", MACHINE_SUPPORTS_SAVE ) // fake SNK copyright
 GAME( 2005, kf10thepdd,  kof2002,  darksoft,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters 10th Anniversary Extra Plus (bootleg of The King of Fighters 2002) (Darksoft)", MACHINE_SUPPORTS_SAVE ) // fake SNK copyright
-GAME( 2004, kf2k5unidd,  kof2002,  darksoft,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters 10th Anniversary 2005 Unique (bootleg of The King of Fighters 2002) (Darksoft)", MACHINE_SUPPORTS_SAVE ) // fake SNK copyright
-GAME( 2004, kof2k4sedd,  kof2002,  darksoft,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters Special Edition 2004 (bootleg of The King of Fighters 2002, Set 1) (Darksoft)", MACHINE_SUPPORTS_SAVE ) /* Hack / Bootleg of kof2002 */
+GAME( 2004, kf2k5unidd,  kof2002,  darksoft,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters 10th Anniversary 2005 Unique (bootleg of The King of Fighters 2002, Set 2) (Darksoft)", MACHINE_SUPPORTS_SAVE ) // fake SNK copyright
+GAME( 2004, kof2k4sedd,  kof2k4se, darksoft,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters Special Edition 2004 (bootleg of The King of Fighters 2002, Set 1) (Darksoft)", MACHINE_SUPPORTS_SAVE ) /* Hack / Bootleg of kof2002 */
 GAME( 1994, kof94dd,     kof94,    darksoft,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "The King of Fighters '94 (NGM-055 ~ NGH-055) (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 1995, kof95dd,     kof95,    darksoft,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "The King of Fighters '95 (NGM-084) (Darksoft)", MACHINE_SUPPORTS_SAVE )
 GAME( 1995, kof95hdd,    kof95,    darksoft,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "The King of Fighters '95 (NGH-084) (Darksoft)", MACHINE_SUPPORTS_SAVE )
@@ -30405,32 +30485,32 @@ GAME( 1991, burningfpnds,  burningf, neo304h,   neogeo,   mvs_led_state,  empty_
 GAME( 1991, burningfpands, burningf, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Burning Fight (prototype, near final, ver 23.3, 910326) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1996, crswd2blnds,   crswd2bl, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg (Razoola)", "Crossed Swords 2 (bootleg of CD version) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1991, crswordnds,    crsword,  neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Alpha Denshi Co.", "Crossed Swords (ALM-002 ~ ALH-002) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2003, ct2k3sands,    kof2001,  ct2k3spd,  neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg (Phenixsoft)", "Crouching Tiger Hidden Dragon 2003 Super Plus alternate (The King of Fighters 2001 bootleg) (Neo SD)", MACHINE_SUPPORTS_SAVE ) /* Hack / Bootleg of kof2001 */
-//GAME( 2003, ct2k3spnds,    kof2001,  ct2k3spd,  neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg (Phenixsoft)", "Crouching Tiger Hidden Dragon 2003 Super Plus (The King of Fighters 2001 bootleg) (Neo SD)", MACHINE_SUPPORTS_SAVE ) /* Protected Hack / Bootleg of kof2001 */
-//GAME( 2003, cthd2003nds,   kof2001,  cthd2003d, neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg (Phenixsoft)", "Crouching Tiger Hidden Dragon 2003 (The King of Fighters 2001 bootleg, set 1) (Neo SD)", MACHINE_SUPPORTS_SAVE ) /* Protected Hack / Bootleg of kof2001 */
+GAME( 2003, ct2k3sands,    kof2001,  neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg (Phenixsoft)", "Crouching Tiger Hidden Dragon 2003 Super Plus (hack of The King of Fighters 2001, alternate) (Neo SD)", MACHINE_SUPPORTS_SAVE ) /* Hack / Bootleg of kof2001 */
+GAME( 2003, ct2k3spnds,    kof2001,  ct2k3spd,  neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg (Phenixsoft)", "Crouching Tiger Hidden Dragon 2003 Super Plus (hack of The King of Fighters 2001) (Neo SD)", MACHINE_SUPPORTS_SAVE ) /* Protected Hack / Bootleg of kof2001 */
+GAME( 2003, cthd2003nds,   kof2001,  cthd2k3d,  neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg (Phenixsoft)", "Crouching Tiger Hidden Dragon 2003 (hack of The King of Fighters 2001, set 1) (Neo SD)", MACHINE_SUPPORTS_SAVE ) /* Protected Hack / Bootleg of kof2001 */
 GAME( 1999, ctomadaynds,   ctomaday, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Visco", "Captain Tomaday (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1990, cyberlipnds,   cyberlip, cyberlip,  neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Cyber-Lip (NGM-010) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 2000, diggermands,   diggerma, neobase,   neogeo,   mvs_led_state,  empty_init, ROT0, "Kyle Hodgetts", "Digger Man (prototype) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1995, doubledrnds,   doubledr, neobase,   neogeo,   mvs_led_state,  empty_init, ROT0, "Technos Japan", "Double Dragon (Neo-Geo) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1997, dragonshnds,   dragonsh, neobase,   neogeo,   mvs_led_state,  empty_init, ROT0, "Face", "Dragon's Heaven (development board) (Neo SD)", MACHINE_IS_INCOMPLETE | MACHINE_NO_SOUND | MACHINE_SUPPORTS_SAVE ) // same ID code as Voltage Fighter Gowkaizer, developed by ex-Technos staff
 GAME( 1991, eightmannds,   eightman, neobase,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK / Pallas", "Eight Man (NGM-025 ~ NGH-025) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-GAME( 1993, fatfurspnds,   fatfursp, neobase,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Fatal Fury Special / Garou Densetsu Special (set 1) (NGM-058 ~ NGH-058) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-GAME( 1993, fatfurspands,  fatfursp, neobase,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Fatal Fury Special / Garou Densetsu Special (set 2) (NGM-058 ~ NGH-058) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 1993, fatfurspnds,   fatfursp, neobase,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Fatal Fury Special / Garou Densetsu Special (NGM-058 ~ NGH-058, set 1) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 1993, fatfurspands,  fatfursp, neobase,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Fatal Fury Special / Garou Densetsu Special (NGM-058 ~ NGH-058, set 2) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1991, fatfury1nds,   fatfury1, neobase,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Fatal Fury - King of Fighters / Garou Densetsu - Shukumei no Tatakai (NGM-033 ~ NGH-033) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1992, fatfury2nds,   fatfury2, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Fatal Fury 2 / Garou Densetsu 2 - Arata-naru Tatakai (NGM-047 ~ NGH-047) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1995, fatfury3nds,   fatfury3, neobase,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Fatal Fury 3 - Road to the Final Victory / Garou Densetsu 3 - Haruka-naru Tatakai (NGM-069 ~ NGH-069) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1992, fbfrenzynds,   fbfrenzy, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Football Frenzy (NGM-034 ~ NGH-034) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-GAME( 1994, fightfevnds,   fightfev, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Viccom", "Fight Fever / Wang Jung Wang (set 1) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-GAME( 1994, fightfevands,  fightfev, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Viccom", "Fight Fever / Wang Jung Wang (set 2) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 1994, fightfevnds,   fightfev, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Viccom", "Fight Fever (set 1) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 1994, fightfevands,  fightfev, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Viccom", "Fight Fever (set 2) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1998, flipshotnds,   flipshot, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Visco", "Flip Shot (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1995, froman2bnds,   froman2b, neobase,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "Idol Mahjong Final Romance 2 (Neo-Geo, bootleg of CD version) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1995, fswordsnds,    samsho3,  neobase,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Fighters Swords (Korean release of Samurai Shodown III) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1995, galaxyfgnds,   galaxyfg, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Sunsoft", "Galaxy Fight - Universal Warriors (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1999, ganryunds,     ganryu,   neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Visco", "Ganryu / Musashi Ganryuki (Neo SD)", MACHINE_SUPPORTS_SAVE ) /* Encrypted GFX */
-//GAME( 1999, garounds,      garou,    garoud,    neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Garou - Mark of the Wolves (NGM-2530) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 1999, garounds,      garou,    garound,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Garou - Mark of the Wolves (NGM-2530) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1999, garoublnds,    garou,    neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "Garou - Mark of the Wolves (bootleg) (Neo SD)", MACHINE_SUPPORTS_SAVE ) /* Bootleg of garoup */
-//GAME( 1999, garouhnds,     garou,    garouhd,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Garou - Mark of the Wolves (NGM-2530 ~ NGH-2530) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-//GAME( 1999, garouhands,    garou,    garoud,    neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Garou - Mark of the Wolves (NGH-2530) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 1999, garouhnds,     garou,    garouhnd,  neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Garou - Mark of the Wolves (NGM-2530 ~ NGH-2530) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 1999, garouhands,    garou,    garound,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Garou - Mark of the Wolves (NGH-2530) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1999, garoupnds,     garou,    neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Garou - Mark of the Wolves (prototype) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1996, ghostlopnds,   ghostlop, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Data East Corporation", "Ghostlop (prototype) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1995, goalx3nds,     goalx3,   neo288h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Visco", "Goal! Goal! Goal! (Neo SD)", MACHINE_SUPPORTS_SAVE )
@@ -30442,8 +30522,8 @@ GAME( 1996, ironcladnds,   ironclad, neo304h,   neogeo,   mvs_led_state,  empty_
 GAME( 1996, ironcladonds,  ironclad, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "Choutetsu Brikin'ger / Iron Clad (prototype, bootleg) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1997, irrmazends,    irrmaze,  irrmaze,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK / Saurus", "The Irritating Maze / Ultra Denryu Iraira Bou (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1994, janshinnds,    janshin,  neogeo_mj, neogeo_mj,mvs_led_state,  empty_init, ROT0, "Aicom", "Janshin Densetsu - Quest of Jongmaster (Neo SD)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2001, jockeygpnds,   jockeygp, jockeygpd, neogeo,   mvs_led_state,  empty_init, ROT0, "Sun Amusement / BrezzaSoft", "Jockey Grand Prix (set 1) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2001, jockeygpands,  jockeygp, jockeygpd, neogeo,   mvs_led_state,  empty_init, ROT0, "Sun Amusement / BrezzaSoft", "Jockey Grand Prix (set 2) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 2001, jockeygpnds,   jockeygp, jckeygpd,  neogeo,   mvs_led_state,  empty_init, ROT0, "Sun Amusement / BrezzaSoft", "Jockey Grand Prix (set 1) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 2001, jockeygpands,  jockeygp, jckeygpd,  neogeo,   mvs_led_state,  empty_init, ROT0, "Sun Amusement / BrezzaSoft", "Jockey Grand Prix (set 2) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1990, joyjoynds,     joyjoy,   neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Puzzled / Joy Joy Kid (NGM-021 ~ NGH-021) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1995, kabukiklnds,   kabukikl, neobase,   neogeo,   mvs_led_state,  empty_init, ROT0, "Hudson", "Far East of Eden - Kabuki Klash / Tengai Makyou - Shin Den (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1994, karnovrnds,    karnovr,  neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Data East Corporation", "Karnov's Revenge / Fighter's History Dynamite (Neo SD)", MACHINE_SUPPORTS_SAVE )
@@ -30451,23 +30531,23 @@ GAME( 2002, kf2k2mpnds,    kof2002,  neo304h,   neogeo,   mvs_led_state,  empty_
 GAME( 2002, kf2k2mp2nds,   kof2002,  neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters 2002 Magic Plus II (bootleg) (Neo SD)", MACHINE_SUPPORTS_SAVE ) /* Encrypted GFX */
 GAME( 2002, kf2k2plsnds,   kof2002,  neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters 2002 Plus (bootleg, set 1) (Neo SD)", MACHINE_SUPPORTS_SAVE ) /* Encrypted GFX */
 GAME( 2002, kf2k2plands,   kof2002,  neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters 2002 Plus (bootleg, set 2) (Neo SD)", MACHINE_SUPPORTS_SAVE ) /* Encrypted GFX */
-//GAME( 2003, kf2k3blnds,    kof2003,  kf2k3upld, neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters 2003 (bootleg, set 1) (Neo SD)", MACHINE_SUPPORTS_SAVE ) // zooming is wrong because its a bootleg of the pcb version on a cart
-//GAME( 2003, kf2k3blands,   kof2003,  kf2k3pld,  neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters 2003 (bootleg, set 2) (Neo SD)", MACHINE_SUPPORTS_SAVE ) // zooming is wrong because its a bootleg of the pcb version on a cart
-//GAME( 2003, kf2k3uplnds,   kof2003,  kf2k3upld, neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters 2004 Ultra Plus (The King of Fighters 2003 bootleg) (Neo SD)", MACHINE_SUPPORTS_SAVE ) // zooming is wrong because its a bootleg of the pcb version on a cart
-//GAME( 2003, kf2k3plnds,    kof2003,  kf2k3pld,  neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters 2004 Plus / Hero (The King of Fighters 2003 bootleg) (Neo SD)", MACHINE_SUPPORTS_SAVE ) // zooming is wrong because its a bootleg of the pcb version on a cart
+GAME( 2003, kf2k3blnds,    kof2003,  kf2k3upld, neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters 2003 (bootleg, set 1) (Neo SD)", MACHINE_SUPPORTS_SAVE ) // zooming is wrong because its a bootleg of the pcb version on a cart
+GAME( 2003, kf2k3blands,   kof2003,  kf2k3pld,  neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters 2003 (bootleg, set 2) (Neo SD)", MACHINE_SUPPORTS_SAVE ) // zooming is wrong because its a bootleg of the pcb version on a cart
+GAME( 2003, kf2k3uplnds,   kof2003,  kf2k3upld, neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters 2004 Ultra Plus (bootleg of The King of Fighters 2003) (Neo SD)", MACHINE_SUPPORTS_SAVE ) // zooming is wrong because its a bootleg of the pcb version on a cart
+GAME( 2003, kf2k3plnds,    kof2003,  kf2k3pld,  neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters 2004 Plus / Hero (bootleg of The King of Fighters 2003) (Neo SD)", MACHINE_SUPPORTS_SAVE ) // zooming is wrong because its a bootleg of the pcb version on a cart
 GAME( 1996, kizunands,     kizuna,   neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Kizuna Encounter - Super Tag Battle / Fu'un Super Tag Battle (Neo SD)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2000, kof2000nds,    kof2000,  kof2000d,  neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "The King of Fighters 2000 (NGM-2570 ~ NGH-2570) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2000, kof2000nnds,   kof2000,  neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "The King of Fighters 2000 (Not encrypted) (Neo SD)", MACHINE_SUPPORTS_SAVE ) /* Encrypted GFX */
+GAME( 2000, kof2000nds,    kof2000,  kof2000nd, neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "The King of Fighters 2000 (NGM-2570 ~ NGH-2570) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 2000, kof2000nnds,   kof2000,  kof2000nd, neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "The King of Fighters 2000 (not encrypted) (Neo SD)", MACHINE_SUPPORTS_SAVE ) /* Encrypted GFX */
 GAME( 2001, kof2001nds,    kof2001,  neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Eolith / SNK", "The King of Fighters 2001 (NGM-2621) (Neo SD)", MACHINE_SUPPORTS_SAVE ) /* Encrypted GFX */
 GAME( 2001, kof2001hnds,   kof2001,  neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Eolith / SNK", "The King of Fighters 2001 (NGH-2621) (Neo SD)", MACHINE_SUPPORTS_SAVE ) /* Encrypted GFX */
 GAME( 2002, kof2002nds,    kof2002,  neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Eolith / Playmore", "The King of Fighters 2002 (NGM-2650 ~ NGH-2650) (Neo SD)", MACHINE_SUPPORTS_SAVE ) /* Encrypted GFX */
 GAME( 2002, kof2002bnds,   kof2002,  neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters 2002 (bootleg) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2003, kof2003nds,    kof2003,  kof2003d,  neogeo,   mvs_led_state,  empty_init, ROT0, "SNK Playmore", "The King of Fighters 2003 (NGM-2710) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2003, kof2003hnds,   kof2003,  kof2003d,  neogeo,   mvs_led_state,  empty_init, ROT0, "SNK Playmore", "The King of Fighters 2003 (NGH-2710) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-GAME( 2002, kof10thnds,    kof2002,  neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters 10th Anniversary (The King of Fighters 2002 bootleg) (Neo SD)", MACHINE_SUPPORTS_SAVE ) // fake SNK copyright
-GAME( 2005, kf10thepnds,   kof2002,  neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters 10th Anniversary Extra Plus (The King of Fighters 2002 bootleg) (Neo SD)", MACHINE_SUPPORTS_SAVE ) // fake SNK copyright
-GAME( 2004, kf2k5uninds,   kof2002,  neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters 10th Anniversary 2005 Unique (The King of Fighters 2002 bootleg) (Neo SD)", MACHINE_SUPPORTS_SAVE ) // fake SNK copyright
-GAME( 2004, kof2k4sends,   kof2002,  neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters Special Edition 2004 (The King of Fighters 2002 bootleg, Set 1) (Neo SD)", MACHINE_SUPPORTS_SAVE ) /* Hack / Bootleg of kof2002 */
+GAME( 2003, kof2003nds,    kof2003,  kof2003nd, neogeo,   mvs_led_state,  empty_init, ROT0, "SNK Playmore", "The King of Fighters 2003 (NGM-2710) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 2003, kof2003hnds,   kof2003,  kof2003nd, neogeo,   mvs_led_state,  empty_init, ROT0, "SNK Playmore", "The King of Fighters 2003 (NGH-2710) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 2002, kof10thnds,    kof2002,  neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters 10th Anniversary (bootleg of The King of Fighters 2002) (Neo SD)", MACHINE_SUPPORTS_SAVE ) // fake SNK copyright
+GAME( 2005, kf10thepnds,   kof2002,  neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters 10th Anniversary Extra Plus (bootleg of The King of Fighters 2002) (Neo SD)", MACHINE_SUPPORTS_SAVE ) // fake SNK copyright
+GAME( 2004, kf2k5uninds,   kof2002,  neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters 10th Anniversary 2005 Unique (bootleg of The King of Fighters 2002, Set 2) (Neo SD)", MACHINE_SUPPORTS_SAVE ) // fake SNK copyright
+GAME( 2004, kof2k4sends,   kof2k4se, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters Special Edition 2004 (bootleg of The King of Fighters 2002, Set 1) (Neo SD)", MACHINE_SUPPORTS_SAVE ) /* Hack / Bootleg of kof2002 */
 GAME( 1994, kof94nds,      kof94,    neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "The King of Fighters '94 (NGM-055 ~ NGH-055) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1995, kof95nds,      kof95,    neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "The King of Fighters '95 (NGM-084) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1995, kof95hnds,     kof95,    neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "The King of Fighters '95 (NGH-084) (Neo SD)", MACHINE_SUPPORTS_SAVE )
@@ -30482,19 +30562,19 @@ GAME( 1998, kof98nds,      kof98,    neo304h,   neogeo,   mvs_led_state,  empty_
 GAME( 1998, kof98hnds,     kof98,    neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "The King of Fighters '98 - The Slugfest / King of Fighters '98 - Dream Match Never Ends (NGH-2420) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1998, kof98knds,     kof98,    neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "The King of Fighters '98 - The Slugfest / King of Fighters '98 - Dream Match Never Ends (Korean board, set 1) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1998, kof98kands,    kof98,    neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "The King of Fighters '98 - The Slugfest / King of Fighters '98 - Dream Match Never Ends (Korean board, set 2) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-//GAME( 1999, kof99nds,      kof99,    kof99d,    neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "The King of Fighters '99 - Millennium Battle (NGM-2510) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-//GAME( 1999, kof99ends,     kof99,    kof99d,    neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "The King of Fighters '99 - Millennium Battle (Earlier) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-//GAME( 1999, kof99hnds,     kof99,    kof99d,    neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "The King of Fighters '99 - Millennium Battle (NGH-2510) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-//GAME( 1999, kof99knds,     kof99,    kof99d,    neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "The King of Fighters '99 - Millennium Battle (Korean release) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 1999, kof99nds,      kof99,    kof99nd,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "The King of Fighters '99 - Millennium Battle (NGM-2510) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 1999, kof99ends,     kof99,    kof99nd,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "The King of Fighters '99 - Millennium Battle (Earlier) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 1999, kof99hnds,     kof99,    kof99nd,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "The King of Fighters '99 - Millennium Battle (NGH-2510) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 1999, kof99knds,     kof99,    kof99nd,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "The King of Fighters '99 - Millennium Battle (Korean release) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1999, kof99kands,    kof99,    neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "The King of Fighters '99 - Millennium Battle (Korean release, non-encrypted program) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1999, kof99pnds,     kof99,    neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "The King of Fighters '99 - Millennium Battle (prototype) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-GAME( 1997, kognds,        kof97,    neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "King of Gladiator (The King of Fighters '97 bootleg) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 1997, kognds,        kof97,    neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "King of Gladiator (bootleg of The King of Fighters '97) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1991, kotmnds,       kotm,     neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "King of the Monsters (set 1) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1991, kotmhnds,      kotm,     neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "King of the Monsters (set 2) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1992, kotm2nds,      kotm2,    neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "King of the Monsters 2 - The Next Thing (NGM-039 ~ NGH-039) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1992, kotm2ands,     kotm2,    neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "King of the Monsters 2 - The Next Thing (older) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1992, kotm2pnds,     kotm2,    neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "King of the Monsters 2 - The Next Thing (prototype) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-GAME( 1998, lans2004nds,   shocktr2, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "Lansquenet 2004 (Shock Troopers - 2nd Squad bootleg) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 1998, lans2004nds,   shocktr2, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "Lansquenet 2004 (bootleg of Shock Troopers - 2nd Squad) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1997, lastbladnds,   lastblad, neobase,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "The Last Blade / Bakumatsu Roman - Gekka no Kenshi (NGM-2340) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1997, lastbladhnds,  lastblad, neobase,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "The Last Blade / Bakumatsu Roman - Gekka no Kenshi (NGH-2340) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1997, lastsolnds,    lastblad, neobase,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "The Last Soldier (Korean release of The Last Blade) (Neo SD)", MACHINE_SUPPORTS_SAVE )
@@ -30510,7 +30590,7 @@ GAME( 1990, maglordnds,    maglord,  neobase,   neogeo,   mvs_led_state,  empty_
 GAME( 1990, maglordhnds,   maglord,  neobase,   neogeo,   mvs_led_state,  empty_init, ROT0, "Alpha Denshi Co.", "Magician Lord (NGH-005) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1990, mahretsunds,   mahretsu, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Mahjong Kyo Retsuden (NGM-004 ~ NGH-004) (Neo SD)", MACHINE_SUPPORTS_SAVE ) // does not support mahjong panel in MVS mode
 GAME( 1995, marukodqnds,   marukodq, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Takara", "Chibi Marukochan Deluxe Quiz (Neo SD)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2003, matrimnds,     matrim,   matrimd,   neogeo,   mvs_led_state,  empty_init, ROT0, "Noise Factory / Atlus", "Matrimelee / Shin Gouketsuji Ichizoku Toukon (NGM-2660 ~ NGH-2660) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 2003, matrimnds,     matrim,   matrimnd,  neogeo,   mvs_led_state,  empty_init, ROT0, "Noise Factory / Atlus", "Matrimelee / Shin Gouketsuji Ichizoku Toukon (NGM-2660 ~ NGH-2660) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1997, miexchngnds,   miexchng, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Face", "Money Puzzle Exchanger / Money Idol Exchanger (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 2002, ms4plusnsd,    mslug4,   neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Bootleg", "Metal Slug 4 Plus (Bootleg) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 2003, ms5plusnsd,    mslug5,   neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Bootleg", "Metal Slug 5 Plus (Bootleg) (Neo SD)", MACHINE_SUPPORTS_SAVE )
@@ -30576,8 +30656,8 @@ GAME( 2002, rotdnds,       rotd,     neo304h,   neogeo,   mvs_led_state,  empty_
 GAME( 2002, rotdhnds,      rotd,     neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Evoga / Playmore", "Rage of the Dragons (NGH-2640?) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1999, s1945pnds,     s1945p,   neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Psikyo", "Strikers 1945 Plus (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 2004, samsh5spnds,   samsh5sp, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Yuki Enterprise / SNK Playmore", "Samurai Shodown V Special / Samurai Spirits Zero Special (NGM-2720) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-GAME( 2004, samsh5sphnds,  samsh5sp, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Yuki Enterprise / SNK Playmore", "Samurai Shodown V Special / Samurai Spirits Zero Special (NGH-2720) (2nd release, less censored) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-GAME( 2004, samsh5sphonds, samsh5sp, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Yuki Enterprise / SNK Playmore", "Samurai Shodown V Special / Samurai Spirits Zero Special (NGH-2720) (1st release, censored) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 2004, samsh5sphnds,  samsh5sp, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Yuki Enterprise / SNK Playmore", "Samurai Shodown V Special / Samurai Spirits Zero Special (NGH-2720, 2nd release, less censored) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 2004, samsh5sphonds, samsh5sp, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Yuki Enterprise / SNK Playmore", "Samurai Shodown V Special / Samurai Spirits Zero Special (NGH-2720, 1st release, censored) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1993, samshonds,     samsho,   neobase,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Samurai Shodown / Samurai Spirits (NGM-045) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1993, samshohnds,    samsho,   neobase,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Samurai Shodown / Samurai Spirits (NGH-045) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1994, samsho2nds,    samsho2,  neobase,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Samurai Shodown II / Shin Samurai Spirits - Haohmaru jigokuhen (NGM-063 ~ NGH-063) (Neo SD)", MACHINE_SUPPORTS_SAVE )
@@ -30614,13 +30694,13 @@ GAME( 1995, stakwinnds,    stakwin,  neobase,   neogeo,   mvs_led_state,  empty_
 GAME( 1996, stakwin2nds,   stakwin2, neobase,   neogeo,   mvs_led_state,  empty_init, ROT0, "Saurus", "Stakes Winner 2 (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1994, strhoopnds,    strhoop,  neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Data East Corporation", "Street Hoop / Street Slam / Dunk Dream (DEM-004 ~ DEH-004) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1990, superspynds,   superspy, neobase,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "The Super Spy (NGM-011 ~ NGH-011) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2003, svcnds,        svc,      svcd,      neogeo,   mvs_led_state,  empty_init, ROT0, "Playmore / Capcom", "SNK vs. Capcom - SVC Chaos (NGM-2690 ~ NGH-2690) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2003, svcbootnds,    svc,      svcd,      neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "SNK vs. Capcom - SVC Chaos (bootleg) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 2003, svcnds,        svc,      svcnd,     neogeo,   mvs_led_state,  empty_init, ROT0, "Playmore / Capcom", "SNK vs. Capcom - SVC Chaos (NGM-2690 ~ NGH-2690) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 2003, svcbootnds,    svc,      svcnd,     neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "SNK vs. Capcom - SVC Chaos (bootleg) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 2003, svcplusnds,    svc,      neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "SNK vs. Capcom - SVC Chaos Plus (bootleg, set 1) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 2003, svcplusands,   svc,      neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "SNK vs. Capcom - SVC Chaos Plus (bootleg, set 2) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2003, svcsplusnds,   svc,      svcd,      neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "SNK vs. Capcom - SVC Chaos Super Plus (bootleg) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2003, svcpcbnds,     svc,      svcd,      neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "SNK vs. Capcom - SVC Chaos (JAMMA PCB, set 1) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2003, svcpcbands,    svc,      svcd,      neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "SNK vs. Capcom - SVC Chaos (JAMMA PCB, set 2) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 2003, svcsplusnds,   svc,      svcnd,     neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "SNK vs. Capcom - SVC Chaos Super Plus (bootleg) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 2003, svcpcbnds,     svc,      svcnd,     neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "SNK vs. Capcom - SVC Chaos (JAMMA PCB, set 1) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 2003, svcpcbands,    svc,      svcnd,     neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "SNK vs. Capcom - SVC Chaos (JAMMA PCB, set 2) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1994, tophuntrnds,   tophuntr, neobase,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Top Hunter - Roddy & Cathy (NGM-046) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1994, tophuntrhnds,  tophuntr, neobase,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Top Hunter - Roddy & Cathy (NGH-046) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1990, tpgolfnds,     tpgolf,   neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Top Player's Golf (NGM-003 ~ NGH-003) (Neo SD)", MACHINE_SUPPORTS_SAVE )
@@ -30629,11 +30709,11 @@ GAME( 1996, turfmastnds,   turfmast, neo304h,   neogeo,   mvs_led_state,  empty_
 GAME( 1996, twinsprinds,   twinspri, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "ADK / SNK",        "Twinkle Star cslot1:sprites (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1996, twsoc96nds,    twsoc96,  neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Tecmo", "Tecmo World Soccer '96 (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1992, viewpoinnds,   viewpoin, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Sammy / Aicom", "Viewpoint (Neo SD)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2001, vlinernds,     vliner,   vlinerd,   vliner,   mvs_led_state,  empty_init, ROT0, "Dyna / BrezzaSoft", "V-Liner (v0.7a) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2001, vliner7ends,   vliner,   vlinerd,   vliner,   mvs_led_state,  empty_init, ROT0, "Dyna / BrezzaSoft", "V-Liner (v0.7e) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2001, vliner6ends,   vliner,   vlinerd,   vliner,   mvs_led_state,  empty_init, ROT0, "Dyna / BrezzaSoft", "V-Liner (v0.6e) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2001, vliner54nds,   vliner,   vlinerd,   vliner,   mvs_led_state,  empty_init, ROT0, "Dyna / BrezzaSoft", "V-Liner (v0.54) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-//GAME( 2001, vliner53nds,   vliner,   vlinerd,   vliner,   mvs_led_state,  empty_init, ROT0, "Dyna / BrezzaSoft", "V-Liner (v0.53) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 2001, vlinernds,     vliner,   vliner,    vliner,   mvs_led_state,  empty_init, ROT0, "Dyna / BrezzaSoft", "V-Liner (v0.7a) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 2001, vliner7ends,   vliner,   vliner,    vliner,   mvs_led_state,  empty_init, ROT0, "Dyna / BrezzaSoft", "V-Liner (v0.7e) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 2001, vliner6ends,   vliner,   vliner,    vliner,   mvs_led_state,  empty_init, ROT0, "Dyna / BrezzaSoft", "V-Liner (v0.6e) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 2001, vliner54nds,   vliner,   vliner,    vliner,   mvs_led_state,  empty_init, ROT0, "Dyna / BrezzaSoft", "V-Liner (v0.54) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 2001, vliner53nds,   vliner,   vliner,    vliner,   mvs_led_state,  empty_init, ROT0, "Dyna / BrezzaSoft", "V-Liner (v0.53) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1996, wakuwak7nds,   wakuwak7, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "Sunsoft", "Waku Waku 7 (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1992, wh1nds,        wh1,      neobase,   neogeo,   mvs_led_state,  empty_init, ROT0, "Alpha Denshi Co.", "World Heroes (ALM-005) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 1992, wh1hnds,       wh1,      neobase,   neogeo,   mvs_led_state,  empty_init, ROT0, "Alpha Denshi Co.", "World Heroes (ALH-005) (Neo SD)", MACHINE_SUPPORTS_SAVE )
@@ -30687,16 +30767,16 @@ GAME( 2003, kof2k3hd,   kof2003,  kof2003hd, neogeo,   mvs_led_state,  empty_ini
 GAME( 2003, kof2k3nd,   kof2003,  neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK Playmore", "The King of Fighters 2003 (Fully Decrypted)", MACHINE_SUPPORTS_SAVE )
 GAME( 2004, kf2k3pd,    kof2003,  neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters 2004 Plus / Hero (bootleg of The King of Fighters 2003, Fully Decrypted)", MACHINE_SUPPORTS_SAVE )
 GAME( 2003, kf2k3upd,   kof2003,  neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters 2004 Ultra Plus (bootleg of The King of Fighters 2003, Fully Decrypted)", MACHINE_SUPPORTS_SAVE )
-GAME( 2004, kf2k4pls,   kof2002,  kof2k4pls, neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters Special Edition 2004 Plus (bootleg of The King of Fighters 2002)", MACHINE_SUPPORTS_SAVE )
-GAME( 2004, kf2k4plsp,  kof2002,  neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters Special Edition 2004 Plus (bootleg of The King of Fighters 2002) (Predecrypted S & P)", MACHINE_SUPPORTS_SAVE )
+GAME( 2004, kf2k4pls,   kof2k4se, kof2k4pls, neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters Special Edition 2004 Plus (bootleg of The King of Fighters 2002)", MACHINE_SUPPORTS_SAVE )
+GAME( 2004, kf2k4plsp,  kof2k4se, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters Special Edition 2004 Plus (bootleg of The King of Fighters 2002) (Predecrypted S & P)", MACHINE_SUPPORTS_SAVE )
 GAME( 1997, kogd,       kof97,    kogd,      neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "King of Gladiator (bootleg of The King of Fighters '97 / Fully Decrypted)", MACHINE_SUPPORTS_SAVE )
 GAME( 1997, kogplusd,   kof97,    kogd,      neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "King of Gladiator Plus (bootleg of The King of Fighters '97 / Fully Decrypted)", MACHINE_SUPPORTS_SAVE )
 GAME( 2005, kof10thd,   kof2002,  neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters 10th Anniversary (bootleg of The King of Fighters 2002 / Fully Decrypted)", MACHINE_SUPPORTS_SAVE )
 GAME( 2005, kof10thu,   kof2002,  kf10thu,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters 10th Anniversary 2005 Unique (bootleg of The King of Fighters 2002, set 1)", MACHINE_SUPPORTS_SAVE )
 GAME( 2005, kf10thepp,  kof2002,  neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters 10th Anniversary Extra Plus (bootleg of The King of Fighters 2002) (Predecrypted S & P)", MACHINE_SUPPORTS_SAVE )
 GAME( 2005, kf2k5unid,  kof2002,  neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters 10th Anniversary 2005 Unique (bootleg of The King of Fighters 2002, set 2) (Decrypted C)", MACHINE_SUPPORTS_SAVE )
-GAME( 2004, kofse2k4,   kof2002,  kof2k4se,  neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters Special Edition 2004 (bootleg of The King of Fighters 2002) (Decrypted P)", MACHINE_SUPPORTS_SAVE )
-GAME( 2004, kofse2k4p,  kof2002,  neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters Special Edition 2004 (bootleg of The King of Fighters 2002) (Fully Decrypted)", MACHINE_SUPPORTS_SAVE )
+GAME( 2004, kofse2k4,   kof2k4se, kof2k4se,  neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters Special Edition 2004 (bootleg of The King of Fighters 2002) (Decrypted P)", MACHINE_SUPPORTS_SAVE )
+GAME( 2004, kofse2k4p,  kof2k4se, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "The King of Fighters Special Edition 2004 (bootleg of The King of Fighters 2002) (Fully Decrypted)", MACHINE_SUPPORTS_SAVE )
 GAME( 2004, lans2k4d,   shocktr2, neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "Lansquenet 2004 (bootleg of Shock Troopers - 2nd Squad / Fully Decrypted)", MACHINE_SUPPORTS_SAVE )
 GAME( 2003, matrimd,    matrim,   matrimd,   neogeo,   mvs_led_state,  empty_init, ROT0, "Noise Factory / Atlus", "Matrimelee / Shin Gouketsuji Ichizoku Toukon (NGM-2660 ~ NGH-2660) (Decrypted C)", MACHINE_SUPPORTS_SAVE )
 GAME( 2003, matrimbd,   matrim,   neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "bootleg", "Matrimelee / Shin Gouketsuji Ichizoku Toukon (bootleg) (Decrypted C)", MACHINE_SUPPORTS_SAVE )

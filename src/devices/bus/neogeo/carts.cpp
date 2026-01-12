@@ -122,30 +122,35 @@ void neogeo_cart(device_slot_interface &device)
     device.option_add_internal("decrypt_cd",       NEOGEO_DECRYPT_CD_CART);
 	device.option_add_internal("boot_cthd2k3a", NEOGEO_DECRYPT_CTHD2K3A_CART);
 	device.option_add_internal("decrypt_fr2cd",    NEOGEO_DECRYPT_FR2CD_CART);
-	device.option_add_internal("decrypt_jckeygpd", NEOGEO_DECRYPT_JOCKEYGPD_CART);
+	device.option_add_internal("cmc50_jckeygpd", NEOGEO_DECRYPT_JOCKEYGPD_CART);
 	device.option_add_internal("boot_kf10thu",  NEOGEO_DECRYPT_KOF10THU_CART);
 	device.option_add_internal("boot_kof96ep",  NEOGEO_DECRYPT_KOF96EP_CART);
 	device.option_add_internal("boot_kof97pla", NEOGEO_DECRYPT_KOF97PLA_CART);
-	device.option_add_internal("decrypt_kof2k2d",  NEOGEO_DECRYPT_KOF2002D_CART);
+	device.option_add_internal("k2k2_kof2k2d",  NEOGEO_DECRYPT_KOF2002D_CART);
 	device.option_add_internal("boot_kf2k1pa",  NEOGEO_DECRYPT_KF2K1PA_CART);
 	device.option_add_internal("boot_kf2k2pd",  NEOGEO_DECRYPT_KF2K2PLSD_CART);
 	device.option_add_internal("boot_kf2k2mpd", NEOGEO_DECRYPT_KF2K2MPD_CART);
 	device.option_add_internal("boot_kf2k2mp2d",NEOGEO_DECRYPT_KF2K2MP2D_CART);
+	device.option_add_internal("boot_kf2k3upld",NEOGEO_DECRYPT_KF2K3UPLD_CART);
+	device.option_add_internal("boot_kf2k3pld", NEOGEO_DECRYPT_KF2K3PLD_CART);
 	device.option_add_internal("boot_kof2k4pls",NEOGEO_DECRYPT_KOF2K4PLS_CART);
 	device.option_add_internal("boot_kogd",     NEOGEO_DECRYPT_KOGD_CART);
-	device.option_add_internal("decrypt_matrimd",  NEOGEO_DECRYPT_MATRIMD_CART);
-	device.option_add_internal("cmc42_mslug3hd",   NEOGEO_DECRYPT_MSLUG3HD_CART);
-	device.option_add_internal("pcm2_mslug4d",     NEOGEO_DECRYPT_MSLUG4D_CART);
-	device.option_add_internal("pcm2_mslug4e",     NEOGEO_DECRYPT_MSLUG4E_CART);
-	device.option_add_internal("decrypt_samsh5d",  NEOGEO_DECRYPT_SAMSHO5D_CART);
-	device.option_add_internal("decrypt_sams5sd",  NEOGEO_DECRYPT_SAMSHO5SPD_CART);
+	device.option_add_internal("k2k2_matrimd",  NEOGEO_DECRYPT_MATRIMD_CART);
+	device.option_add_internal("k2k2_matrimnd", NEOGEO_DECRYPT_MATRIMND_CART);
+	device.option_add_internal("cmc42_mslug3hd", NEOGEO_DECRYPT_MSLUG3HD_CART);
+	device.option_add_internal("pcm2_mslug4d",  NEOGEO_DECRYPT_MSLUG4D_CART);
+	device.option_add_internal("pcm2_mslug4e",  NEOGEO_DECRYPT_MSLUG4E_CART);
+	device.option_add_internal("k2k2_samsh5d",  NEOGEO_DECRYPT_SAMSHO5D_CART);
+	device.option_add_internal("k2k2_sams5sd",  NEOGEO_DECRYPT_SAMSHO5SPD_CART);
 
 // ==================================================================> NEOGEO_DECRYPT_PVC_CART_DEVICE
 	device.option_add_internal("pvcd_mslug5d",  NEOGEO_DECRYPT_PVC_MSLUG5D_CART);
 	device.option_add_internal("pvcd_mslug5e",  NEOGEO_DECRYPT_PVC_MSLUG5E_CART);
 	device.option_add_internal("pvcd_kf2k3d",   NEOGEO_DECRYPT_PVC_KOF2003D_CART);
+	device.option_add_internal("pvcd_kf2k3nd",  NEOGEO_DECRYPT_PVC_KOF2003ND_CART);
 	device.option_add_internal("pvcd_kf2k3hd",  NEOGEO_DECRYPT_PVC_KOF2003HD_CART);
 	device.option_add_internal("pvcd_svcd",     NEOGEO_DECRYPT_PVC_SVCD_CART);
+	device.option_add_internal("pvcd_svcnd",    NEOGEO_DECRYPT_PVC_SVCND_CART);
 
 // ==================================================================> NEOGEO_DARKSOFT_PVC_CART_DEVICE
     device.option_add_internal("pvcdd_kof2k3dd",   NEOGEO_DARKSOFT_PVC_KOF2003DD_CART);
@@ -154,8 +159,11 @@ void neogeo_cart(device_slot_interface &device)
 
 // ==================================================================> NEOGEO_SMA_DECRYPT_CART_DEVICE
 	device.option_add_internal("sma_garoud",       NEOGEO_DECRYPT_SMA_GAROUD_CART);
+	device.option_add_internal("sma_garound",      NEOGEO_DECRYPT_SMA_GAROUND_CART);
 	device.option_add_internal("sma_garouhd",      NEOGEO_DECRYPT_SMA_GAROUHD_CART);
+	device.option_add_internal("sma_garouhnd",     NEOGEO_DECRYPT_SMA_GAROUHND_CART);
 	device.option_add_internal("sma_kof99d",       NEOGEO_DECRYPT_SMA_KOF99D_CART);
+	device.option_add_internal("sma_kof99nd",      NEOGEO_DECRYPT_SMA_KOF99ND_CART);
     device.option_add_internal("sma_kof2kd",       NEOGEO_DECRYPT_SMA_KOF2000D_CART);
 	device.option_add_internal("sma_kof2knd",      NEOGEO_DECRYPT_SMA_KOF2000ND_CART);
 	device.option_add_internal("sma_mslug3d",      NEOGEO_DECRYPT_SMA_MSLUG3D_CART);
@@ -169,6 +177,8 @@ void neogeo_cart(device_slot_interface &device)
 	device.option_add_internal("sma_mslug3dd",     NEOGEO_DARKSOFT_SMA_MSLUG3DD_CART);
 
 // ==================================================================> NEOGEO_DARKSOFT_CTHD2K3_CART_DEVICE
+    device.option_add_internal("boot_cthd2k3d",  NEOGEO_DECRYPT_CTHD2K3D_CART);
+	device.option_add_internal("boot_ct2k3spd",  NEOGEO_DECRYPT_CT2K3SPD_CART);
     device.option_add_internal("darksoft_ct2k3spdd",  NEOGEO_DARKSOFT_CT2K3SPDD_CART);
 
 // ==================================================================> NEOGEO_DARKSOFT_CART_DEVICE

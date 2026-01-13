@@ -30553,7 +30553,7 @@ GAME( 1998, mslug2nsd,     mslug2,   neo304h,   neogeo,   mvs_led_state,  empty_
 GAME( 1998, mslug2tnsd,    mslug2,   neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Metal Slug 2 Turbo - Super Vehicle-001/II (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 2000, mslug3nsd,     mslug3,   mslug3nd,  neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Metal Slug 3 (NGM-2630) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 2000, mslug3hnsd,    mslug3,   mslug3hd,  neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Metal Slug 3 (NGH-2630) (Neo SD)", MACHINE_SUPPORTS_SAVE )
-GAME( 2000, mslug3b6nsd,   mslug3,   neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Metal Slug 6 (Metal Slug 3 Bootleg) (Neo SD)", MACHINE_SUPPORTS_SAVE )
+GAME( 2000, mslug3b6nsd,   mslug3,   neo304h,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK", "Metal Slug 6 (bootleg of Metal Slug 3) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 2002, mslug4nsd,     mslug4,   mslug4d,   neogeo,   mvs_led_state,  empty_init, ROT0, "Mega / Noise Factory / Playmore", "Metal Slug 4 (NGM-2630) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 2002, mslug4hnsd,    mslug4,   mslug4d,   neogeo,   mvs_led_state,  empty_init, ROT0, "Mega / Noise Factory / Playmore", "Metal Slug 4 (NGH-2630) (Neo SD)", MACHINE_SUPPORTS_SAVE )
 GAME( 2003, mslug5nsd,     mslug5,   mslug5e,   neogeo,   mvs_led_state,  empty_init, ROT0, "SNK Playmore", "Metal Slug 5 (NGM-2680) (Neo SD)", MACHINE_SUPPORTS_SAVE )

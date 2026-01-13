@@ -81,6 +81,8 @@ void neoboot_prot_device::sx_decrypt(uint8_t* fixed, uint32_t fixed_size, int va
 	}
 }
 
+
+
 /* The King of Fighters '97 Oroshi Plus 2003 (bootleg) */
 
 void neoboot_prot_device::kof97oro_px_decode(uint8_t* cpurom, uint32_t cpurom_size)

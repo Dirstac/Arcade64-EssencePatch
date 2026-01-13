@@ -18,8 +18,6 @@ public:
 	void cx_decrypt(uint8_t* sprrom, uint32_t sprrom_size);
 	void sx_decrypt(uint8_t* fixed, uint32_t fixed_size, int value);
 
-	void sx_decrypted(uint8_t* fixed, uint32_t fixed_size, int value);
-
 	void kof97oro_px_decode(uint8_t* cpurom, uint32_t cpurom_size);
 
 	void kf10thep_px_decrypt(uint8_t* cpurom, uint32_t cpurom_size);

@@ -206,8 +206,23 @@ windows_options & MameUIGlobal(void)
 	return core_opts;
 }
 
+// 修改的 (Eziochiu)
+/************************************************************************************/
+static const options_entry ips_option_entries[] =
+{
+	{ OPTION_IPS, nullptr, core_options::option_type::STRING, "IPS patch name" },
+	{ nullptr }
+};
+/************************************************************************************/
+
 void OptionsInit(void)
 {
+// 修改的 (Eziochiu)
+/************************************************************************************/
+	// manually add OPTION_IPS since windows_options doesn't inherit from emu_options
+	core_opts.add_entries(ips_option_entries);
+/************************************************************************************/
+
 	// setup our INI folder
 	SetIniDir("ini");
 	// now load the options and interface settings
@@ -1092,6 +1107,19 @@ void SetLanguageDir(const char* path)
 	core_opts.set_value(OPTION_LANGUAGEPATH, path, OPTION_PRIORITY_CMDLINE);
 }
 
+// 修改的 (Eziochiu)
+/************************************************************************/
+const char* GetIpsDir(void)
+{
+	return core_opts.value(OPTION_IPSPATH);
+}
+
+void SetIpsDir(const char* path)
+{
+	core_opts.set_value(OPTION_IPSPATH, path, OPTION_PRIORITY_CMDLINE);
+}
+/************************************************************************/
+
 const char* GetFlyerDir(void)
 {
 	return winui_opts.value(MUIOPTION_FLYER_DIRECTORY);
@@ -1935,6 +1963,12 @@ void SetDirectories(windows_options &opts)
 //	opts.set_value(OSDOPTION_GLSLPATH, GetGLSLDir(), OPTION_PRIORITY_CMDLINE);
 	opts.set_value(OSDOPTION_BGFX_PATH, GetBGFXDir(), OPTION_PRIORITY_CMDLINE);
 	opts.set_value(OPTION_PLUGINSPATH, GetPluginsDir(), OPTION_PRIORITY_CMDLINE);
+
+// 修改的 (Eziochiu)
+/**************************************************************************/
+	opts.set_value(OPTION_IPSPATH, GetIpsDir(), OPTION_PRIORITY_CMDLINE);
+/**************************************************************************/
+
 	opts.set_value(OPTION_LANGUAGEPATH, GetLanguageDir(), OPTION_PRIORITY_CMDLINE);
 }
 

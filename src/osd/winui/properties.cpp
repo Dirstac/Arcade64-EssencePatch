@@ -572,7 +572,12 @@ static intptr_t CALLBACK IPSDialogProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPAR
 				SetWindowText(hDlg, wtitle);
 				free(wtitle);
 			}
-			
+
+			{
+				int savedLang = GetIPSLang();
+				if (savedLang < 0 || savedLang > 2) savedLang = 0;
+				SetIPSLangOverride(savedLang);
+			}
 			HWND hTree = GetDlgItem(hDlg, IDC_IPS_TREE);
 			if (hTree)
 			{
@@ -655,6 +660,10 @@ static intptr_t CALLBACK IPSDialogProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPAR
 				ComboBox_AddString(hLang, L"繁體中文");
 				ComboBox_AddString(hLang, L"English");
 				ComboBox_SetCurSel(hLang, 0);
+
+				int savedLang = GetIPSLang();
+				if (savedLang < 0 || savedLang > 2) savedLang = 0;
+				ComboBox_SetCurSel(hLang, savedLang);
 			}
 			
 			HWND hRelation = GetDlgItem(hDlg, IDC_IPS_RELATION);
@@ -1021,7 +1030,10 @@ static intptr_t CALLBACK IPSDialogProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPAR
 						if (idx != CB_ERR)
 						{
 							SetIPSLangOverride(idx);
-							
+
+							SetIPSLang(idx);
+							SaveInterface();
+
 							HWND hTree = GetDlgItem(hDlg, IDC_IPS_TREE);
 							if (hTree)
 							{
@@ -1148,12 +1160,36 @@ static intptr_t CALLBACK IPSDialogProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPAR
 					HWND hTree = GetDlgItem(hDlg, IDC_IPS_TREE);
 					if (hTree)
 					{
-						HTREEITEM hItem = TreeView_GetRoot(hTree);
-						while (hItem)
-						{
-							TreeView_SetCheckState(hTree, hItem, FALSE);
-							hItem = TreeView_GetNextSibling(hTree, hItem);
-						}
+						int nParentIndex = -1;
+						if (DriverIsClone(g_nGame))
+							nParentIndex = GetParentIndex(&driver_list::driver(g_nGame));
+						
+						std::function<void(HTREEITEM)> clear_all_checkboxes;
+						clear_all_checkboxes = [&](HTREEITEM hRoot) {
+							HTREEITEM hItem = hRoot;
+							while (hItem)
+							{
+								TreeView_SetCheckState(hTree, hItem, FALSE);
+								
+								TVITEM tvi;
+								tvi.mask = TVIF_PARAM;
+								tvi.hItem = hItem;
+								if (TreeView_GetItem(hTree, &tvi) && tvi.lParam >= 0)
+								{
+									const char* filename = GetPatchFilename(g_nGame, nParentIndex, (int)tvi.lParam);
+									if (filename)
+										IPSSetPatchState(filename, false);
+								}
+								
+								HTREEITEM hChild = TreeView_GetChild(hTree, hItem);
+								if (hChild)
+									clear_all_checkboxes(hChild);
+								
+								hItem = TreeView_GetNextSibling(hTree, hItem);
+							}
+						};
+						
+						clear_all_checkboxes(TreeView_GetRoot(hTree));
 					}
 					HWND hList = GetDlgItem(hDlg, IDC_IPS_LIST);
 					if (hList)
@@ -3302,7 +3338,7 @@ static void BuildDataMap(void)
 	datamap_add(properties_datamap, IDC_STEADYKEY,				DM_BOOL,	OPTION_STEADYKEY);
 	datamap_add(properties_datamap, IDC_MULTIKEYBOARD,			DM_BOOL,	OPTION_MULTIKEYBOARD);
 	datamap_add(properties_datamap, IDC_MULTIMOUSE,				DM_BOOL,	OPTION_MULTIMOUSE);
-	datamap_add(properties_datamap, IDC_RELOAD,					DM_BOOL,	OPTION_OFFSCREEN_RELOAD);
+    datamap_add(properties_datamap, IDC_RELOAD,					DM_BOOL,	OPTION_OFFSCREEN_RELOAD);
 	datamap_add(properties_datamap, IDC_JDZ,					DM_FLOAT,	OPTION_JOYSTICK_DEADZONE);
 	datamap_add(properties_datamap, IDC_JDZDISP,				DM_FLOAT,	OPTION_JOYSTICK_DEADZONE);
 	datamap_add(properties_datamap, IDC_JSAT,					DM_FLOAT,	OPTION_JOYSTICK_SATURATION);

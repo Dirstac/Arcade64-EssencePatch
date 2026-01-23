@@ -104,6 +104,11 @@
 #define INTERNAL_UI_INI_FILENAME 				"ui"
 #define PLUGINS_INI_FILENAME 					"plugin"
 
+// 修改的 (Eziochiu)
+/********************************************************************/
+#define MUIOPTION_IPS_LANG						"ips_lang"
+/********************************************************************/
+
 // 修改的 代码来源 (EKMAME)
 /********************************************************************/
 #define MUIOPTION_USEKOREAN_GAMELIST			"Korean GAME List"
@@ -469,6 +474,12 @@ uint32_t GetDriverCacheLower(int driver_index);
 uint32_t GetDriverCacheUpper(int driver_index);
 void SetDriverCache(int driver_index, uint32_t val);
 BOOL RequiredDriverCache(void);
+
+// 修改的 (Eziochiu)
+/*********************************/
+int GetIPSLang(void);
+void SetIPSLang(int val);
+/*********************************/
 
 // 修改的 代码来源 (EKMAME)
 /*********************************/

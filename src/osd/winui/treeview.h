@@ -70,21 +70,9 @@ enum
 	FOLDER_SOURCE,
 	FOLDER_SAVESTATE,
 	FOLDER_DUMPING,
-// 修改的 代码来源 (EKMAME)
+// 修改的 代码来源 (Gaston90)
 /******************/
-	FOLDER_NEOGEO,
-	FOLDER_CPS,
-	FOLDER_PGM,
-	FOLDER_NAMCO,		
-	FOLDER_SETA,
-	FOLDER_TAITO,		
-	FOLDER_KONAMI,		
-	FOLDER_SEGA,	
-	FOLDER_CAVE,
-	FOLDER_MIDWAY,
-	FOLDER_TOAPLAN,
-	FOLDER_NINTENDO,
-	FOLDER_DATAEAST,
+	FOLDER_FILE,
 /******************/
 	MAX_FOLDERS
 };
@@ -162,20 +150,8 @@ HIMAGELIST GetTreeViewIconList(void);
 int GetTreeViewIconIndex(int icon_id);
 void ResetTreeViewFolders(void);
 void SelectTreeViewFolder(int folder_id);
-// 修改的 代码来源 (EKMAME)
+// 修改的 代码来源 (Gaston90)
 /**********************************************/
-void CreateNEOGEOFolders(int parent_index);
-void CreateCPSFolders(int parent_index);
-void CreatePGMFolders(int parent_index);
-void CreateNAMCOFolders(int parent_index);
-void CreateSETAFolders(int parent_index);
-void CreateTAITOFolders(int parent_index);
-void CreateKONAMIFolders(int parent_index);
-void CreateSEGAFolders(int parent_index);
-void CreateTOAFolders(int parent_index);
-void CreateMIDWAYFolders(int parent_index);
-void CreateTOAPLANFolders(int parent_index);
-void CreateNINTENDOFolders(int parent_index);
-void CreateDATAEASTFolders(int parent_index);
+void CreateFILEFolders(int parent_index);
 /**********************************************/
 #endif

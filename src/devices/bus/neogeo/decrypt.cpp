@@ -119,28 +119,16 @@ void neogeo_decrypt_pvc_cart_device::device_add_mconfig(machine_config &config)
 
 DEFINE_DEVICE_TYPE(NEOGEO_SMA_DECRYPT_CART,                 neogeo_sma_decrypt_cart_device,             "neocart_sma_decrypt",     "Neo Geo SMA DECRYPTED Cart")
 DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_SMA_GAROUD_CART,          neogeo_decrypt_sma_garoud_cart_device,      "neocart_garoud",          "Neo Geo Garou Decrypted SMA Cart")
-DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_SMA_GAROUND_CART,         neogeo_decrypt_sma_garound_cart_device,     "neocart_garound",         "Neo Geo Garou Decrypted ND SMA Cart")
 DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_SMA_GAROUHD_CART,         neogeo_decrypt_sma_garouhd_cart_device,     "neocart_garouhd",         "Neo Geo Garou Decrypted AES SMA Cart")
-DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_SMA_GAROUHND_CART,        neogeo_decrypt_sma_garouhnd_cart_device,    "neocart_garouhnd",        "Neo Geo Garou Decrypted ND AES SMA Cart")
 DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_SMA_KOF99D_CART,          neogeo_decrypt_sma_kof99d_cart_device,      "neocart_kof99d",          "Neo Geo KoF 99 Decrypted SMA Cart")
-DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_SMA_KOF99ND_CART,         neogeo_decrypt_sma_kof99nd_cart_device,     "neocart_kof99nd",         "Neo Geo KoF 99 Decrypted ND SMA Cart")
 DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_SMA_KOF2000D_CART,        neogeo_decrypt_sma_kof2000d_cart_device,    "neocart_kof2000d",        "Neo Geo KoF 2000 Decrypted SMA Cart")
 DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_SMA_KOF2000ND_CART,       neogeo_decrypt_sma_kof2000nd_cart_device,   "neocart_kof2000nd",       "Neo Geo KoF 2000 ND Decrypted SMA Cart")
 DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_SMA_MSLUG3D_CART,         neogeo_decrypt_sma_mslug3d_cart_device,     "neocart_mslug3d",         "Neo Geo Metal Slug 3 Decrypted SMA Cart (green)")
-DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_SMA_MSLUG3ND_CART,        neogeo_decrypt_sma_mslug3nd_cart_device,    "neocart_mslug3nd",        "Neo Geo Metal Slug 3 ND Decrypted Cart (green)")
-
-// ================================================================> NEOGEO_SMA_DARKSOFT_CART_DEVICE
-DEFINE_DEVICE_TYPE(NEOGEO_DARKSOFT_SMA_GAROUDD_CART,        neogeo_darksoft_sma_garoudd_cart_device,    "neocart_garoudd",         "Neo Geo Garou Darksoft SMA Cart")
-DEFINE_DEVICE_TYPE(NEOGEO_DARKSOFT_SMA_GAROUHDD_CART,       neogeo_darksoft_sma_garouhdd_cart_device,   "neocart_garouhdd",        "Neo Geo Garou Darksoft AES SMA Cart")
-DEFINE_DEVICE_TYPE(NEOGEO_DARKSOFT_SMA_KOF99DD_CART,        neogeo_darksoft_sma_kof99dd_cart_device,    "neocart_kof99dd",         "Neo Geo KoF 99 Darksoft SMA Cart")
-DEFINE_DEVICE_TYPE(NEOGEO_DARKSOFT_SMA_KOF2000DD_CART,      neogeo_darksoft_sma_kof2000dd_cart_device,  "neocart_kof2000dd",       "Neo Geo KoF 2000 Darksoft SMA Cart")
-DEFINE_DEVICE_TYPE(NEOGEO_DARKSOFT_SMA_MSLUG3DD_CART,       neogeo_darksoft_sma_mslug3dd_cart_device,   "neocart_mslug3dd",        "Neo Geo Metal Slug 3 Darksoft SMA Cart (green)")
 
 neogeo_sma_decrypt_cart_device::neogeo_sma_decrypt_cart_device(const machine_config &mconfig, device_type type, const char *tag, device_t *owner, uint16_t clock) :
 	neogeo_rom_device(mconfig, type, tag, owner, clock),
 	m_sma_prot(*this, "sma_prot"),
-	m_cmc_prot(*this, "cmc_prot"),
-    m_prot(*this, "bootleg_prot")
+	m_cmc_prot(*this, "cmc_prot")
 {
 }
 
@@ -170,84 +158,9 @@ void neogeo_sma_decrypt_cart_device::device_add_mconfig(machine_config &config)
 {
 	NG_SMA_PROT(config, m_sma_prot);
 	NG_CMC_PROT(config, m_cmc_prot);
-    NEOBOOT_PROT(config, m_prot);
-}
-
-// ================================================================> NEOGEO_DARKSOFT_CTHD2K3_CART_DEVICE
-DEFINE_DEVICE_TYPE(NEOGEO_DARKSOFT_CTHD2K3DD_CART, neogeo_darksoft_cthd2k3_cart_device, "neocart_ct2k3dd", "Neo Geo CTHD 2003 Darksoft Cart")
-
-
-neogeo_darksoft_cthd2k3_cart_device::neogeo_darksoft_cthd2k3_cart_device(const machine_config &mconfig, device_type type, const char *tag, device_t *owner, uint16_t clock) :
-	neogeo_rom_device(mconfig, type, tag, owner, clock),
-	m_cthd_prot(*this, "cthd_prot"),
-    m_prot(*this, "bootleg_prot")
-{
-}
-
-neogeo_darksoft_cthd2k3_cart_device::neogeo_darksoft_cthd2k3_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint16_t clock) :
-	neogeo_darksoft_cthd2k3_cart_device(mconfig, NEOGEO_DARKSOFT_CTHD2K3DD_CART, tag, owner, clock)
-{
-}
-
-
-//-------------------------------------------------
-//  mapper specific start/reset
-//-------------------------------------------------
-
-void neogeo_darksoft_cthd2k3_cart_device::device_start()
-{
-}
-
-void neogeo_darksoft_cthd2k3_cart_device::device_reset()
-{
-}
-
-
-/*-------------------------------------------------
- mapper specific handlers
- -------------------------------------------------*/
-
-void neogeo_darksoft_cthd2k3_cart_device::device_add_mconfig(machine_config &config)
-{
-	NG_CTHD_PROT(config, m_cthd_prot);
-    NEOBOOT_PROT(config, m_prot);
-}
-
-void neogeo_darksoft_cthd2k3_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
-{
-	m_cthd_prot->decrypt_cthd2003(spr_region, spr_region_size, audiocpu_region, audio_region_size, fix_region, fix_region_size);
-	m_cthd_prot->patch_cthd2003(cpuregion, cpuregion_size);
 }
 
 // ================================================================> NEOGEO_DECRYPT_CART_DEVICE
-/*************************************************
- cd
-**************************************************/
-
-DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_CD_CART, neogeo_decrypt_cd_cart_device, "neocart_cd", "CD to MVS format Cart")
-
-neogeo_decrypt_cd_cart_device::neogeo_decrypt_cd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_decrypt_cart_device(mconfig, NEOGEO_DECRYPT_CD_CART, tag, owner, clock)
-{
-}
-
-void neogeo_decrypt_cd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
-{
-	uint8_t a,b,c,d;
-
-	// decrypt sprites extracted from CD to MVS format
-	for (uint32_t i = 0; i < spr_region_size; i+=4)
-	{
-		a = spr_region[i];
-		b = spr_region[i+1];
-		c = spr_region[i+2];
-		d = spr_region[i+3];
-		spr_region[i] = b;
-		spr_region[i+1] = d;
-		spr_region[i+2] = a;
-		spr_region[i+3] = c;
-	}
-}
 
 /*************************************************
  cthd2k3a
@@ -304,69 +217,6 @@ void neogeo_decrypt_jockeygpd_cart_device::device_add_mconfig(machine_config &co
 {
 	neogeo_decrypt_cart_device::device_add_mconfig(config);
 	NVRAM(config, m_nvram);
-}
-
-/*************************************************
- fr2cd
-**************************************************/
-
-DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_FR2CD_CART, neogeo_decrypt_fr2cd_cart_device, "neocart_fr2cd", "Neo Geo Idol Mahjong Final Romance 2 Cart")
-
-neogeo_decrypt_fr2cd_cart_device::neogeo_decrypt_fr2cd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_decrypt_cart_device(mconfig, NEOGEO_DECRYPT_FR2CD_CART, tag, owner, clock)
-{
-}
-
-void neogeo_decrypt_fr2cd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
-{
-//// Fix rebooting at start
-
-	uint16_t *mem16 = (uint16_t*)cpuregion;
-
-	// change jsr to C004DA
-	mem16[0x01AF8 /2] = 0x04DA; // C00552 (Not used?)
-	mem16[0x01BF6 /2] = 0x04DA; // C0056A (fixes crash)
-	mem16[0x01ED8 /2] = 0x04DA; // C00570 (Not used?)
-	mem16[0x1C384 /2] = 0x04DA; // C00552 (fixes crash)
-
-	// 0x001C06 - this routine can cause a loop/freeze
-	mem16[0x01C06 /2] = 0x4E75;
-
-//// Fix text on bottom line
-
-	uint8_t *dst = fix_region;
-
-	// Move text for credit + coin info (Thanks to Kanyero), overwrites "MA" in neogeo logo
-	memcpy(dst, dst + 0x600, 0x140);
-
-	// Patch out neogeo intro (because of above line)
-//  mem16[0x114 /2]=0x200;
-
-
-//// Optional stuff
-
-
-	// Hack in the proper identification (see setup menu [F2])
-	mem16[0x3a6 / 2] = 0x4649;
-	mem16[0x3a8 / 2] = 0x4e41;
-	mem16[0x3aa / 2] = 0x4c20;
-	mem16[0x3ac / 2] = 0x524f;
-	mem16[0x3ae / 2] = 0x4d41;
-	mem16[0x3b0 / 2] = 0x4e43;
-	mem16[0x3b2 / 2] = 0x4520;
-	mem16[0x3b4 / 2] = 0x3220;
-	uint8_t  *mem8 = cpuregion;
-	memcpy(mem8+0x61e, mem8+0x3a6, 16);
-	memcpy(mem8+0x896, mem8+0x3a6, 16);
-
-	// Album Fix
-	mem16[0x1C382 /2] = 0x0008; // C00552
-	mem16[0x1C384 /2] = 0x0000;
-	mem16[0x80000 /2] = 0x33FC;
-	mem16[0x80002 /2] = 0x0001;
-	mem16[0x80004 /2] = 0x0020;
-	mem16[0x80006 /2] = 0x0002;
-	mem16[0x80008 /2] = 0x4E75;
 }
 
 /*************************************************
@@ -497,28 +347,6 @@ void neogeo_decrypt_kf2k2mp2d_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
 }
 
 /*************************************************
- kf2k3upld
- **************************************************/
-
-DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_KF2K3UPLD_CART, neogeo_decrypt_kf2k3upld_cart_device, "neocart_kf2k3upld", "The King of Fighters 2003 Decrypted (bootleg, set 1) Cart")
-
-neogeo_decrypt_kf2k3upld_cart_device::neogeo_decrypt_kf2k3upld_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_decrypt_cart_device(mconfig, NEOGEO_DECRYPT_KF2K3UPLD_CART, tag, owner, clock)
-{
-}
-
-/*************************************************
- kf2k3pld
-**************************************************/
-
-DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_KF2K3PLD_CART, neogeo_decrypt_kf2k3pld_cart_device, "neocart_kf2k3pld", "The King of Fighters 2003 Decrypted (bootleg, set 2) Cart")
-
-neogeo_decrypt_kf2k3pld_cart_device::neogeo_decrypt_kf2k3pld_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_decrypt_cart_device(mconfig, NEOGEO_DECRYPT_KF2K3PLD_CART, tag, owner, clock)
-{
-}
-
-/*************************************************
  kof2k4pls
  **************************************************/
 
@@ -623,57 +451,6 @@ void neogeo_decrypt_matrimd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
 }
 
 /*************************************************
- matrimnd
-**************************************************/
-
-DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_MATRIMND_CART, neogeo_decrypt_matrimnd_cart_device, "neocart_matrimnd", "Neo Geo Matrimelee ND Decrypted Cart")
-
-neogeo_decrypt_matrimnd_cart_device::neogeo_decrypt_matrimnd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_decrypt_cart_device(mconfig, NEOGEO_DECRYPT_MATRIMND_CART, tag, owner, clock)
-{
-}
-
-/*************************************************
- mslug3hd
-**************************************************/
-
-DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_MSLUG3HD_CART, neogeo_decrypt_mslug3hd_cart_device, "neocart_mslug3hd", "Neo Geo Metal Slug 3 Decrypted AES CMC42 Cart")
-
-neogeo_decrypt_mslug3hd_cart_device::neogeo_decrypt_mslug3hd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_decrypt_cart_device(mconfig, NEOGEO_DECRYPT_MSLUG3HD_CART, tag, owner, clock)
-{
-}
-
-/*************************************************
- mslug4d
-**************************************************/
-
-DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_MSLUG4D_CART, neogeo_decrypt_mslug4d_cart_device, "neocart_mslug4d", "Neo Geo Metal Slug 4 Decrypted Cart")
-
-neogeo_decrypt_mslug4d_cart_device::neogeo_decrypt_mslug4d_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_decrypt_cart_device(mconfig, NEOGEO_DECRYPT_MSLUG4D_CART, tag, owner, clock)
-{
-}
-
-/*************************************************
- mslug4e
-**************************************************/
-
-DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_MSLUG4E_CART, neogeo_decrypt_mslug4e_cart_device, "neocart_mslug4e", "Neo Geo Metal Slug 4 Earlier Cart")
-
-neogeo_decrypt_mslug4e_cart_device::neogeo_decrypt_mslug4e_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_decrypt_cart_device(mconfig, NEOGEO_DECRYPT_MSLUG4E_CART, tag, owner, clock)
-{
-}
-
-void neogeo_decrypt_mslug4e_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
-{
-    m_cmc_prot->cmc50_m1_decrypt(audiocrypt_region, audiocrypt_region_size, audiocpu_region, audio_region_size);
-	m_cmc_prot->cmc50_gfx_decrypt(spr_region, spr_region_size, MSLUG4_GFX_KEY);
-    m_pcm2_prot->decrypt(ym_region, ym_region_size, 8);
-}
-
-/*************************************************
  samsho5d
 **************************************************/
 
@@ -750,17 +527,6 @@ void neogeo_decrypt_pvc_kof2003d_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
 }
 
 /*************************************************
- kof2003nd
-**************************************************/
-
-DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_PVC_KOF2003ND_CART, neogeo_decrypt_pvc_kof2003nd_cart_device, "neocart_kof2003nd", "Neo Geo KoF 2003 Decrypted ND PVC Cart")
-
-neogeo_decrypt_pvc_kof2003nd_cart_device::neogeo_decrypt_pvc_kof2003nd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_decrypt_pvc_cart_device(mconfig, NEOGEO_DECRYPT_PVC_KOF2003ND_CART, tag, owner, clock)
-{
-}
-
-/*************************************************
  kof2003hd
  **************************************************/
 
@@ -792,68 +558,6 @@ void neogeo_decrypt_pvc_svcd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
 	m_pvc_prot->svc_px_decrypt(cpuregion, cpuregion_size);
 }
 
-/*************************************************
- svcnd
-**************************************************/
-
-DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_PVC_SVCND_CART, neogeo_decrypt_pvc_svcnd_cart_device, "neocart_svcnd", "Neo Geo SNK vs Capcom Decrypted ND PVC Cart")
-
-neogeo_decrypt_pvc_svcnd_cart_device::neogeo_decrypt_pvc_svcnd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_decrypt_pvc_cart_device(mconfig, NEOGEO_DECRYPT_PVC_SVCND_CART, tag, owner, clock)
-{
-}
-
-// ================================================================> NEOGEO_DARKSOFT_PVC_CART_DEVICE
-/*************************************************
- mslug5dd
-**************************************************/
-
-DEFINE_DEVICE_TYPE(NEOGEO_DARKSOFT_PVC_MSLUG5DD_CART, neogeo_darksoft_pvc_mslug5dd_cart_device, "neocart_mslug5dd", "Neo Geo Metal Slug 5 Darksoft Cart")
-
-neogeo_darksoft_pvc_mslug5dd_cart_device::neogeo_darksoft_pvc_mslug5dd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_decrypt_pvc_cart_device(mconfig, NEOGEO_DARKSOFT_PVC_MSLUG5DD_CART, tag, owner, clock)
-{
-}
-
-void neogeo_darksoft_pvc_mslug5dd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
-{
-
-    m_prot->darksoft_cx_decrypt(spr_region, spr_region_size);
-}
-
-/*************************************************
- kof2003dd
-**************************************************/
-
-DEFINE_DEVICE_TYPE(NEOGEO_DARKSOFT_PVC_KOF2003DD_CART, neogeo_darksoft_pvc_kof2003dd_cart_device, "neocart_kof2003dd", "Neo Geo KoF 2003 Darksoft Cart")
-
-neogeo_darksoft_pvc_kof2003dd_cart_device::neogeo_darksoft_pvc_kof2003dd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_decrypt_pvc_cart_device(mconfig, NEOGEO_DARKSOFT_PVC_KOF2003DD_CART, tag, owner, clock)
-{
-}
-
-void neogeo_darksoft_pvc_kof2003dd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
-{
-    m_prot->darksoft_cx_decrypt(spr_region, spr_region_size);
-}
-
-/*************************************************
- svcdd
-**************************************************/
-
-DEFINE_DEVICE_TYPE(NEOGEO_DARKSOFT_PVC_SVCDD_CART, neogeo_darksoft_pvc_svcdd_cart_device, "neocart_svcdd", "Neo Geo SNK vs Capcom Darksoft Cart")
-
-neogeo_darksoft_pvc_svcdd_cart_device::neogeo_darksoft_pvc_svcdd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_decrypt_pvc_cart_device(mconfig, NEOGEO_DARKSOFT_PVC_SVCDD_CART, tag, owner, clock)
-{
-}
-
-void neogeo_darksoft_pvc_svcdd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
-{
-
-    m_prot->darksoft_cx_decrypt(spr_region, spr_region_size);
-}
-
 // ================================================================> NEOGEO_SMA_DECRYPT_CART_DEVICE
 /*************************************************
  garoud
@@ -867,15 +571,6 @@ neogeo_decrypt_sma_garoud_cart_device::neogeo_decrypt_sma_garoud_cart_device(con
 void neogeo_decrypt_sma_garoud_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
 {
 	m_sma_prot->garou_decrypt_68k(cpuregion);
-}
-
-/*************************************************
- garound
-**************************************************/
-
-neogeo_decrypt_sma_garound_cart_device::neogeo_decrypt_sma_garound_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_sma_decrypt_cart_device(mconfig, NEOGEO_DECRYPT_SMA_GAROUND_CART, tag, owner, clock)
-{
 }
 
 /*************************************************
@@ -893,15 +588,6 @@ void neogeo_decrypt_sma_garouhd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
 }
 
 /*************************************************
- garouhnd
- **************************************************/
-
-neogeo_decrypt_sma_garouhnd_cart_device::neogeo_decrypt_sma_garouhnd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_sma_decrypt_cart_device(mconfig, NEOGEO_DECRYPT_SMA_GAROUHND_CART, tag, owner, clock)
-{
-}
-
-/*************************************************
  kof99d
 **************************************************/
 
@@ -913,15 +599,6 @@ neogeo_decrypt_sma_kof99d_cart_device::neogeo_decrypt_sma_kof99d_cart_device(con
 void neogeo_decrypt_sma_kof99d_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
 {
 	m_sma_prot->kof99_decrypt_68k(cpuregion);
-}
-
-/*************************************************
- kof99nd
-**************************************************/
-
-neogeo_decrypt_sma_kof99nd_cart_device::neogeo_decrypt_sma_kof99nd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_sma_decrypt_cart_device(mconfig, NEOGEO_DECRYPT_SMA_KOF99ND_CART, tag, owner, clock)
-{
 }
 
 /*************************************************
@@ -959,314 +636,4 @@ neogeo_decrypt_sma_mslug3d_cart_device::neogeo_decrypt_sma_mslug3d_cart_device(c
 void neogeo_decrypt_sma_mslug3d_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
 {
 	m_sma_prot->mslug3_decrypt_68k(cpuregion);
-}
-
-/*************************************************
- mslug3nd
- **************************************************/
-
-neogeo_decrypt_sma_mslug3nd_cart_device::neogeo_decrypt_sma_mslug3nd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_sma_decrypt_cart_device(mconfig, NEOGEO_DECRYPT_SMA_MSLUG3ND_CART, tag, owner, clock)
-{
-}
-
-// ================================================================> NEOGEO_SMA_DARKSOFT_CART_DEVICE
-/*************************************************
- garoudd
-**************************************************/
-
-neogeo_darksoft_sma_garoudd_cart_device::neogeo_darksoft_sma_garoudd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_sma_decrypt_cart_device(mconfig, NEOGEO_DARKSOFT_SMA_GAROUDD_CART, tag, owner, clock)
-{
-}
-
-void neogeo_darksoft_sma_garoudd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
-{
-	m_prot->darksoft_cx_decrypt(spr_region, spr_region_size);
-}
-
-/*************************************************
- garouhdd
- **************************************************/
-
-neogeo_darksoft_sma_garouhdd_cart_device::neogeo_darksoft_sma_garouhdd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_sma_decrypt_cart_device(mconfig, NEOGEO_DARKSOFT_SMA_GAROUHDD_CART, tag, owner, clock)
-{
-}
-
-void neogeo_darksoft_sma_garouhdd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
-{
-	m_prot->darksoft_cx_decrypt(spr_region, spr_region_size);
-}
-
-/*************************************************
- kof99dd
-**************************************************/
-
-neogeo_darksoft_sma_kof99dd_cart_device::neogeo_darksoft_sma_kof99dd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_sma_decrypt_cart_device(mconfig, NEOGEO_DARKSOFT_SMA_KOF99DD_CART, tag, owner, clock)
-{
-}
-
-void neogeo_darksoft_sma_kof99dd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
-{
-	m_prot->darksoft_cx_decrypt(spr_region, spr_region_size);
-}
-
-/*************************************************
- kof2000dd
-**************************************************/
-
-neogeo_darksoft_sma_kof2000dd_cart_device::neogeo_darksoft_sma_kof2000dd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_sma_decrypt_cart_device(mconfig, NEOGEO_DARKSOFT_SMA_KOF2000DD_CART, tag, owner, clock)
-{
-}
-
-void neogeo_darksoft_sma_kof2000dd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
-{
-	m_prot->darksoft_cx_decrypt(spr_region, spr_region_size);
-}
-
-/*************************************************
- mslug3dd
- **************************************************/
-
-neogeo_darksoft_sma_mslug3dd_cart_device::neogeo_darksoft_sma_mslug3dd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_sma_decrypt_cart_device(mconfig, NEOGEO_DARKSOFT_SMA_MSLUG3DD_CART, tag, owner, clock)
-{
-}
-
-void neogeo_darksoft_sma_mslug3dd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
-{
-	m_prot->darksoft_cx_decrypt(spr_region, spr_region_size);
-}
-// ================================================================> NEOGEO_DARKSOFT_CTHD2K3_CART_DEVICE
-
-/*************************************************
- cthd2k3d
-**************************************************/
-
-DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_CTHD2K3D_CART, neogeo_decrypt_cthd2k3d_cart_device, "neocart_cthd2k3d", "Neo Geo CTHD 2003 Decrypt Cart")
-
-neogeo_decrypt_cthd2k3d_cart_device::neogeo_decrypt_cthd2k3d_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_darksoft_cthd2k3_cart_device(mconfig, NEOGEO_DECRYPT_CTHD2K3D_CART, tag, owner, clock)
-{
-}
-
-void neogeo_decrypt_cthd2k3d_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
-{
-	m_cthd_prot->patch_cthd2003(cpuregion, cpuregion_size);
-}
-
-/*************************************************
- ct2k3spd
-**************************************************/
-
-DEFINE_DEVICE_TYPE(NEOGEO_DECRYPT_CT2K3SPD_CART, neogeo_decrypt_ct2k3spd_cart_device, "neocart_ct2k3spd", "Neo Geo CTHD 2003 Super Plus Decrypt Cart")
-
-neogeo_decrypt_ct2k3spd_cart_device::neogeo_decrypt_ct2k3spd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_darksoft_cthd2k3_cart_device(mconfig, NEOGEO_DECRYPT_CT2K3SPD_CART, tag, owner, clock)
-{
-}
-
-void neogeo_decrypt_ct2k3spd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
-{
-	m_cthd_prot->patch_cthd2003(cpuregion, cpuregion_size);
-}
-
-/*************************************************
- ct2k3spdd
-**************************************************/
-
-DEFINE_DEVICE_TYPE(NEOGEO_DARKSOFT_CT2K3SPDD_CART, neogeo_darksoft_ct2k3spdd_cart_device, "neocart_ct2k3spdd", "Neo Geo CTHD 2003 Super Plus Darksoft Cart")
-
-neogeo_darksoft_ct2k3spdd_cart_device::neogeo_darksoft_ct2k3spdd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_darksoft_cthd2k3_cart_device(mconfig, NEOGEO_DARKSOFT_CT2K3SPDD_CART, tag, owner, clock)
-{
-}
-
-void neogeo_darksoft_ct2k3spdd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
-{
-	m_cthd_prot->patch_cthd2003(cpuregion, cpuregion_size);
-    m_prot->darksoft_cx_decrypt(spr_region, spr_region_size);
-}
-
-// ================================================================> NEOGEO_DARKSOFT_CART_DEVICE
-/*************************************************
- Darksoft
-**************************************************/
-
-DEFINE_DEVICE_TYPE(NEOGEO_DARKSOFT_DECRYPT_CART, neogeo_darksoft_decrypt_cart_device, "neocart_darksoft", "Neo Geo Darksoft Decrypt Cart")
-
-neogeo_darksoft_decrypt_cart_device::neogeo_darksoft_decrypt_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_decrypt_cart_device(mconfig, NEOGEO_DARKSOFT_DECRYPT_CART, tag, owner, clock)
-{
-}
-
-void neogeo_darksoft_decrypt_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
-{
-	m_prot->darksoft_cx_decrypt(spr_region, spr_region_size);
-}
-
-/*************************************************
- jockeygpdd
- **************************************************/
-
-DEFINE_DEVICE_TYPE(NEOGEO_DARKSOFT_JOCKEYGPDD_CART, neogeo_darksoft_jockeygpdd_cart_device, "neocart_jockeygpdd", "Neo Geo Jockey GP Darksoft CMC50 Cart")
-
-neogeo_darksoft_jockeygpdd_cart_device::neogeo_darksoft_jockeygpdd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_decrypt_cart_device(mconfig, NEOGEO_DARKSOFT_JOCKEYGPDD_CART, tag, owner, clock),
-	m_nvram(*this, "nvram")
-{
-}
-
-void neogeo_darksoft_jockeygpdd_cart_device::device_start()
-{
-	m_ram = make_unique_clear<uint16_t[]>(0x2000/2);
-	m_nvram->set_base(m_ram.get(), 0x2000);
-	save_pointer(NAME(m_ram), 0x2000/2);
-}
-
-void neogeo_darksoft_jockeygpdd_cart_device::device_add_mconfig(machine_config &config)
-{
-	neogeo_decrypt_cart_device::device_add_mconfig(config);
-	NVRAM(config, m_nvram);
-}
-
-void neogeo_darksoft_jockeygpdd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
-{
-	m_prot->darksoft_cx_decrypt(spr_region, spr_region_size);
-    m_cmc_prot->cmc50_gfx_decrypt(spr_region, spr_region_size, JOCKEYGP_GFX_KEY);
-}
-
-/*************************************************
- kf2k3upldd
- **************************************************/
-
-DEFINE_DEVICE_TYPE(NEOGEO_DARKSOFT_KF2K3UPLDD_CART, neogeo_darksoft_kf2k3upldd_cart_device, "neocart_kf2k3upldd", "The King of Fighters 2003 (bootleg, set 1) (Darksoft) Cart")
-
-neogeo_darksoft_kf2k3upldd_cart_device::neogeo_darksoft_kf2k3upldd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_decrypt_cart_device(mconfig, NEOGEO_DARKSOFT_KF2K3UPLDD_CART, tag, owner, clock)
-{
-}
-
-void neogeo_darksoft_kf2k3upldd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
-{
-    m_prot->darksoft_cx_decrypt(spr_region, spr_region_size);
-}
-
-/*************************************************
- kf2k3pldd
-**************************************************/
-
-DEFINE_DEVICE_TYPE(NEOGEO_DARKSOFT_KF2K3PLDD_CART, neogeo_darksoft_kf2k3pldd_cart_device, "neocart_kf2k3pldd", "The King of Fighters 2003 (bootleg, set 2) (Darksoft) Cart")
-
-neogeo_darksoft_kf2k3pldd_cart_device::neogeo_darksoft_kf2k3pldd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_decrypt_cart_device(mconfig, NEOGEO_DARKSOFT_KF2K3PLDD_CART, tag, owner, clock)
-{
-}
-
-void neogeo_darksoft_kf2k3pldd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
-{
-    m_prot->darksoft_cx_decrypt(spr_region, spr_region_size);
-}
-
-/*************************************************
- kof98dd
-**************************************************/
-
-DEFINE_DEVICE_TYPE(NEOGEO_DARKSOFT_KOF98DD_CART, neogeo_darksoft_kof98dd_cart_device, "neocart_kof98dd", "Neo Geo KoF 98 Darksoft Cart")
-
-neogeo_darksoft_kof98dd_cart_device::neogeo_darksoft_kof98dd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_decrypt_cart_device(mconfig, NEOGEO_DARKSOFT_KOF98DD_CART, tag, owner, clock)
-{
-}
-
-void neogeo_darksoft_kof98dd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
-{
-	m_kof98_prot->decrypt_68k(cpuregion, cpuregion_size);
-    m_prot->darksoft_cx_decrypt(spr_region, spr_region_size);
-}
-
-/*************************************************
- kof2002dd
-**************************************************/
-
-DEFINE_DEVICE_TYPE(NEOGEO_DARKSOFT_KOF2002DD_CART, neogeo_darksoft_kof2002dd_cart_device, "neocart_kof2002dd", "Neo Geo KoF 2002 Darksoft Cart")
-
-neogeo_darksoft_kof2002dd_cart_device::neogeo_darksoft_kof2002dd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_decrypt_cart_device(mconfig, NEOGEO_DARKSOFT_KOF2002DD_CART, tag, owner, clock)
-{
-}
-
-void neogeo_darksoft_kof2002dd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
-{
-	m_kof2k2_prot->kof2002_decrypt_68k(cpuregion, cpuregion_size);
-    m_prot->darksoft_cx_decrypt(spr_region, spr_region_size);
-}
-
-/*************************************************
- matrimdd
-**************************************************/
-
-DEFINE_DEVICE_TYPE(NEOGEO_DARKSOFT_MATRIMDD_CART, neogeo_darksoft_matrimdd_cart_device, "neocart_matrimdd", "Neo Geo Matrimelee Darksoft Cart")
-
-neogeo_darksoft_matrimdd_cart_device::neogeo_darksoft_matrimdd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_decrypt_cart_device(mconfig, NEOGEO_DARKSOFT_MATRIMDD_CART, tag, owner, clock)
-{
-}
-
-void neogeo_darksoft_matrimdd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
-{
-
-    m_prot->darksoft_cx_decrypt(spr_region, spr_region_size);
-}
-
-/*************************************************
- mslug4dd
-**************************************************/
-
-DEFINE_DEVICE_TYPE(NEOGEO_DARKSOFT_MSLUG4DD_CART, neogeo_darksoft_mslug4dd_cart_device, "neocart_mslug4dd", "Neo Geo Metal Slug 4 Darksoft Cart")
-
-neogeo_darksoft_mslug4dd_cart_device::neogeo_darksoft_mslug4dd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_decrypt_cart_device(mconfig, NEOGEO_DARKSOFT_MSLUG4DD_CART, tag, owner, clock)
-{
-}
-
-void neogeo_darksoft_mslug4dd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
-{
-
-    m_prot->darksoft_cx_decrypt(spr_region, spr_region_size);
-}
-
-/*************************************************
- V-Linerdd : this is plain NeoGeo cart + RAM
- **************************************************/
-
-DEFINE_DEVICE_TYPE(NEOGEO_DARKSOFT_VLINERDD_CART, neogeo_darksoft_vlinerdd_cart_device, "neocart_vlinerdd", "Neo Geo V-Liner Darksoft Cart")
-
-neogeo_darksoft_vlinerdd_cart_device::neogeo_darksoft_vlinerdd_cart_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock) :
-	neogeo_rom_device(mconfig, NEOGEO_DARKSOFT_VLINERDD_CART, tag, owner, clock),
-    m_prot(*this, "bootleg_prot"),
-	m_nvram(*this, "nvram")
-{
-}
-
-void neogeo_darksoft_vlinerdd_cart_device::device_start()
-{
-	m_cart_ram = make_unique_clear<uint16_t[]>(0x2000/2);
-	m_nvram->set_base(m_cart_ram.get(), 0x2000);
-	save_pointer(NAME(m_cart_ram), 0x2000/2);
-}
-
-void neogeo_darksoft_vlinerdd_cart_device::device_add_mconfig(machine_config &config)
-{
-    NEOBOOT_PROT(config, m_prot);
-	NVRAM(config, m_nvram);
-}
-
-void neogeo_darksoft_vlinerdd_cart_device::decrypt_all(DECRYPT_ALL_PARAMS)
-{
-
-    m_prot->darksoft_cx_decrypt(spr_region, spr_region_size);
 }

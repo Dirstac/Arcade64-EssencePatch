@@ -400,7 +400,6 @@ void Picker_SetViewID(HWND hWndPicker, int nViewID)
 
 	DWORD dwStyle = GetWindowLong(hWndPicker, GWL_STYLE);
 	dwStyle &= ~LVS_TYPEMASK;
-	//dwStyle |= LVS_REPORT;
 	dwStyle |= nListViewStyle; // 修改的 代码来源 (EKMAME)
 	SetWindowLong(hWndPicker, GWL_STYLE, dwStyle);
 	RedrawWindow(hWndPicker, NULL, NULL, RDW_ERASE | RDW_INVALIDATE | RDW_FRAME);

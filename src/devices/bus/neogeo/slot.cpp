@@ -203,11 +203,8 @@ static const neogeo_slot slot_list[] =
 
 // 修改的 (Gaston90) 
 /******************************************************************/
-
 // ===============================> NEOGEO_DECRYPT_CART_DEVICE
-	{ NEOGEO_CD, "decrypt_cd" },
 	{ NEOGEO_CTHD2K3A, "boot_cthd2k3a" },
-	{ NEOGEO_FR2CD, "decrypt_fr2cd" },
 	{ NEOGEO_JCKEYGPD, "cmc50_jckeygpd" },
 	{ NEOGEO_KOF10THU, "boot_kf10thu" },
 	{ NEOGEO_KOF96EP, "boot_kof96ep" },
@@ -217,15 +214,9 @@ static const neogeo_slot slot_list[] =
 	{ NEOGEO_KOF2K2PD, "boot_kf2k2pd" },
 	{ NEOGEO_KOF2K2MPD, "boot_kf2k2mpd" },
 	{ NEOGEO_KOF2K2MP2D, "boot_kf2k2mp2d" },
-    { NEOGEO_KF2K3UPLD, "boot_kf2k3upld" },
-	{ NEOGEO_KF2K3PLD, "boot_kf2k3pld" },
 	{ NEOGEO_KOF2K4PLS, "boot_kof2k4pls" },
 	{ NEOGEO_KOGD, "boot_kogd" },
 	{ NEOGEO_MATRIMD, "k2k2_matrimd" },
-	{ NEOGEO_MATRIMND, "k2k2_matrimnd" },
-	{ NEOGEO_MSLUG3HD, "cmc42_mslug3hd" },
-	{ NEOGEO_MSLUG4D, "pcm2_mslug4d" },
-	{ NEOGEO_MSLUG4E, "pcm2_mslug4e" },
 	{ NEOGEO_SAMSHO5D, "k2k2_samsh5d" },
 	{ NEOGEO_SAMSHO5SD, "k2k2_sams5sd" },
 
@@ -236,47 +227,14 @@ static const neogeo_slot slot_list[] =
 	{ NEOGEO_KOF2K3ND, "pvcd_kf2k3nd" },
 	{ NEOGEO_KOF2K3HD, "pvcd_kf2k3hd" },
 	{ NEOGEO_SVCD, "pvcd_svcd" },
-	{ NEOGEO_SVCND, "pvcd_svcnd" },
-
-// ===============================> NEOGEO_DARKSOFT_PVC_CART_DEVICE
-    { NEOGEO_KOF2K3DD, "pvcdd_kof2k3dd" },
-	{ NEOGEO_MSLUG5DD, "pvcdd_mslug5dd" },
-	{ NEOGEO_SVCDD, "pvcdd_svcdd" },
 
 // ===============================> NEOGEO_SMA_DECRYPT_CART_DEVICE
 	{ NEOGEO_GAROUD, "sma_garoud" },
-	{ NEOGEO_GAROUND, "sma_garound" },
 	{ NEOGEO_GAROUHD, "sma_garouhd" },
-	{ NEOGEO_GAROUHND, "sma_garouhnd" },
 	{ NEOGEO_KOF99D, "sma_kof99d" },
-	{ NEOGEO_KOF99ND, "sma_kof99nd" },
 	{ NEOGEO_KOF2KD, "sma_kof2kd" },
 	{ NEOGEO_KOF2KND, "sma_kof2knd" },
 	{ NEOGEO_MSLUG3D, "sma_mslug3d" },
-	{ NEOGEO_MSLUG3ND, "sma_mslug3nd" },
-
-// ===============================> NEOGEO_SMA_DARKSOFT_CART_DEVICE
-	{ NEOGEO_GAROUDD, "sma_garoudd" },
-	{ NEOGEO_GAROUHDD, "sma_garouhdd" },
-	{ NEOGEO_KOF99DD, "sma_kof99dd" },
-	{ NEOGEO_KOF2KDD, "sma_kof2kdd" },
-	{ NEOGEO_MSLUG3DD, "sma_mslug3dd" },
-
-// ===============================> NEOGEO_DARKSOFT_CTHD2K3_CART_DEVICE
-	{ NEOGEO_CTHD2K3D, "boot_cthd2k3d" },
-	{ NEOGEO_CT2K3SPD, "boot_ct2k3spd" },
-	{ NEOGEO_CT2K3SPDD, "darksoft_ct2k3spdd" },
-
-// ===============================> NEOGEO_DARKSOFT_DECRYPT_CART_DEVICE
-	{ NEOGEO_DARKSOFT, "darksoft_decrypt" },
-    { NEOGEO_JOCKEYGPDD, "darksoft_jockeygpdd" },
-    { NEOGEO_KF2K3UPLDD, "darksoft_kf2k3upldd" },
-	{ NEOGEO_KF2K3PLDD, "darksoft_kf2k3pldd" },
-    { NEOGEO_KOF98DD, "darksoft_kof98dd" },
-	{ NEOGEO_KOF2K2DD, "darksoft_kof2k2dd" },
-    { NEOGEO_MATRIMDD, "darksoft_matrimdd" },
-    { NEOGEO_MSLUG4DD, "darksoft_mslug4dd" },
-	{ NEOGEO_VLINERDD, "darksoft_vlinerdd" },
 
 /******************************************************************/
 };

@@ -3155,7 +3155,8 @@ void ioport_manager::save_game_inputs(util::xml::data_node &parentnode)
 							{
 								portnode->set_attribute_int("value", field.live().value & field.mask());
 							}
-							if (field.live().toggle != field.toggle()) {
+							if (field.live().toggle != field.toggle()) 
+							{
 								portnode->set_attribute("toggle", field.live().toggle ? "yes" : "no");
 							}
 /**********************************************************************************************************/

@@ -68,12 +68,12 @@ const options_entry winui_options::s_option_entries[] =
 	{ MUIOPTION_WINDOW_WIDTH,				"1150",     core_options::option_type::INTEGER, nullptr },
 	{ MUIOPTION_WINDOW_HEIGHT,				"639",      core_options::option_type::INTEGER, nullptr },
 	{ MUIOPTION_WINDOW_STATE,				"1",        core_options::option_type::INTEGER, nullptr },
-	{ MUIOPTION_LIST_COLOR,					"0,0,0",    core_options::option_type::INTEGER, nullptr },
-	{ MUIOPTION_HISTORY_COLOR,				"0,0,0",    core_options::option_type::INTEGER, nullptr },
-	{ MUIOPTION_TREE_COLOR,					"0,0,0",    core_options::option_type::INTEGER, nullptr },
-	{ MUIOPTION_TREEBG_COLOR,				"255,255,255", core_options::option_type::INTEGER, nullptr },
-	{ MUIOPTION_LISTBG_COLOR,				"255,255,255", core_options::option_type::INTEGER, nullptr },
-	{ MUIOPTION_HISTORYBG_COLOR,			"255,255,255", core_options::option_type::INTEGER, nullptr },
+	{ MUIOPTION_LIST_COLOR,					"255,255,255",    core_options::option_type::INTEGER, nullptr }, // 修改的 (加斯顿90)
+	{ MUIOPTION_HISTORY_COLOR,				"255,255,255",    core_options::option_type::INTEGER, nullptr }, // 修改的 (加斯顿90)
+	{ MUIOPTION_TREE_COLOR,					"255,255,255",    core_options::option_type::INTEGER, nullptr }, // 修改的 (加斯顿90)
+	{ MUIOPTION_TREEBG_COLOR,				"183,91,0", core_options::option_type::INTEGER, nullptr }, // 修改的 (加斯顿90)
+	{ MUIOPTION_LISTBG_COLOR,				"0,0,0", core_options::option_type::INTEGER, nullptr }, // 修改的 (加斯顿90)
+	{ MUIOPTION_HISTORYBG_COLOR,			"0,0,0", core_options::option_type::INTEGER, nullptr }, // 修改的 (加斯顿90)
 	{ MUIOPTION_CUSTOM_COLOR,				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0", core_options::option_type::STRING, nullptr },
 	{ MUIOPTION_LIST_MODE,					"154",      core_options::option_type::INTEGER, nullptr }, // 修改的 (加斯顿90)
 	{ MUIOPTION_SPLITTERS,					"150,778",  core_options::option_type::STRING, nullptr }, // 修改的 (加斯顿90)

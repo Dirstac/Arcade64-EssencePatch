@@ -1572,11 +1572,15 @@ static LRESULT CALLBACK MameWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 		case WM_CLOSE:
 			if (GetExitDialog())
 			{
+
+// 修改的 (加斯顿90)
+/**********************************************************
 				if (winui_message_box_utf8(hMain, "Are you sure you want to quit?", MAMEUINAME, MB_ICONQUESTION | MB_YESNO) == IDNO)
 				{
 					SetFocus(hWndList);
 					return true;
 				}
+ **********************************************************/
 			}
 
 			Win32UI_exit();
@@ -1813,19 +1817,16 @@ bool OnIdle(HWND hWnd)
 {
 	static bool bFirstTime = true;
 
-// 修改的 代码来源 (EKMAME)
-/*************************/
+// 修改的 代码来源 (熊猫侠优化版)
+/*****************************/
 	const char *pDescription;
 	const char *pName; 
 
 
-#ifdef USE_KLIST
+//#ifdef USE_KLIST
 	  int		i;
 	  LV_FINDINFO lvfi;
-#else
-	  int driver_index;
-#endif
-/*************************/
+/****************************/
 
 	if (bFirstTime)
 		bFirstTime = false;
@@ -1836,35 +1837,23 @@ bool OnIdle(HWND hWnd)
 		return idle_work;
 	}
 
-// 修改的 代码来源 (EKMAME)
+// 修改的 代码来源 (熊猫侠优化版)
 /*******************************************************************/
-#ifdef USE_KLIST
-	lvfi.flags = LVFI_STRING;
-	lvfi.psz   = (LPCWSTR)GetDefaultGame();
-	i = ListView_FindItem(hWndList, -1, &lvfi);
+		lvfi.flags = LVFI_STRING;
+		lvfi.psz   = (LPCWSTR)GetDefaultGame();
+		i = ListView_FindItem(hWndList, -1, &lvfi);
+	
+		Picker_SetSelectedPick(hWndList,(i != -1) ? i : 0);
+		i = Picker_GetSelectedItem(hWndList);
 
-	Picker_SetSelectedPick(hWndList,(i != -1) ? i : 0);
-	i = Picker_GetSelectedItem(hWndList);
-#else	
-	driver_index = Picker_GetSelectedItem(hWndList);
-#endif
-
-#ifdef USE_KLIST
-  	pDescription = GetDescriptionByIndex(i, GetUsekoreanList());
-#else
-	pDescription = GetDriverGameTitle(driver_index);
-#endif
+	  	pDescription = GetDescriptionByIndex(i, GetUsekoreanList());
 /*******************************************************************/
 
 	SetStatusBarText(0, pDescription);
 
-// 修改的 代码来源 (EKMAME)
+// 修改的 代码来源 (熊猫侠优化版)
 /*******************************************************************/
-	#ifdef USE_KLIST
 	pName = GetGameNameByIndex(i, GetUsekoreanList());
-#else
-	pName = GetDriverGameName(driver_index);
-#endif
 /*******************************************************************/
 	SetStatusBarText(1, pName);
 	idle_work = false;
@@ -4009,7 +3998,7 @@ void GamePicker_EnteringItem(HWND hwndPicker, int nItem)
 	EnableSelection(nItem);
 
 	// decide if it is valid to load a savestate
-	EnableMenuItem(GetMenu(hMain), ID_FILE_LOADSTATE, BIT(GetDriverCacheLower(nItem),7) ? MFS_ENABLED : MFS_GRAYED);
+	EnableMenuItem(GetMenu(hMain), ID_FILE_LOADSTATE, (driver_list::driver(nItem).flags & MACHINE_SUPPORTS_SAVE) ? MFS_ENABLED : MFS_GRAYED);
 }
 
 int GamePicker_FindItemParent(HWND hwndPicker, int nItem)
@@ -6023,6 +6012,11 @@ static void SaveGameListToFile(char *szFile)
 
 	fprintf(f, ", %d game(s) found.%s", nListCount, CrLf);
 
+// 修改的 (缘来是你)
+/*******************************************************************************/
+    fprintf(f, "Short name\tDescription\tManufacturer\n");	// 导出当前游戏列表
+/*******************************************************************************/
+
 	// Games
 	for (int nIndex = 0; nIndex < nListCount; nIndex++)
 	{
@@ -6034,7 +6028,13 @@ static void SaveGameListToFile(char *szFile)
 		{
 			int nGameIndex  = lvi.lParam;
 
-			fprintf(f, "%s%s", GetDriverGameTitle(nGameIndex),"\n");
+// 修改的 (缘来是你)
+//======================= 导出当前游戏列表 ===================================================================>>>			
+			const char *shortname = GetDriverGameName(nGameIndex);
+            const char *description = GetDescriptionByIndex(nGameIndex, GetUsekoreanList());
+            const char *manufacturer = GetGameManufactureByIndex(nGameIndex, GetUsekoreanList());
+            fprintf(f, "%s\t%s\t%s\n", shortname, description, manufacturer);
+//=========================================================================================================>>>
 		}
 	}
 

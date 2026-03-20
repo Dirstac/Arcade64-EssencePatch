@@ -319,7 +319,7 @@ IDI_CONTROLSHEET        ICON                    "res\\joystick.ico"
 IDI_MISCSHEET           ICON                    "res\\misc.ico"
 IDI_MISC2SHEET          ICON                    "res\\debug.ico"
 IDI_SNAPSHEET           ICON                    "res\\snapshot.ico"
-// 修改的 代码来源 (Gaston90)
+// 修改的 代码来源 (加斯顿90)
 /****************************************************************************/
 IDI_FOLDER_FILE		    ICON		            "res\\fold_file.ico"
 /****************************************************************************/
@@ -566,7 +566,7 @@ BEGIN
     COMBOBOX        IDC_REFRESH,331,250,55,62,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP,0
 
     CONTROL         "Switch resolutions",IDC_SWITCHRES,WC_BUTTON,BS_AUTOCHECKBOX | WS_TABSTOP,325,275,94,10,0
-    
+
     CONTROL         "Low Latency",IDC_LOWLATENCY,WC_BUTTON,BS_AUTOCHECKBOX | WS_TABSTOP,216,275,94,10,0
 
     PUSHBUTTON      "Reset",IDC_PROP_RESET,4,292,98,14,0,0
@@ -760,16 +760,16 @@ BEGIN
     
     GROUPBOX        "BIOS selection",IDC_STATIC,4,152,180,28
     COMBOBOX        IDC_BIOS,10,162,170,62,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP,0
-    
+
     GROUPBOX        "Cheat file",IDC_STATIC,4,184,180,48
     EDITTEXT        IDC_CHEATFILE,10,194,170,14,ES_LEFT | WS_BORDER
     
     PUSHBUTTON      "Select cheat file",IDC_SELECT_CHEATFILE,10,212,60,14,0,0
     PUSHBUTTON      "Reset cheat file",IDC_RESET_CHEATFILE,80,212,60,14,0,0
     
-    CONTROL         "Skip game informations screen at startup",IDC_SKIP_GAME_INFO,WC_BUTTON,BS_AUTOCHECKBOX | WS_TABSTOP,10,236,200,10,0
-    CONTROL         "Quit game confirmation screen on exit",IDC_CONFIRM_QUIT,WC_BUTTON,BS_AUTOCHECKBOX | WS_TABSTOP,10,248,200,10,0
-    CONTROL         "Display mouse cursor in internal interface",IDC_ENABLE_MOUSE_UI,WC_BUTTON,BS_AUTOCHECKBOX | WS_TABSTOP,10,260,200,10,0
+    CONTROL         "Skip game informations screen at startup",IDC_SKIP_GAME_INFO,WC_BUTTON,BS_AUTOCHECKBOX | WS_TABSTOP,10,236,150,10,0
+    CONTROL         "Quit game confirmation screen on exit",IDC_CONFIRM_QUIT,WC_BUTTON,BS_AUTOCHECKBOX | WS_TABSTOP,10,248,150,10,0
+    CONTROL         "Display mouse cursor in internal interface",IDC_ENABLE_MOUSE_UI,WC_BUTTON,BS_AUTOCHECKBOX | WS_TABSTOP,10,260,150,10,0
     CONTROL         "Save NVRAM on exit",IDC_NVRAM_SAVE,WC_BUTTON,BS_AUTOCHECKBOX | WS_TABSTOP,10,272,104,10,0
     CONTROL         "Enable rewind savestates",IDC_REWIND,WC_BUTTON,BS_AUTOCHECKBOX | WS_TABSTOP,10,284,104,10,0
 
@@ -808,7 +808,9 @@ BEGIN
     CONTROL         "Use bilinear filtering for movie recording",IDC_SNAPBILINEAR,WC_BUTTON,BS_AUTOCHECKBOX | WS_TABSTOP,200,245,148,10,0
     CONTROL         "Create burn-in snapshots for each screen",IDC_SNAPBURNIN,WC_BUTTON,BS_AUTOCHECKBOX | WS_TABSTOP,200,257,148,10,0
     CONTROL         "Exit from MAME when INP playback is finished",IDC_EXIT_PLAYBACK,WC_BUTTON,BS_AUTOCHECKBOX | WS_TABSTOP,200,269,164,10,0
-    
+
+	CONTROL         "Skip CRC/HASH check",IDC_SKIP_CRC_CHECK,WC_BUTTON,BS_AUTOCHECKBOX | WS_TABSTOP,200,281,200,10,0   // 缘来是你
+
     PUSHBUTTON      "Reset",IDC_PROP_RESET,4,294,98,14,0,0
     PUSHBUTTON      "Restore default options",IDC_USE_DEFAULT,118,294,98,14,0,0
 END

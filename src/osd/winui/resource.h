@@ -496,6 +496,11 @@
 #define IDC_REWIND                      1402
 #define IDC_DRC_CORE                    1403
 #define IDC_BGFX_BACKEND                1407
+
+// 修改的 (缘来是你)
+/********************************************/
+#define IDC_SKIP_CRC_CHECK              1408
+/********************************************/
 #define ID_CONTEXT_SHOW_FOLDER_START    39000
 #define ID_CONTEXT_SHOW_FOLDER_END      39499
 #define ID_SHOW_FOLDER_START            39500
@@ -581,11 +586,6 @@
 #define ID_OPTIONS_HISTORY_FONT         40114
 #define ID_OPTIONS_TREE_FONT            40115
 #define ID_VIEW_FULLSCREEN              40116
-
-// 修改的 (Eziochiu)
-/********************************************/
-//#define ID_ENABLE_INDENT                40117
-/********************************************/
 #define ID_NOTEPAD                      40118
 #define ID_VIEW_TAB_SCREENSHOT          40120
 #define ID_VIEW_TAB_TITLE               40121

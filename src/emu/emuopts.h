@@ -45,6 +45,11 @@
 #define OPTION_IPS                  "ips"
 /***********************************************/
 
+// 修改的 (缘来是你) 
+/***********************************************/
+#define OPTION_SKIP_CRC_CHECK       "skipcrc"
+/***********************************************/
+
 // core directory options
 #define OPTION_CFG_DIRECTORY        "cfg_directory"
 #define OPTION_NVRAM_DIRECTORY      "nvram_directory"
@@ -454,6 +459,12 @@ public:
 	bool debuglog() const { return bool_value(OPTION_DEBUGLOG); }
 
 	// core misc options
+
+// 修改的 (缘来是你) 
+/*******************************************************************************/
+	bool skip_crc_check() const { return bool_value(OPTION_SKIP_CRC_CHECK); }
+/*******************************************************************************/
+
 	bool drc() const { return bool_value(OPTION_DRC); }
 	bool drc_rwx() const { return bool_value(OPTION_DRC_RWX); }
 	bool drc_use_c() const { return bool_value(OPTION_DRC_USE_C); }

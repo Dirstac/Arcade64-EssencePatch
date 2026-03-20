@@ -60,6 +60,11 @@ const options_entry emu_options::s_option_entries[] =
 	{ OPTION_IPS,                                        nullptr,     core_options::option_type::STRING,     "IPS patch name" },
 /********************************************************************************************************************************************/
 
+// 修改的 (缘来是你) 
+/********************************************************************************************************************************************/
+	{ OPTION_SKIP_CRC_CHECK,                             "0",         core_options::option_type::BOOLEAN,    "Skip CRC and HASH checks" },
+/********************************************************************************************************************************************/
+
 	// output directory options
 	{ nullptr,                                           nullptr,     core_options::option_type::HEADER,     "CORE OUTPUT DIRECTORY OPTIONS" },
 	{ OPTION_CFG_DIRECTORY,                              "cfg",       core_options::option_type::PATH,       "directory to save configurations" },

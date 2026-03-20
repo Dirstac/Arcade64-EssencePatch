@@ -450,8 +450,13 @@ void ioport_list::append_custom(device_t &device, std::ostream &errorbuf)
 	{
 		for (ioport_field &field : port.second->fields())
 		{
-			if (nplayer < field.player()+1)
-				nplayer = field.player()+1;
+			//修复代码作者 tomaszpoliszuk	缘来是你摘抄
+			//修复自定义&连射导致的按键错位
+			if(field.type() >=IPT_JOYSTICK_UP && field.type() <= IPT_BUTTON16)
+			{	
+				if (nplayer < field.player()+1)
+					nplayer = field.player()+1;
+			}
 		}
 		port.second->collapse_fields(errorbuf);
 	}
@@ -1986,7 +1991,8 @@ time_t ioport_manager::initialize()
 					if (field.type_class()==INPUT_CLASS_CONTROLLER)
 					{
 
-					if (players < field.player() + 1) players = field.player() + 1;
+						if (players < field.player() + 1)
+							players = field.player() + 1;
 						field.set_player(field.player() + player_offset);
 					}
 #ifdef USE_CUSTOM_BUTTON

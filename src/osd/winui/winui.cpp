@@ -1580,7 +1580,7 @@ static LRESULT CALLBACK MameWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 					SetFocus(hWndList);
 					return true;
 				}
- **********************************************************/
+ **********************************************************/															
 			}
 
 			Win32UI_exit();

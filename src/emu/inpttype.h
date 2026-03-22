@@ -203,7 +203,6 @@ enum ioport_type : osd::u32
 
 		IPT_GAMBLE_KEYIN,   // attendant
 		IPT_GAMBLE_KEYOUT,  // attendant
-		IPT_GAMBLE_SERVICE, // attendant
 		IPT_GAMBLE_BOOK,    // attendant
 
 		IPT_GAMBLE_PAYOUT,  // player

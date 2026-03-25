@@ -43,6 +43,10 @@
 #include "dipty.h"
 #include "emuopts.h"
 
+// 修改的 代码来源 (缘来是你)
+/*********************************/
+#include "ui/menu_ips_patches.h"
+/*********************************/
 
 namespace ui {
 
@@ -54,6 +58,11 @@ enum : unsigned {
 	CUSTOM_BUTTON,
 #endif /* USE_CUSTOM_BUTTON */
 /*********************/
+
+// 修改的 代码来源 (缘来是你)
+/*****************************/
+	IPS_PATCHES,
+/*****************************/	
 	INPUT_OPTIONS,
 	SETTINGS_DIP_SWITCHES,
 	SETTINGS_DRIVER_CONFIG,
@@ -123,6 +132,11 @@ void menu_main::populate()
 	m_phase = machine().phase();
 
 	item_append(_("menu-main", "Input Settings"), 0, (void *)INPUT_OPTIONS);
+
+// 修改的 代码来源 (缘来是你)
+/************************************************************************/
+    item_append(_("menu-main", "IPS Manager"), 0, (void *)IPS_PATCHES);
+/************************************************************************/
 
 	if (ui().machine_info().has_dips())
 		item_append(_("menu-main", "DIP Switches"), 0, (void *)SETTINGS_DIP_SWITCHES);
@@ -251,6 +265,14 @@ bool menu_main::handle(event const *ev)
 		case INPUT_OPTIONS:
 			menu::stack_push<menu_input_options>(ui(), container());
 			break;
+
+// 修改的 代码来源 (缘来是你)
+/****************************************************************************/
+        case IPS_PATCHES:
+            menu::stack_push<menu_ips_patches>(ui(), container());
+            break;
+/****************************************************************************/
+
 
 // 修改的 代码来源 (EKMAME)
 /****************************************************************************/

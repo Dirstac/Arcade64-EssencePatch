@@ -1,7 +1,7 @@
 # Arcade64-EssencePatch
 What is Arcade64 Essence Patch?
 
-This is a version that implements some features that the [PSARCADECLASSIC+](https://github.com/Gaston900/PSArcadeClassic) emulator had, to the most recent versions of [ARCADE64](https://arcade.mameworld.info/).
+This is a version that was developed to include unofficial support for the [ARCADE64](https://arcade.mameworld.info/) emulator that has not yet been included or recognized to date, which does not allow the incorporation of corrections, new mechanisms and optimization for the system.
 
 I am only supporting the operating systems 64x bits, Windows 7, Windows 8, Windows 10 and Windows 11.
 
@@ -23,6 +23,8 @@ Added custom buttons and autofire.
 Removed warning screen, startups, Decryption screen texts.
 
 Removed the following annoying messages: “WRONG LENGTH”, “NO_DUMP”, “WRONG CHECKSUMS”, “BAD_DUMP”.
+
+Support reading IPS (By Eziochiu)
 
 Added movement optimization V.4 for all fighting games (By GSC2007).
 

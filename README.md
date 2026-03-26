@@ -44,6 +44,7 @@ How to compile
 ---------------------------------------
 In order to compile this version we will need to download the [ARCADE64](https://github.com/Robbbert/abcdefg/tags) source codes. How do we know which version we need? We will have to locate the latest compilation that I have released publicly.
 
+And we will apply this command to start the compilation:
 ```
 make OSD=winui PTR64=1 SUBTARGET=arcade SYMBOLS=0 NO_SYMBOLS=1 DEPRECATED=0
 ```

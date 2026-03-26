@@ -36,7 +36,7 @@ Supports game list language files and multilingual title display (By 缘来是�
 
 Supports Skip CRC/IPS Check (By 缘来是你).
 
-NEOGEO, PGM, driver supports key combination settings.
+NEOGEO, PGM, driver supports key combination settings (By KAZE).
 
 How to compile
 ---------------------------------------

@@ -10,6 +10,8 @@ What has been optimized in this version?
 This command will help us have much easier access to the settings:
 
 * To enter the BIOS, press the "0" key.
+* To play in windowed mode, press the "Spacebar" key.
+* To accelerate the game by 3x, press the "Backspace" key.
 
 Players 1 and 2 use this controller by default:
 
@@ -22,17 +24,17 @@ Removed warning screen, startups, Decryption screen texts.
 
 Removed the following annoying messages: “WRONG LENGTH”, “NO_DUMP”, “WRONG CHECKSUMS”, “BAD_DUMP”.
 
-Added movement optimization for all fighting games (By GSC2007).
+Added movement optimization V.4 for all fighting games (By GSC2007).
 
 The Arcade64 "GUI" EKMAME source code has been implemented (By KAZE).
 
-The Arcade64 "GUI" some default settings have been implemented.
-
-It is already pre-configured, enforce aspect ratio is disabled, full screen mode and tricks are already enabled by default.
+It is already pre-configured, video mode OpenGl, enforce aspect ratio is disabled, full screen mode and tricks are already enabled by default.
 
 The cheat reference function, if the cloned game does not have a cheat file, it will reference the cheat file of the main ROM.
 
-Supports game language files. The list language can be edited freely.
+Supports game list language files and multilingual title display (By 缘来是你).
+
+Supports Skip CRC/IPS Check (By 缘来是你).
 
 NEOGEO, PGM, driver supports key combination settings.
 
@@ -44,7 +46,7 @@ In order to compile this version we will need to download the [ARCADE64](https:/
 make OSD=winui PTR64=1 SUBTARGET=arcade SYMBOLS=0 NO_SYMBOLS=1 DEPRECATED=0
 ```
 
-The compilation [TOOL](https://github.com/mamedev/buildtools/releases) is suggested to be version msys64-2022-01-12.
+The compilation [TOOL](https://github.com/mamedev/buildtools/releases) is suggested to be 7.0 msys64 (Jan 11, 2022).
 
 Open Source Software Projects
 ------------------------------

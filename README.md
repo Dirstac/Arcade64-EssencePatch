@@ -3,7 +3,7 @@ What is Arcade64 Essence Patch?
 
 This is a version that implements some features that the [PSARCADECLASSIC+](https://github.com/Gaston900/PSArcadeClassic) emulator had, to the most recent versions of [ARCADE64](https://arcade.mameworld.info/).
 
-I am only supporting 64x the operating systems, Windows 7, Windows 8, Windows 10 and Windows 11.
+I am only supporting the operating systems 64x bits, Windows 7, Windows 8, Windows 10 and Windows 11.
 
 What has been optimized in this version?
 ---------------------------------------

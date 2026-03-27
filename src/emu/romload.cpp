@@ -15,6 +15,7 @@
 /***********************/
 #include "ips.h"
 /***********************/
+
 #include "drivenum.h"
 #include "emuopts.h"
 #include "fileio.h"
@@ -822,25 +823,26 @@ std::unique_ptr<emu_file> rom_load_manager::open_rom_file(
     random data for a nullptr file
 -------------------------------------------------*/
 
-int rom_load_manager::rom_fread(emu_file *file, u8 *buffer, int length, const rom_entry *parent_region)
-{
 // 修改的 (Eziochiu) 
 /********************************************************************************************************************************/
+int rom_load_manager::rom_fread(emu_file *file, u8 *buffer, int length, const rom_entry *parent_region, const char *rom_name)
+{
 	int bytes_read = length;
+
 
 	if (file) // files just pass through
 		bytes_read = file->read(buffer, length);
 	else if (!ROMREGION_ISERASE(parent_region)) // otherwise, fill with randomness unless it was already specifically erased
 		fill_random(buffer, length);
 
-	if (m_ips_patch)
-	{
-		ips::apply_patch(m_ips_patch, buffer, bytes_read);
-	}
+	if (rom_name)
+  
+		ips::apply_all_patches(rom_name, buffer, bytes_read);
+ 
 
-	return bytes_read;
-/********************************************************************************************************************************/
+ 	return bytes_read;
 }
+/********************************************************************************************************************************/
 
 
 /*-------------------------------------------------
@@ -854,6 +856,12 @@ int rom_load_manager::read_rom_data(
 		const rom_entry *parent_region,
 		const rom_entry *romp)
 {
+
+// 修改的 (缘来是你) 
+/***********************************************/
+	const char *rom_name = ROM_GETNAME(romp); 
+/***********************************************/
+
 	int const datashift(ROM_GETBITSHIFT(romp));
 	int const datamask(((1 << ROM_GETBITWIDTH(romp)) - 1) << datashift);
 	int numbytes(ROM_GETLENGTH(romp));
@@ -879,7 +887,11 @@ int rom_load_manager::read_rom_data(
 
 	// special case for simple loads
 	if ((datamask == 0xff) && ((groupsize == 1) || !reversed) && (skip == 0))
-		return rom_fread(file, base, numbytes, parent_region);
+
+// 修改的 (缘来是你) 
+/***************************************************************************/
+		return rom_fread(file, base, numbytes, parent_region, rom_name);
+/***************************************************************************/
 
 	// use a temporary buffer for complex loads
 	u32 const tempbufsize(std::min(TEMPBUFFER_MAX_SIZE, numbytes));
@@ -895,7 +907,12 @@ int rom_load_manager::read_rom_data(
 
 		// read as much as we can
 		LOG("  Reading %X bytes into buffer\n", bytesleft);
-		if (rom_fread(file, bufptr, bytesleft, parent_region) != bytesleft)
+
+// 修改的 (缘来是你) 
+/***************************************************************************************/
+		if (rom_fread(file, bufptr, bytesleft, parent_region, rom_name) != bytesleft)
+/***************************************************************************************/
+
 			return 0;
 		numbytes -= bytesleft;
 

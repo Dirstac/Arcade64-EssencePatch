@@ -40,7 +40,7 @@ static windows_options core_opts;			// MAME.INI default options
 static windows_options save_opts;			// MAME.INI current options
 static ui_options ui_opts;					// UI.INI options
 static plugin_options plugin_opts;			// PLUGIN.INI options
-static winui_game_options game_opts;    // game stats
+static winui_game_options game_opts;        // game stats
 #define GAMEINFO_INI_FILENAME                    "GAMESTAT.ini"
 
 // UI options in INTERFACE.INI
@@ -76,12 +76,12 @@ const options_entry winui_options::s_option_entries[] =
 	{ MUIOPTION_HISTORYBG_COLOR,			"0,0,0", core_options::option_type::INTEGER, nullptr }, // 修改的 (加斯顿90)
 	{ MUIOPTION_CUSTOM_COLOR,				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0", core_options::option_type::STRING, nullptr },
 	{ MUIOPTION_LIST_MODE,					"154",      core_options::option_type::INTEGER, nullptr }, // 修改的 (加斯顿90)
-	{ MUIOPTION_SPLITTERS,					"150,778",  core_options::option_type::STRING, nullptr }, // 修改的 (加斯顿90)
+	{ MUIOPTION_SPLITTERS,					"185,782",  core_options::option_type::STRING, nullptr }, // 修改的 (加斯顿90)
 	{ MUIOPTION_GUI_FONT,					"-11,0,0,0,400,0,0,0,0,3,2,1,34,Tahoma", core_options::option_type::STRING, nullptr },
-	{ MUIOPTION_LIST_FONT,					"-11,0,0,0,400,0,0,0,0,3,2,1,34,Tahoma", core_options::option_type::STRING, nullptr },
-	{ MUIOPTION_HISTORY_FONT,				"-11,0,0,0,400,0,0,0,0,3,2,1,34,Verdana", core_options::option_type::STRING, nullptr },
-	{ MUIOPTION_TREE_FONT,					"-11,0,0,0,400,0,0,0,0,3,2,1,34,Tahoma", core_options::option_type::STRING, nullptr },
-	{ MUIOPTION_COLUMN_WIDTHS,				"482,77,108,140,39,160,60,70", core_options::option_type::STRING, nullptr }, // 修改的 (加斯顿90)
+	{ MUIOPTION_LIST_FONT,					"-15,0,0,0,400,0,0,0,0,3,2,1,34,Tahoma", core_options::option_type::STRING, nullptr }, // 修改的 (加斯顿90)
+	{ MUIOPTION_HISTORY_FONT,				"-15,0,0,0,400,0,0,0,0,3,2,1,34,Verdana", core_options::option_type::STRING, nullptr }, // 修改的 (加斯顿90)
+	{ MUIOPTION_TREE_FONT,					"-15,0,0,0,400,0,0,0,0,3,2,1,34,Tahoma", core_options::option_type::STRING, nullptr }, // 修改的 (加斯顿90)
+	{ MUIOPTION_COLUMN_WIDTHS,				"707,107,159,140,48,194,60,70", core_options::option_type::STRING, nullptr }, // 修改的 (加斯顿90)
 	{ MUIOPTION_COLUMN_ORDER,				"0,4,1,2,5,3,6,7", core_options::option_type::STRING, nullptr }, // 修改的 (加斯顿90)
 	{ MUIOPTION_COLUMN_SHOWN,				"1,1,1,1,1,1,0,0", core_options::option_type::STRING, nullptr }, // 修改的 (加斯顿90)
 

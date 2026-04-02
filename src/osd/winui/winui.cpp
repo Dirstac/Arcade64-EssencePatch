@@ -725,6 +725,12 @@ static void RunMAME(int nGameIndex, const play_options *playopts)
 
 int MameUIMain(HINSTANCE hInstance, LPWSTR lpCmdLine)
 {
+
+// 修改的 代码来源 (缘来是你)
+/********************************/
+		SetProcessDPIAware();
+/********************************/
+
 	// delete old log file, ignore any error
 	unlink("winui.log");
 //	unlink("verbose.log");
@@ -1592,7 +1598,7 @@ static LRESULT CALLBACK MameWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 					SetFocus(hWndList);
 					return true;
 				}
- **********************************************************/															
+ **********************************************************/
 			}
 
 			Win32UI_exit();

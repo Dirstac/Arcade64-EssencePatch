@@ -358,13 +358,13 @@ END
 
 // 修改的 代码来源 (加斯顿90)
 /*****************************************************************************************************************************/
-IDD_ABOUT DIALOGEX 0, 0, 277, 208
+IDD_ABOUT DIALOGEX 0, 0, 278, 208
 STYLE WS_POPUP | WS_VISIBLE | WS_BORDER | DS_SETFONT
 FONT 9, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     RTEXT            "",IDC_BUILD,6,4,265,10
     LTEXT            "",IDC_BUILDVER,6,4,120,10
-    CONTROL         "",IDC_ABOUT,WC_STATIC,SS_BITMAP,6,16,30,17
+    CONTROL         "",IDC_ABOUT,WC_STATIC,SS_BITMAP,7,16,30,17
     CTEXT           "MAME Copyright (C) 2025-2026 Arcade64 - Essence Patch",IDC_TEXT1,6,90,280,10
     CTEXT           "MAMEUI version by Christopher Kirmse and The MAMEUI Team",IDC_TEXT2,6,102,280,10
     CTEXT           "Additional MAMEUI code by Mike Haaland, Andrew Kirmse,",IDC_TEXT1,6,114,280,10

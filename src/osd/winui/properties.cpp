@@ -1565,6 +1565,13 @@ static char *GameInfoTitle(OPTIONS_TYPE opt_type, int nIndex)
 	else
 		snprintf(buffer, std::size(buffer), "%s - \"%s\"", GetDriverGameTitle(nIndex), GetDriverGameName(nIndex));
 
+// 修改的 代码来源 (缘来是你)
+/************************** 中文列表 ****************************/
+		snprintf(buffer, std::size(buffer), "%s - \"%s\"", 
+             GetDescriptionByIndex(nIndex, GetUsekoreanList()), 
+             GetGameNameByIndex(nIndex, GetUsekoreanList()));
+/**************************************************************/
+
 	return buffer;
 }
 
@@ -1577,8 +1584,14 @@ static char *GameInfoCloneOf(int nIndex)
 
 	if (DriverIsClone(nIndex))
 	{
-		int nParentIndex = GetParentIndex(&driver_list::driver(nIndex));
-		snprintf(buffer, std::size(buffer), "%s - \"%s\"", GetDriverGameTitle(nParentIndex), GetDriverGameName(nParentIndex));
+
+// 修改的 代码来源 (缘来是你)
+/****************************** 中文列表 ******************************/
+    int nParentIndex = GetParentIndex(&driver_list::driver(nIndex));
+    snprintf(buffer, std::size(buffer), "%s - \"%s\"", 
+             GetDescriptionByIndex(nParentIndex, GetUsekoreanList()), 
+             GetGameNameByIndex(nParentIndex, GetUsekoreanList()));
+/*********************************************************************/
 	}
 
 	return buffer;
@@ -2014,9 +2027,9 @@ intptr_t CALLBACK GamePropertiesDialogProc(HWND hDlg, UINT uMsg, WPARAM wParam, 
 			hIcon = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_MAMEUI_ICON));
 			SendMessage(hDlg, WM_SETICON, ICON_SMALL, (LPARAM)hIcon);
 			hBrushDlg = CreateSolidBrush(RGB(240, 240, 240));
-// 修改的 代码来源 (EKMAME)
+// 修改的 代码来源 (缘来是你)
 /*************************************************************************************************************************/
-            snprintf(tmp, std::size(tmp), "Information for \"%s\"", (char *)GetGameNameByIndex(index,GetUsekoreanList()));
+            snprintf(tmp, std::size(tmp), "\"%s\" Information for", GetDescriptionByIndex(index, GetUsekoreanList()));
 /*************************************************************************************************************************/
 			winui_set_window_text_utf8(hDlg, tmp);
 // 修改的 代码来源 (EKMAME)
@@ -4621,6 +4634,12 @@ static void DisableVisualStyles(HWND hDlg)
 	SetWindowTheme(GetDlgItem(hDlg, IDC_NVRAM_SAVE), L" ", L" ");
 	SetWindowTheme(GetDlgItem(hDlg, IDC_REWIND), L" ", L" ");
 	SetWindowTheme(GetDlgItem(hDlg, IDC_DRC_CORE), L" ", L" ");
+
+// 修改的 (缘来是你)
+/**************************************************************************/
+	SetWindowTheme(GetDlgItem(hDlg, IDC_SKIP_CRC_CHECK), L" ", L" ");
+/**************************************************************************/
+
 	/* Snap/Movie/Playback */
 	SetWindowTheme(GetDlgItem(hDlg, IDC_SNAPVIEW), L" ", L" ");
 	SetWindowTheme(GetDlgItem(hDlg, IDC_SNAPNAME), L" ", L" ");

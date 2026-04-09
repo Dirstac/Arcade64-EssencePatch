@@ -70,6 +70,13 @@
 #include "dxdecode.h" 
 #include "screenshot.h"
 
+// 修改的 代码来源 (缘来是你)
+//============================>>>
+//导出 XML
+#include <string>
+#include <vector>
+//============================>>>
+
 #ifndef TVS_EX_DOUBLEBUFFER
 #define TVS_EX_DOUBLEBUFFER		0x0004
 #endif
@@ -190,6 +197,12 @@ void UpdateListView(void);
 int GetMinimumScreenShotWindowWidth(void);
 // we maintain an array of drivers sorted by name, useful all around
 int GetParentIndex(const game_driver *driver);
+
+// 修改的 代码来源 (EKMAME)
+/***********************************************/
+const char *funcGetParentName(const char *name);
+/***********************************************/
+
 int GetParentRomSetIndex(const game_driver *driver);
 // sets text in part of the status bar on the main window
 void SetStatusBarText(int part_index, const char *message);
@@ -200,6 +213,7 @@ const char * GetSearchText(void);
 /***********************************************************/
 char *GetGameNameByIndex(int nIndex, bool bUse);
 char *GetDescriptionByIndex(int nIndex, bool bUse);
+const char* GetGameChineseDescription(const char* driver_name);	
 char *GetGameManufactureByIndex(int nIndex, bool bUse);
 
 int GetNumGames(void);

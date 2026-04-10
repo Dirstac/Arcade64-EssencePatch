@@ -2034,7 +2034,7 @@ HIMAGELIST GetTreeViewIconList(void)
 	return hTreeSmall;
 }
 
-// 修改的 代码来源 (Gaston90)
+// 修改的 代码来源 (加斯顿90)
 /****************************************************************************/
 void CreateFILEFolders(int parent_index)
 {

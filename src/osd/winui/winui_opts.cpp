@@ -56,7 +56,7 @@ const options_entry winui_options::s_option_entries[] =
 	{ MUIOPTION_CURRENT_TAB,				"0",        core_options::option_type::STRING, nullptr },
 	{ MUIOPTION_SHOW_TOOLBAR,				"1",        core_options::option_type::BOOLEAN, nullptr },
 	{ MUIOPTION_SHOW_STATUS_BAR,			"1",        core_options::option_type::BOOLEAN, nullptr },
-	{ MUIOPTION_HIDE_FOLDERS,				nullptr,        core_options::option_type::STRING, nullptr },
+	{ MUIOPTION_HIDE_FOLDERS,				nullptr,    core_options::option_type::STRING, nullptr },
 	{ MUIOPTION_SHOW_FOLDER_SECTION,		"1",        core_options::option_type::BOOLEAN, nullptr },
 	{ MUIOPTION_SHOW_TABS,					"1",        core_options::option_type::BOOLEAN, nullptr },
 	{ MUIOPTION_HIDE_TABS,					"scores, howto, select, versus, boss, end, gameover, logo, artpreview, flyer, cabinet, marquee, cpanel, pcb, history",         core_options::option_type::STRING, nullptr }, // 修改的 (加斯顿90)

@@ -466,6 +466,7 @@ std::string machine_info::game_info_string() const
 		wchar_t const s(std::use_facet<std::numpunct<wchar_t> >(std::locale()).decimal_point());
 		point = utf8_from_wstring(std::wstring_view(&s, 1));
 	}
+// 修改的 代码来源 (缘来是你)
 //==================缘来是你==========中文名称================>>>
 #if 0
 	// print description, manufacturer, and CPU:
